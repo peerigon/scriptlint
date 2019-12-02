@@ -59,6 +59,21 @@ describe("defaultRules.ts", () => {
 		expect(validate("foobar:barfoo")).toBe(false);
 		expect(validate("foobar")).toBe(false);
 	});
+
+	maybeTestValidationFn("prepost-trigger-defined", (validate: any) => {
+		expect(validate({})).toBe(true);
+		expect(
+			validate({
+				prefoo: "echo 1",
+				foo: "echo 1",
+			})
+		).toBe(true);
+		expect(
+			validate({
+				prefoo: "echo 1",
+			})
+		).toEqual(["foo"]);
+	});
 });
 
 export {};

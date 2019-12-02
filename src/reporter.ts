@@ -43,10 +43,8 @@ export const warning = (template: string, values?: Values): void => {
 	stash(message, "warning");
 };
 
-export const error = (template: string, values?: Values): void => {
-	const message = makeMessage(template, values);
-
-	stash(message, "error");
+export const error = (message: string): void => {
+	print("error", message);
 };
 
 export const dump = (): number => {
@@ -62,9 +60,19 @@ export const dump = (): number => {
 };
 
 const print = (type: MessageType, message: string) => {
-	const notUnderlined = `${PREFIX} [${type}]`;
-	const underlined = chalk.underline(message);
+	switch (type) {
+	case "error": {
+		console.log(chalk.bold.red(`${PREFIX} [error] ${message}`));
+		break;
+	}
 
-	console.log(type === "error" ? chalk.red(`${notUnderlined} ${underlined}`) : `${notUnderlined} ${underlined}`);
+	case "warning": {
+		const notUnderlined = chalk.yellow.bold(`${PREFIX} [${type}]`);
+		const underlined = chalk.yellow.underline(message);
+
+		console.log(`${notUnderlined} ${underlined}`);
+		break;
+	}
+	}
 };
 

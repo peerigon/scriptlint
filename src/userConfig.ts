@@ -25,7 +25,7 @@ export const sanitizeConfig = (loadedConfig: CosmiconfigConfig): Config => {
 
 		if (!keyExists) {
 			delete sanitized[key];
-			error(`[${PROJECT_NAME}] unknown config key "${key}"`);
+			error(`unknown config key "${key}"`);
 		}
 	});
 
