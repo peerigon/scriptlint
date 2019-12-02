@@ -1,7 +1,7 @@
 import path from "path";
 import fs from "fs";
 import {PackageScripts} from "./types";
-import {DEFAULT_HOOKS} from "./constants";
+import {IGNORE_SCRIPT_NAMES} from "./constants";
 
 type Config = {
 	ignore: Array<string>;
@@ -30,7 +30,7 @@ const userPackageScripts = (ignores: Array<string>): PackageScripts => {
 			throw Error;
 		}
 
-		return filterPackageScriptsByKeys(scripts, [...DEFAULT_HOOKS, ...ignores]);
+		return filterPackageScriptsByKeys(scripts, [...IGNORE_SCRIPT_NAMES, ...ignores]);
 	} catch (error) {
 		throw new Error("Cannot read package.json");
 	}

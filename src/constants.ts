@@ -10,7 +10,7 @@ export const NAMESPACES = [
 	"start",
 	"test",
 ];
-export const DEFAULT_HOOKS = [
+export const IGNORE_SCRIPT_NAMES = [
 	"install",
 	"postinstall",
 	"postpack",
@@ -23,6 +23,7 @@ export const DEFAULT_HOOKS = [
 	"postuninstall",
 	"postversion",
 	"preinstall",
+	"precommit",
 	"prepack",
 	"prepare",
 	"prepublish",
@@ -35,6 +36,7 @@ export const DEFAULT_HOOKS = [
 	"preuninstall",
 	"preversion",
 	"publish",
+	"release",
 	"restart",
 	"shrinkwrap",
 	"stop",
