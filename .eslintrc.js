@@ -12,7 +12,7 @@ module.exports = {
   root: true,
   rules: {
     indent: ["error", "tab"],
-    "@typescript-eslint/indent": ["error", "tab"],
+    "@typescript-eslint/indent": 0,
     "no-tabs": 0,
     "@typescript-eslint/strict-boolean-expressions": 0
   }
