@@ -17,7 +17,7 @@
 		"start": "node dist/index.js",
 		"test": "yarn test:lint && yarn test:types && yarn test:unit && yarn test:self",
 		"test:types": "tsc -p tsconfig.json --noEmit true",
-		"test:unit": "yarn jest",
+		"test:unit": "yarn jest --coverage",
 		"test:watch": "yarn jest --watch",
 		"test:lint": "eslint ./src  --ext js,ts,tsx",
 		"test:self": "yarn build && node ./dist/index.js",
