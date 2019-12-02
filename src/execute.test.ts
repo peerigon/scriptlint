@@ -9,7 +9,7 @@ describe("execute.ts", () => {
 	it("errors by default on empty scripts", () => {
 		const executed = execute(rulesNonStrict, {});
 
-		expect(executed).toBe(true);
+		expect(executed).toEqual(["mandatory-test", "mandatory-start", "mandatory-dev"]);
 	});
 
 	it("doesn't complain about correct scripts (default)", () => {
@@ -19,7 +19,7 @@ describe("execute.ts", () => {
 			test: "echo 1",
 		});
 
-		expect(executed2).toBe(false);
+		expect(executed2).toEqual([]);
 	});
 
 	it("complains about rule violations (strict)", () => {
@@ -27,7 +27,7 @@ describe("execute.ts", () => {
 			foo: "echo 1",
 		});
 
-		expect(executed2).toBe(true);
+		expect(executed2).toEqual(["mandatory-test", "mandatory-start", "mandatory-dev", "uses-allowed-namespace (foo)"]);
 	});
 
 	it("doesn't complain about correct scripts (default)", () => {
@@ -35,9 +35,10 @@ describe("execute.ts", () => {
 			dev: "echo 1",
 			start: "echo 1",
 			test: "echo 1",
+			prepublishOnly: "echo 1",
 		});
 
-		expect(executed2).toBe(false);
+		expect(executed2).toEqual([]);
 	});
 });
 

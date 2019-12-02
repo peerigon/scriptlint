@@ -1,14 +1,16 @@
 import {Rule, PackageScripts} from "./types";
 import {dump, warning} from "./reporter";
 
-const execute = (rules: Array<Rule>, scripts: PackageScripts) => {
+const execute = (rules: Array<Rule>, scripts: PackageScripts): Array<string> => {
 	dump();
+	const issues: Array<string> = [];
 
 	const executeObjectRule = ({validate, message, name}: Rule) => {
 		const validationResult = typeof validate === "function" && validate(scripts);
 		const valid = typeof validationResult === "boolean" ? validationResult : validationResult.length < 1;
 
 		if (!valid) {
+			issues.push(name);
 			if (typeof validationResult === "boolean") {
 				warning(`${message} (${name})`);
 			} else {
@@ -24,6 +26,7 @@ const execute = (rules: Array<Rule>, scripts: PackageScripts) => {
 			const valid = typeof validate === "function" && validate(key, value);
 
 			if (!valid) {
+				issues.push(`${name} (${key})`);
 				warning(`${message} (${name})`, {name: key});
 			}
 		});
@@ -37,7 +40,7 @@ const execute = (rules: Array<Rule>, scripts: PackageScripts) => {
 		}
 	});
 
-	return dump() > 0;
+	return issues;
 };
 
 export default execute;

@@ -1,5 +1,6 @@
-import {NAME_REGEX, NAMESPACES} from "./constants";
+import {NAME_REGEX, NAMESPACES, IGNORE_SCRIPT_NAMES} from "./constants";
 import {PackageScripts, Rule} from "./types";
+import {filterPackageScriptsByKeys} from "./userPackageScripts";
 
 const makeMandatoryName = (name: string): Rule => ({
 	isObjectRule: true,
@@ -51,6 +52,7 @@ const rules = [
 		isObjectRule: true,
 		message: "some custom hooks ({{names}}) are missing their trigger script(s)",
 		validate: (scripts: PackageScripts): boolean | Array<string> => {
+			scripts = filterPackageScriptsByKeys(scripts, IGNORE_SCRIPT_NAMES);
 			const preHooksMissing = getMissingHooks("pre", scripts);
 			const postHooksMissing = getMissingHooks("post", scripts);
 			const allMissing = [...preHooksMissing, ...postHooksMissing];

@@ -6,9 +6,9 @@ import execute from "./execute";
 
 const scripts = userPackageScripts(userConfig.ignoreScripts);
 const rules = loadRulesFromRuleConfig(userConfig.extends, userConfig.rules);
-const hadErrors = execute(rules, scripts);
+const issues = execute(rules, scripts);
 
-if (hadErrors) {
+if (issues.length) {
 	// eslint-disable-next-line no-process-exit
 	process.exit(1);
 }
