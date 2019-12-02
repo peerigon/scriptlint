@@ -9,7 +9,7 @@ type RulesConfig = {
 	[key: string]: boolean;
 };
 
-const getByName = (rules: Array<Rule>, name: string): Rule | null => {
+export const getRuleByName = (rules: Array<Rule>, name: string): Rule | null => {
 	const filtered = rules.filter((r: Rule) => r.name === name);
 
 	if (filtered.length < 1) {
@@ -32,7 +32,7 @@ const loadRulesFromSet = (ruleSet: string): Array<Rule> => {
 		ruleNameList = defaultRuleSets.strict;
 	}
 
-	const rulesAndNulls = ruleNameList.map((name: string) => getByName(defaultRules, name));
+	const rulesAndNulls = ruleNameList.map((name: string) => getRuleByName(defaultRules, name));
 	const filtered: Array<Rule> = rulesAndNulls.filter((r): r is Rule => r !== null);
 
 	return filtered;
