@@ -1,4 +1,4 @@
 # scriptlint
-an enforcable script naming standard for package.json
+an enforceable script naming standard for package.json
 
 **TBC**
