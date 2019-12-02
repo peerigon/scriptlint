@@ -1,13 +1,13 @@
 {
-	"name": "scriptss",
+	"name": "scriptlint",
 	"version": "0.0.0",
 	"description": "an enforcable script naming standard for package.json",
 	"main": "dist/index.js",
-	"repository": "https://github.com/peerigon/scriptss",
+	"repository": "https://github.com/peerigon/scriptlint",
 	"author": "Peerigon GmbH",
 	"license": "MIT",
 	"bin": {
-		"scriptss": "./dist/index.js"
+		"scriptlint": "./dist/index.js"
 	},
 	"scripts": {
 		"build": "yarn build:clean && tsc -p tsconfig.json && chmod +x ./dist/index.js",

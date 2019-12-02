@@ -1,4 +1,4 @@
-export const PROJECT_NAME = "scriptss";
+export const PROJECT_NAME = "scriptlint";
 export const NAME_REGEX = /^[\d:A-Za-z]+$/;
 export const NAMESPACES = [
 	"build",
