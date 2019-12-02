@@ -1,59 +1,59 @@
 {
-  "name": "scriptss",
-  "version": "0.0.0",
-  "description": "an enforcable script naming standard for package.json",
-  "main": "dist/index.js",
-  "repository": "https://github.com/peerigon/scriptss",
-  "author": "Peerigon GmbH",
-  "license": "MIT",
-  "bin": {
-    "scriptss": "./dist/index.js"
-  },
-  "scripts": {
-    "build": "yarn build:clean && tsc -p tsconfig.json && chmod +x ./dist/index.js",
-    "build:clean": "rimraf ./dist",
-    "dev": "yarn build && nodemon -e js,ts --watch src --exec \"yarn run build:dev\"",
-    "build:dev": "tsc -p tsconfig.json",
-    "start": "node dist/index.js",
-    "test": "yarn test:lint && yarn test:types && yarn test:unit && yarn test:self",
-    "test:types": "tsc -p tsconfig.json --noEmit true",
-    "test:unit": "yarn jest",
-    "test:lint": "eslint ./src  --ext js,ts,tsx",
-    "test:self": "yarn build && node ./dist/index.js",
-    "format:eslint": "yarn test:lint --fix"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "yarn test",
-      "pre-push": "yarn test"
-    }
-  },
-  "lint-staged": {
-    "./src/**/*.{js,jsx}": [
-      "format:eslint",
-      "git add"
-    ]
-  },
-  "devDependencies": {
-    "@types/cosmiconfig": "^6.0.0",
-    "@types/jest": "^24.0.23",
-    "@typescript-eslint/eslint-plugin": "^2.9.0",
-    "@typescript-eslint/parser": "^2.9.0",
-    "eslint": "^6.7.1",
-    "eslint-config-peerigon": "^24.0.0",
-    "eslint-import-resolver-typescript": "^2.0.0",
-    "eslint-plugin-prefer-arrow": "^1.1.6",
-    "husky": "^3.1.0",
-    "jest": "^24.9.0",
-    "lint-staged": "^9.5.0",
-    "nodemon": "^2.0.1",
-    "rimraf": "^3.0.0",
-    "ts-jest": "^24.2.0",
-    "typescript": "^3.7.2"
-  },
-  "dependencies": {
-    "@types/node": "^12.12.14",
-    "chalk": "^3.0.0",
-    "cosmiconfig": "^6.0.0"
-  }
+	"name": "scriptss",
+	"version": "0.0.0",
+	"description": "an enforcable script naming standard for package.json",
+	"main": "dist/index.js",
+	"repository": "https://github.com/peerigon/scriptss",
+	"author": "Peerigon GmbH",
+	"license": "MIT",
+	"bin": {
+		"scriptss": "./dist/index.js"
+	},
+	"scripts": {
+		"build": "yarn build:clean && tsc -p tsconfig.json && chmod +x ./dist/index.js",
+		"build:clean": "rimraf ./dist",
+		"dev": "yarn build && nodemon -e js,ts --watch src --exec \"yarn run build:dev\"",
+		"build:dev": "tsc -p tsconfig.json",
+		"start": "node dist/index.js",
+		"test": "yarn test:lint && yarn test:types && yarn test:unit && yarn test:self",
+		"test:types": "tsc -p tsconfig.json --noEmit true",
+		"test:unit": "yarn jest",
+		"test:lint": "eslint ./src  --ext js,ts,tsx",
+		"test:self": "yarn build && node ./dist/index.js",
+		"format:eslint": "yarn test:lint --fix"
+	},
+	"husky": {
+		"hooks": {
+			"pre-commit": "yarn test",
+			"pre-push": "yarn test"
+		}
+	},
+	"lint-staged": {
+		"./src/**/*.{js,jsx}": [
+			"format:eslint",
+			"git add"
+		]
+	},
+	"devDependencies": {
+		"@types/cosmiconfig": "^6.0.0",
+		"@types/jest": "^24.0.23",
+		"@typescript-eslint/eslint-plugin": "^2.9.0",
+		"@typescript-eslint/parser": "^2.9.0",
+		"eslint": "^6.7.1",
+		"eslint-config-peerigon": "^24.0.0",
+		"eslint-import-resolver-typescript": "^2.0.0",
+		"eslint-plugin-prefer-arrow": "^1.1.6",
+		"husky": "^3.1.0",
+		"jest": "^24.9.0",
+		"lint-staged": "^9.5.0",
+		"nodemon": "^2.0.1",
+		"rimraf": "^3.0.0",
+		"ts-jest": "^24.2.0",
+		"typescript": "^3.7.2"
+	},
+	"dependencies": {
+		"@types/node": "^12.12.14",
+		"chalk": "^3.0.0",
+		"cosmiconfig": "^6.0.0"
+	}
 }
