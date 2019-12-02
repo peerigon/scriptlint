@@ -74,6 +74,11 @@ describe("defaultRules.ts", () => {
 			})
 		).toEqual(["foo"]);
 	});
+
+	maybeTestValidationFn("no-aliases", (validate: any) => {
+		expect(validate("foo", "bar")).toBe(true);
+		expect(validate("foo", "foo")).toBe(false);
+	});
 });
 
 export {};

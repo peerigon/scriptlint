@@ -31,6 +31,12 @@ const rules = [
 		validate: (key: string) => NAME_REGEX.test(key),
 	},
 	{
+		name: "no-aliases",
+		isObjectRule: false,
+		message: "don't alias binaries, use npx/yarn instead",
+		validate: (key: string, value: string) => key !== value,
+	},
+	{
 		name: "uses-allowed-namespace",
 		isObjectRule: false,
 		message: 'script name "{{name}}" should start with one of the allowed namespaces',
