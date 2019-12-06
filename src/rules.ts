@@ -19,7 +19,7 @@ export const getRuleByName = (rules: Array<Rule>, name: string): Rule | null => 
 	return filtered[0];
 };
 
-const loadRulesFromSet = (ruleSet: string): Array<Rule> => {
+export const loadRulesFromSet = (ruleSet: string): Array<Rule> => {
 	let ruleNameList = defaultRuleSets.default;
 
 	if (!ruleSet.startsWith(PROJECT_NAME)) {
@@ -45,7 +45,7 @@ export const loadRulesFromRuleConfig = (extend: Array<string>, rulesConfig?: Rul
 		return [...allRules, ...theseRules];
 	}, []);
 
-	if (typeof rulesConfig === undefined) {
+	if (!rulesConfig) {
 		return loadedRules;
 	}
 

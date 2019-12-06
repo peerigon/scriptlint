@@ -19,6 +19,7 @@
 		"test:types": "tsc -p tsconfig.json --noEmit true",
 		"test:unit": "yarn jest --coverage",
 		"test:watch": "yarn jest --watch",
+		"test:update": "yarn jest -u",
 		"test:lint": "eslint ./src  --ext js,ts,tsx",
 		"test:self": "yarn build && node ./dist/index.js",
 		"format:eslint": "yarn test:lint --fix"
@@ -46,6 +47,7 @@
 		"eslint-plugin-prefer-arrow": "^1.1.6",
 		"husky": "^3.1.0",
 		"jest": "^24.9.0",
+		"jest-mock-console": "^1.0.0",
 		"lint-staged": "^9.5.0",
 		"nodemon": "^2.0.1",
 		"rimraf": "^3.0.0",

@@ -22,12 +22,23 @@ describe("execute.ts", () => {
 		expect(executed2).toEqual([]);
 	});
 
-	it("complains about rule violations (strict)", () => {
+	it("complains about rule violations (strict) #1", () => {
 		const executed2 = execute(rulesStrict, {
 			foo: "echo 1",
 		});
 
 		expect(executed2).toEqual(["mandatory-test", "mandatory-start", "mandatory-dev", "uses-allowed-namespace (foo)"]);
+	});
+
+	it("complains about rule violations (strict) #2", () => {
+		const executed2 = execute(rulesStrict, {
+			dev: "echo 1",
+			start: "echo 1",
+			test: "echo 1",
+			"preother:foobar": "echo 1",
+		});
+
+		expect(executed2).toEqual(["prepost-trigger-defined"]);
 	});
 
 	it("doesn't complain about correct scripts (default)", () => {

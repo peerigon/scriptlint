@@ -36,12 +36,15 @@ export const sanitizeConfig = (loadedConfig: CosmiconfigConfig): Config => {
 	return sanitized;
 };
 
-const loadConfig = (): Config => {
-	const explorerSync = cosmiconfigSync(PROJECT_NAME);
+const loadConfig = (name = PROJECT_NAME): Config => {
+	const explorerSync = cosmiconfigSync(name);
 	const searchedFor = explorerSync.search();
-	const loadedConfig = searchedFor?.config;
 
-	return sanitizeConfig(loadedConfig);
+	if (!searchedFor) {
+		return defaultConfig;
+	}
+
+	return sanitizeConfig(searchedFor.config);
 };
 
-export default loadConfig();
+export default loadConfig;

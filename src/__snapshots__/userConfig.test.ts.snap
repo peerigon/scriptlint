@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`reporter.ts loadConfig() 1`] = `
+Object {
+  "extends": Array [
+    "scriptlint/strict",
+  ],
+  "ignoreScripts": Array [
+    "foobar",
+  ],
+  "rules": Object {
+    "mandatory-dev": false,
+  },
+}
+`;

@@ -40,6 +40,8 @@ const execute = (rules: Array<Rule>, scripts: PackageScripts): Array<string> => 
 		}
 	});
 
+	dump();
+
 	return issues;
 };
 
