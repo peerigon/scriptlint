@@ -1,4 +1,4 @@
-import defaultRules from "./defaultRules";
+import defaultRules from "./rules";
 import {Rule} from "./types";
 
 const ruleSets = {

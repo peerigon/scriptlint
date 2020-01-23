@@ -1,5 +1,5 @@
 import defaultRuleSets from "./defaultRuleSets";
-import defaultRules from "./defaultRules";
+import defaultRules from "./rules";
 // Types
 import {Rule} from "./types";
 

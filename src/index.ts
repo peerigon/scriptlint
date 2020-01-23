@@ -2,7 +2,7 @@
 
 import loadUserConfig from "./userConfig";
 import userPackageScripts from "./userPackageScripts";
-import {loadRulesFromRuleConfig} from "./rules";
+import {loadRulesFromRuleConfig} from "./loadRules";
 import execute from "./execute";
 
 const userConfig = loadUserConfig();

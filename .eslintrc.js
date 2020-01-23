@@ -11,9 +11,11 @@ module.exports = {
   },
   root: true,
   rules: {
+    "import/no-anonymous-default-export": "off",
+    "import/prefer-default-export": "warn",
     indent: ["error", "tab"],
-    "@typescript-eslint/indent": 0,
-    "no-tabs": 0,
-    "@typescript-eslint/strict-boolean-expressions": 0
+    "@typescript-eslint/indent": "off",
+    "no-tabs": "off",
+    "@typescript-eslint/strict-boolean-expressions": "off"
   }
 };

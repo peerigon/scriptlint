@@ -1,5 +1,5 @@
 import execute from "./execute";
-import {loadRulesFromRuleConfig} from "./rules";
+import {loadRulesFromRuleConfig} from "./loadRules";
 
 const rulesNonStrict = loadRulesFromRuleConfig(false);
 const rulesStrict = loadRulesFromRuleConfig(true);

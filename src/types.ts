@@ -6,7 +6,7 @@ export type Rule = {
 };
 
 export type PackageScripts = {
-	[key: string]: unknown;
+	[key: string]: string;
 };
 
 export type Config = {
