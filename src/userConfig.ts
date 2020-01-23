@@ -7,6 +7,7 @@ import {Config} from "./types";
 
 export const defaultConfig: Config = {
 	strict: false,
+	fix: false,
 	rules: {},
 	customRules: [],
 	ignoreScripts: [],

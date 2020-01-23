@@ -3,6 +3,7 @@
 exports[`reporter.ts loadConfig() 1`] = `
 Object {
   "customRules": Array [],
+  "fix": false,
   "ignoreScripts": Array [
     "foobar",
   ],

@@ -128,6 +128,17 @@ The CLI can help you enforce these rules. Install it with `npm install scriptlin
 
 You can also add this as a pre-run to husky or as a precommit-hook.
 
+You can also define some options on the command line directly, if you prefer:
+
+```
+Usage: scriptlint [options]
+
+Options:
+  -s, --strict  strict mode
+  -f, --fix     autofixing
+  -h, --help    output usage information
+```
+
 ### configuration
 
 Configuration can be loaded from a `package.json` property (`scriptlint`), `.scriptlintrc` (as JSON), or `scriptlint.js` (CommonJS module). This is the default:

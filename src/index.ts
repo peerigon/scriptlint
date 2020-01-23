@@ -1,13 +1,22 @@
 #!/usr/bin/env node
 
 import loadUserConfig from "./userConfig";
+import loadCliConfig from "./cliConfig";
 import userPackageScripts from "./userPackageScripts";
 import {loadRulesFromRuleConfig} from "./loadRules";
 import execute from "./execute";
 
 const userConfig = loadUserConfig();
-const scripts = userPackageScripts(userConfig.ignoreScripts);
-const rules = loadRulesFromRuleConfig(userConfig.strict, userConfig.rules, userConfig.customRules);
+const cliConfig = loadCliConfig(process.argv);
+const config = {...userConfig, ...cliConfig};
+const scripts = userPackageScripts(config.ignoreScripts);
+
+const rules = loadRulesFromRuleConfig(
+	config.strict,
+	config.rules,
+	config.customRules
+);
+
 const issues = execute(rules, scripts);
 
 if (issues.length > 0) {

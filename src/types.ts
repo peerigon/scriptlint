@@ -11,6 +11,7 @@ export type PackageScripts = {
 
 export type Config = {
 	strict: boolean;
+	fix: boolean;
 	rules: {
 		[key: string]: boolean;
 	};

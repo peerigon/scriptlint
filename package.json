@@ -59,6 +59,7 @@
 	"dependencies": {
 		"@types/node": "13.1.8",
 		"chalk": "^3.0.0",
+		"commander": "^4.1.0",
 		"cosmiconfig": "^6.0.0"
 	}
 }
