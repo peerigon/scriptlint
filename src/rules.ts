@@ -38,7 +38,10 @@ export const loadRulesFromSet = (ruleSet: string): Array<Rule> => {
 	return filtered;
 };
 
-export const loadRulesFromRuleConfig = (extend: Array<string>, rulesConfig?: RulesConfig): Array<Rule> => {
+export const loadRulesFromRuleConfig = (extend: Array<string> | string, rulesConfig?: RulesConfig): Array<Rule> => {
+	if (typeof extend === "string") {
+		extend = [extend];
+	}
 	const rules = extend.map(loadRulesFromSet);
 
 	const loadedRules = rules.reduce((allRules: Array<Rule>, theseRules: Array<Rule>) => {
