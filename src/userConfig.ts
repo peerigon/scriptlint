@@ -2,18 +2,13 @@ import {cosmiconfigSync} from "cosmiconfig";
 import {Config as CosmiconfigConfig} from "cosmiconfig/dist/types";
 import {error} from "./reporter";
 import {PROJECT_NAME} from "./constants";
-
-type Config = {
-	extends: Array<string>;
-	rules: {
-		[key: string]: boolean;
-	};
-	ignoreScripts: Array<string>;
-};
+// Types
+import {Config} from "./types";
 
 export const defaultConfig: Config = {
-	extends: [PROJECT_NAME + "/default"],
+	strict: false,
 	rules: {},
+	customRules: [],
 	ignoreScripts: [],
 };
 
@@ -28,10 +23,6 @@ export const sanitizeConfig = (loadedConfig: CosmiconfigConfig): Config => {
 			error(`unknown config key "${key}"`);
 		}
 	});
-
-	if (sanitized.extends.length < 1) {
-		sanitized.extends = defaultConfig.extends;
-	}
 
 	return sanitized;
 };

@@ -8,3 +8,16 @@ export type Rule = {
 export type PackageScripts = {
 	[key: string]: unknown;
 };
+
+export type Config = {
+	strict: boolean;
+	rules: {
+		[key: string]: boolean;
+	};
+	customRules: Array<Rule>;
+	ignoreScripts: Array<string>;
+};
+
+export type RulesConfig = {
+	[key: string]: boolean;
+};

@@ -52,7 +52,7 @@ That's it for the default rules! They should be relatively easy to follow and no
 ```json
 {
 	"scriptlint": {
-		"extends": ["scriptlint/strict"]
+		"strict": true
 	}
 }
 ```
@@ -134,15 +134,16 @@ Configuration can be loaded from a `package.json` property (`scriptlint`), `.scr
 
 ```json
 {
-	"extends": ["scriptlint/default"],
+	"strict": true,
 	"rules": {},
-	"ignoreScripts": []
+	"ignoreScripts": [],
+	"customRules": []
 }
 ```
 
-#### `extends`
+#### `strict `
 
-This defines what set of rules will be used. The default one only enforces the minimum rules, `scriptlint/strict` uses all of the rules.
+This defines what set of rules will be used. Non-strict means minimum rules, `"strict": true` uses all of the default rules available.
 
 #### rules
 
@@ -161,7 +162,7 @@ Turn a rule on/off like this:
 
 ```json
 {
-	"extends": "scriptlint/strict",
+	"strict": true,
 	"rules": {
 		"uses-allowed-namespace": false
 	}
@@ -172,12 +173,43 @@ Turn a rule on/off like this:
 
 ```json
 {
-	"extends": "scriptlint/strict",
+	"strict": true,
 	"ignoreScripts": ["my-funny-scriptname"]
 }
 ```
 
 Scripts in this list will be exempt from linting.
+
+#### custom rules
+
+You can add custom rule implementations in your config. `customRules` is an array of objects in this schema:
+
+```js
+{
+	name: string,				// your custom rule's name
+	isObjectRule:boolean	// does the callback for this rule 
+}
+```
+
+As a speaking example here's a custom config (`.scriptlintrc.js`) to override the camelCase rule and replace it with a kebab-case one:
+
+```js
+module.exports = {
+  rules: {
+    "correct-casing": false,
+    "correct-kebab-casings": true
+  },
+  customRules: [
+    {
+      name: "correct-kebab-casings",
+      isObjectRule: false,
+      message: "`{{name}}`: Script name must be kebab case",
+      validate: name => /^[\d:a-z\-]+$/.test(name)
+    }
+  ]
+};
+
+```
 
 
 ## local dev

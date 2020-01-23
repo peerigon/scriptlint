@@ -1,15 +1,32 @@
-import {
-	loadRulesFromRuleConfig,
-	getRuleByName,
-	loadRulesFromSet,
-} from "./rules";
+import {loadRulesFromRuleConfig, getRuleByName} from "./rules";
 import defaultRules from "./defaultRules";
-import {PROJECT_NAME} from "./constants";
 
 describe("rules.ts", () => {
-	// one in string, one in Array<string> configuration
-	const defaultRulesLoaded = loadRulesFromRuleConfig(PROJECT_NAME + "/default");
-	const strictRulesLoaded = loadRulesFromRuleConfig([PROJECT_NAME + "/strict"]);
+	const defaultRulesLoaded = loadRulesFromRuleConfig(false);
+	const strictRulesLoaded = loadRulesFromRuleConfig(true);
+
+	it("loads custom rules", () => {
+		const customRule = {
+			name: "test-custom-rule-foobar",
+			isObjectRule: false,
+			message: "foobar",
+			validate: () => true,
+		};
+
+		const rulesWithCustomRule = loadRulesFromRuleConfig(
+			false,
+			{
+				[customRule.name]: true,
+			},
+			[customRule]
+		);
+
+		expect(
+			rulesWithCustomRule
+				.map(r => r.name)
+				.filter(r => r === customRule.name)[0]
+		).toBe(customRule.name);
+	});
 
 	it("loads correct amount of rules", () => {
 		expect(strictRulesLoaded.length).toBe(defaultRules.length);
@@ -22,18 +39,8 @@ describe("rules.ts", () => {
 		).toMatchSnapshot();
 	});
 
-	test("loadRulesFromSet() defaults on unknown plugin", () => {
-		expect(loadRulesFromSet("foo")).toEqual(defaultRulesLoaded);
-	});
-
-	test("loadRulesFromSet() defaults on unknown default set", () => {
-		expect(loadRulesFromSet(PROJECT_NAME + "/unknown")).toEqual(
-			defaultRulesLoaded
-		);
-	});
-
 	test("loadRulesFromSet() excludes rules by config", () => {
-		const rules = loadRulesFromRuleConfig([PROJECT_NAME + "/default"], {
+		const rules = loadRulesFromRuleConfig(true, {
 			"mandatory-dev": false,
 			"mandatory-start": false,
 			"mandatory-test": false,

@@ -1,7 +1,7 @@
 const search = () => {
 	return {
 		config: {
-			extends: ["scriptlint/strict"],
+			strict: true,
 			ignoreScripts: ["foobar"],
 			rules: {
 				"mandatory-dev": false

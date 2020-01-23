@@ -1,5 +1,3 @@
-import {PROJECT_NAME} from "./constants";
-import {error} from "./reporter";
 import defaultRuleSets from "./defaultRuleSets";
 import defaultRules from "./defaultRules";
 // Types
@@ -22,45 +20,30 @@ export const getRuleByName = (
 	return filtered[0];
 };
 
-export const loadRulesFromSet = (ruleSet: string): Array<Rule> => {
-	let ruleNameList = defaultRuleSets.default;
-
-	if (!ruleSet.startsWith(PROJECT_NAME)) {
-		error("plugin loading not implemented yet :)");
-	} else if (!ruleSet.endsWith("/default") && !ruleSet.endsWith("/strict")) {
-		error("Unknown default rules");
+export const loadDefaultRulesFromSet = (strict: boolean): Array<Rule> => {
+	if (strict) {
+		return defaultRuleSets.strict
+			.map((name: string) => getRuleByName(defaultRules, name))
+			.filter((r): r is Rule => r !== null);
 	}
 
-	if (ruleSet === PROJECT_NAME + "/strict") {
-		ruleNameList = defaultRuleSets.strict;
-	}
-
-	const rulesAndNulls = ruleNameList.map((name: string) =>
-		getRuleByName(defaultRules, name)
-	);
-
-	const filtered: Array<Rule> = rulesAndNulls.filter(
-		(r): r is Rule => r !== null
-	);
-
-	return filtered;
+	return defaultRuleSets.default
+		.map((name: string) => getRuleByName(defaultRules, name))
+		.filter((r): r is Rule => r !== null);
 };
 
 export const loadRulesFromRuleConfig = (
-	extend: Array<string> | string,
-	rulesConfig?: RulesConfig
+	strict: boolean,
+	rulesConfig?: RulesConfig,
+	customRules?: Array<Rule>
 ): Array<Rule> => {
-	if (typeof extend === "string") {
-		extend = [extend];
-	}
-	const rules = extend.map(loadRulesFromSet);
+	const rules = loadDefaultRulesFromSet(strict);
 
-	const loadedRules = rules.reduce(
-		(allRules: Array<Rule>, theseRules: Array<Rule>) => {
-			return [...allRules, ...theseRules];
-		},
-		[]
+	const loadedCustomRules = (customRules || []).filter(
+		(cr: Rule) => Boolean(rulesConfig && rulesConfig[cr.name])
 	);
+
+	const loadedRules = [...loadedCustomRules, ...rules];
 
 	if (!rulesConfig) {
 		return loadedRules;

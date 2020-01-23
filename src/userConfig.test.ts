@@ -1,9 +1,17 @@
 import loadConfig, {sanitizeConfig, defaultConfig} from "./userConfig";
 
 const validConfig = {
-	extends: ["foo"],
+	strict: true,
 	rules: {foo: "bar"},
 	ignoreScripts: ["foo"],
+	customRules: [
+		{
+			isObjectRule: false,
+			name: "foobar",
+			message: "barbaz",
+			validate: () => true,
+		},
+	],
 };
 
 const invalidConfig = {
@@ -22,17 +30,6 @@ describe("reporter.ts", () => {
 	});
 	it("should sanitize configs: valid => valid", () => {
 		expect(sanitizeConfig(validConfig)).toEqual(validConfig);
-	});
-	it("should sanitize configs: extends not empty", () => {
-		expect(
-			sanitizeConfig({
-				extends: [],
-				rules: {foo: "bar"},
-			})
-		).toEqual({
-			...defaultConfig,
-			rules: {foo: "bar"},
-		});
 	});
 
 	test("loadConfig()", () => {

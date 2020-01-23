@@ -2,14 +2,13 @@
 
 exports[`reporter.ts loadConfig() 1`] = `
 Object {
-  "extends": Array [
-    "scriptlint/strict",
-  ],
+  "customRules": Array [],
   "ignoreScripts": Array [
     "foobar",
   ],
   "rules": Object {
     "mandatory-dev": false,
   },
+  "strict": true,
 }
 `;

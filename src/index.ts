@@ -7,7 +7,7 @@ import execute from "./execute";
 
 const userConfig = loadUserConfig();
 const scripts = userPackageScripts(userConfig.ignoreScripts);
-const rules = loadRulesFromRuleConfig(userConfig.extends, userConfig.rules);
+const rules = loadRulesFromRuleConfig(userConfig.strict, userConfig.rules, userConfig.customRules);
 const issues = execute(rules, scripts);
 
 if (issues.length > 0) {

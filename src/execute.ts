@@ -34,7 +34,7 @@ const execute = (
 
 		pairs.forEach(([key, value]) => {
 			const valid =
-				typeof validate === "function" && validate(key, value);
+				typeof validate === "function" && validate(key, value, scripts);
 
 			if (!valid) {
 				issues.push(`${name} (${key})`);
