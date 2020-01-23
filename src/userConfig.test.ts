@@ -24,10 +24,12 @@ describe("reporter.ts", () => {
 		expect(sanitizeConfig(validConfig)).toEqual(validConfig);
 	});
 	it("should sanitize configs: extends not empty", () => {
-		expect(sanitizeConfig({
-			extends: [],
-			rules: {foo: "bar"},
-		})).toEqual({
+		expect(
+			sanitizeConfig({
+				extends: [],
+				rules: {foo: "bar"},
+			})
+		).toEqual({
 			...defaultConfig,
 			rules: {foo: "bar"},
 		});

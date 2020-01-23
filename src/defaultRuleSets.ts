@@ -2,7 +2,12 @@ import defaultRules from "./defaultRules";
 import {Rule} from "./types";
 
 const ruleSets = {
-	default: ["mandatory-test", "mandatory-start", "mandatory-dev", "no-default-test"],
+	default: [
+		"mandatory-test",
+		"mandatory-start",
+		"mandatory-dev",
+		"no-default-test",
+	],
 	strict: defaultRules.map((r: Rule) => r.name),
 };
 

@@ -20,13 +20,19 @@ export const filterPackageScriptsByKeys = (
 		}, {});
 };
 
-export const readPackageScripts = (cwd: string, ignores: Array<string>): PackageScripts => {
+export const readPackageScripts = (
+	cwd: string,
+	ignores: Array<string>
+): PackageScripts => {
 	try {
 		const packageLocation = path.join(cwd, "package.json");
 		const packageJson = fs.readFileSync(packageLocation, "utf-8");
 		const {scripts} = JSON.parse(packageJson);
 
-		return filterPackageScriptsByKeys(scripts, [...IGNORE_SCRIPT_NAMES, ...ignores]);
+		return filterPackageScriptsByKeys(scripts, [
+			...IGNORE_SCRIPT_NAMES,
+			...ignores,
+		]);
 	} catch (_) {
 		throw new Error("Cannot read package.json");
 	}

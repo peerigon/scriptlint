@@ -11,9 +11,11 @@ type Message = {
 
 type MessageBuffer = Array<Message>;
 
-type Values = {
-	[key: string]: string;
-} | undefined;
+type Values =
+	| undefined
+	| {
+			[key: string]: string;
+	};
 
 const makeMessage = (template: string, values: Values): string => {
 	let message = template;
@@ -33,7 +35,8 @@ let stashed: MessageBuffer = [];
 
 const stash = (message: string, type: MessageType): void => {
 	stashed.push({
-		message, type,
+		message,
+		type,
 	});
 };
 
@@ -75,4 +78,3 @@ const print = (type: MessageType, message: string) => {
 	}
 	}
 };
-

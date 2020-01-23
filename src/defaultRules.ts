@@ -19,7 +19,9 @@ const rules = [
 		message: "`test` script can't be the default script",
 		validate: (scripts: PackageScripts) => {
 			if (Object.keys(scripts).includes("test")) {
-				return scripts.test !== 'echo "Error: no test specified" && exit 1';
+				return (
+					scripts.test !== 'echo "Error: no test specified" && exit 1'
+				);
 			}
 
 			return true;
@@ -40,7 +42,8 @@ const rules = [
 	{
 		name: "uses-allowed-namespace",
 		isObjectRule: false,
-		message: 'script name "{{name}}" should start with one of the allowed namespaces',
+		message:
+			'script name "{{name}}" should start with one of the allowed namespaces',
 		validate: (key: string) =>
 			NAMESPACES.some(n => key === n) ||
 			NAMESPACES.some(n => key.startsWith(`${n}:`)) ||
@@ -50,7 +53,8 @@ const rules = [
 	{
 		name: "prepost-trigger-defined",
 		isObjectRule: true,
-		message: "some custom hooks ({{names}}) are missing their trigger script(s)",
+		message:
+			"some custom hooks ({{names}}) are missing their trigger script(s)",
 		validate: (scripts: PackageScripts): boolean | Array<string> => {
 			scripts = filterPackageScriptsByKeys(scripts, IGNORE_SCRIPT_NAMES);
 			const preHooksMissing = getMissingHooks("pre", scripts);

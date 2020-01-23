@@ -9,7 +9,10 @@ type RulesConfig = {
 	[key: string]: boolean;
 };
 
-export const getRuleByName = (rules: Array<Rule>, name: string): Rule | null => {
+export const getRuleByName = (
+	rules: Array<Rule>,
+	name: string
+): Rule | null => {
 	const filtered = rules.filter((r: Rule) => r.name === name);
 
 	if (filtered.length < 1) {
@@ -32,32 +35,48 @@ export const loadRulesFromSet = (ruleSet: string): Array<Rule> => {
 		ruleNameList = defaultRuleSets.strict;
 	}
 
-	const rulesAndNulls = ruleNameList.map((name: string) => getRuleByName(defaultRules, name));
-	const filtered: Array<Rule> = rulesAndNulls.filter((r): r is Rule => r !== null);
+	const rulesAndNulls = ruleNameList.map((name: string) =>
+		getRuleByName(defaultRules, name)
+	);
+
+	const filtered: Array<Rule> = rulesAndNulls.filter(
+		(r): r is Rule => r !== null
+	);
 
 	return filtered;
 };
 
-export const loadRulesFromRuleConfig = (extend: Array<string> | string, rulesConfig?: RulesConfig): Array<Rule> => {
+export const loadRulesFromRuleConfig = (
+	extend: Array<string> | string,
+	rulesConfig?: RulesConfig
+): Array<Rule> => {
 	if (typeof extend === "string") {
 		extend = [extend];
 	}
 	const rules = extend.map(loadRulesFromSet);
 
-	const loadedRules = rules.reduce((allRules: Array<Rule>, theseRules: Array<Rule>) => {
-		return [...allRules, ...theseRules];
-	}, []);
+	const loadedRules = rules.reduce(
+		(allRules: Array<Rule>, theseRules: Array<Rule>) => {
+			return [...allRules, ...theseRules];
+		},
+		[]
+	);
 
 	if (!rulesConfig) {
 		return loadedRules;
 	}
 
-	return loadedRules.map((rule: Rule) => {
-		if (rulesConfig && rule.name in rulesConfig && rulesConfig[rule.name] === false) {
-			return null;
-		}
+	return loadedRules
+		.map((rule: Rule) => {
+			if (
+				rulesConfig &&
+				rule.name in rulesConfig &&
+				rulesConfig[rule.name] === false
+			) {
+				return null;
+			}
 
-		return rule;
-	}).filter((r): r is Rule => r !== null);
+			return rule;
+		})
+		.filter((r): r is Rule => r !== null);
 };
-

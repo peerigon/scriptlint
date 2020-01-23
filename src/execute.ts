@@ -1,20 +1,30 @@
 import {Rule, PackageScripts} from "./types";
 import {dump, warning} from "./reporter";
 
-const execute = (rules: Array<Rule>, scripts: PackageScripts): Array<string> => {
+const execute = (
+	rules: Array<Rule>,
+	scripts: PackageScripts
+): Array<string> => {
 	dump();
 	const issues: Array<string> = [];
 
 	const executeObjectRule = ({validate, message, name}: Rule) => {
-		const validationResult = typeof validate === "function" && validate(scripts);
-		const valid = typeof validationResult === "boolean" ? validationResult : validationResult.length < 1;
+		const validationResult =
+			typeof validate === "function" && validate(scripts);
+
+		const valid =
+			typeof validationResult === "boolean" ?
+				validationResult :
+				validationResult.length < 1;
 
 		if (!valid) {
 			issues.push(name);
 			if (typeof validationResult === "boolean") {
 				warning(`${message} (${name})`);
 			} else {
-				warning(`${message} (${name})`, {names: validationResult.join(", ")});
+				warning(`${message} (${name})`, {
+					names: validationResult.join(", "),
+				});
 			}
 		}
 	};
@@ -23,7 +33,8 @@ const execute = (rules: Array<Rule>, scripts: PackageScripts): Array<string> => 
 		const pairs = Object.entries(scripts);
 
 		pairs.forEach(([key, value]) => {
-			const valid = typeof validate === "function" && validate(key, value);
+			const valid =
+				typeof validate === "function" && validate(key, value);
 
 			if (!valid) {
 				issues.push(`${name} (${key})`);

@@ -10,7 +10,6 @@ const search = () => {
 	};
 };
 
-
 const configs = {
 	scriptlint: {
 		search
@@ -18,10 +17,10 @@ const configs = {
 	missing: {
 		search: () => null
 	}
-}
+};
 
 module.exports = {
-	cosmiconfigSync: (name) => {
-		return configs[name]
+	cosmiconfigSync: name => {
+		return configs[name];
 	}
 };

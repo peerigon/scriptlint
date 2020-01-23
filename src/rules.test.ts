@@ -1,4 +1,8 @@
-import {loadRulesFromRuleConfig, getRuleByName, loadRulesFromSet} from "./rules";
+import {
+	loadRulesFromRuleConfig,
+	getRuleByName,
+	loadRulesFromSet,
+} from "./rules";
 import defaultRules from "./defaultRules";
 import {PROJECT_NAME} from "./constants";
 
@@ -12,7 +16,9 @@ describe("rules.ts", () => {
 
 	test("getRuleByName() nulls on unknwon name", () => {
 		expect(getRuleByName(defaultRulesLoaded, "foo")).toBe(null);
-		expect(getRuleByName(defaultRulesLoaded, "mandatory-dev")).toMatchSnapshot();
+		expect(
+			getRuleByName(defaultRulesLoaded, "mandatory-dev")
+		).toMatchSnapshot();
 	});
 
 	test("loadRulesFromSet() defaults on unknown plugin", () => {
@@ -20,7 +26,9 @@ describe("rules.ts", () => {
 	});
 
 	test("loadRulesFromSet() defaults on unknown default set", () => {
-		expect(loadRulesFromSet(PROJECT_NAME + "/unknown")).toEqual(defaultRulesLoaded);
+		expect(loadRulesFromSet(PROJECT_NAME + "/unknown")).toEqual(
+			defaultRulesLoaded
+		);
 	});
 
 	test("loadRulesFromSet() excludes rules by config", () => {
