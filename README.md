@@ -1,10 +1,10 @@
 # scriptlint
 
-an enforceable script naming standard for package.json
+an enforceable script naming standard for your package.json scripts
 
 ## intro
 
-When you switch projects a lot, keeping track of dev commands is hard. Was it `npm run dev` or `npm run develop`? There's no convention or standard to follow. Well, now there is: this document aims to define an easy to comply style guide how to name your package scripts, as well as a enforceable set of rules to improve their intuitive use. We created a CLI tool to lint your package scripts, so to speak.
+When frequently switching between projects, keeping track run/dev commands and helper scripts is hard. Was it `npm run dev` or `npm run start:development`? Was it `yarn lint` or `yarn eslint`? Until now, there's no convention or standard to follow or enforce but now there is! This document aims to define an easy to comply style guide how to name (and use) your package scripts, as well as a enforceable set of rules to improve their intuitive use. We created a CLI tool to lint your package scripts, so to speak.
 
 ## minimum rules
 
@@ -25,10 +25,11 @@ Every `package.json` has to have at least these 3 scripts:
 ...
 }
 ```
-
 ☑️
 
-### 2. the test script is not the default one from npm
+**Note:** if you have a project, where having for example a `start` script doesn't make sense, feel free to alias it to something else like `dev` or you keep it as a stub, for example `"start": "echo \"start what?\""`.
+
+### 2. the test script is not the default one from `npm init`
 
 ```json
 {
@@ -41,13 +42,26 @@ Every `package.json` has to have at least these 3 scripts:
 ...
 }
 ```
-❗️please change the test script to something more meaningful. When in doubt, try to alias it to your build process so it checks if the project builds, that's better than nothing.
+❗️
 
-That's it for the default rules! They should be relatively easy to follow and not require a lot of changes to get your project up to standard. When you've worked those out, it's time to switch over to strict mode (we'll see how to do that in a minute):
+Reasoning: Every project has at least one method of quick code verification. When in doubt, try to alias it to your build script, that's better than nothing.
 
-### 3. how to actually name the scripts
+That's it for the default rules! They should be relatively easy to follow and not require a lot of changes to get your project up to standard. When you've worked those out, it's time to switch over to strict mode:
 
-#### use categories, subcategories and `:`
+
+```json
+{
+	"scriptlint": {
+		"extends": ["scriptlint/strict"]
+	}
+}
+```
+
+In your `package.json`, see below for other configuration options.
+
+### 3. How to name scripts
+
+#### Use categories, subcategories and `:`
 
 To better signify, what category a script belongs to, prefix it with one of these categories:
 
@@ -88,6 +102,7 @@ The semantic of your subcategories is totally up to you, it is still good avdice
 #### use camelCase
 
 Since npm does it, we should do it:
+
 - `prepublishOnly` ☑️
 - `test:unit:watchAll` ☑️
 - `test-unit` ❗️
