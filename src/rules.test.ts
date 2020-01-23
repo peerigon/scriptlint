@@ -7,14 +7,15 @@ import defaultRules from "./defaultRules";
 import {PROJECT_NAME} from "./constants";
 
 describe("rules.ts", () => {
-	const defaultRulesLoaded = loadRulesFromRuleConfig([PROJECT_NAME + "/default"]);
+	// one in string, one in Array<string> configuration
+	const defaultRulesLoaded = loadRulesFromRuleConfig(PROJECT_NAME + "/default");
 	const strictRulesLoaded = loadRulesFromRuleConfig([PROJECT_NAME + "/strict"]);
 
 	it("loads correct amount of rules", () => {
 		expect(strictRulesLoaded.length).toBe(defaultRules.length);
 	});
 
-	test("getRuleByName() nulls on unknwon name", () => {
+	test("getRuleByName() nulls on unknown name", () => {
 		expect(getRuleByName(defaultRulesLoaded, "foo")).toBe(null);
 		expect(
 			getRuleByName(defaultRulesLoaded, "mandatory-dev")
