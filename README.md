@@ -183,6 +183,7 @@ Scripts in this list will be exempt from linting.
 ## local dev
 
 - `yarn install`
+- `yarn build`
 - `yarn link`
 - `yarn dev`
 - in another project `yarn link "scriptlint"`
