@@ -1,7 +1,9 @@
 import path from "path";
+import fs from "fs";
 import eJF from "edit-json-file";
+import detectIndent from "detect-indent";
 import {IGNORE_SCRIPT_NAMES} from "./constants";
-import {PackageScripts, PackageFile} from "./types";
+import {PackageScripts} from "./types";
 
 type Config = {
 	ignore: Array<string>;
@@ -20,14 +22,16 @@ export const filterPackageScriptsByKeys = (
 		}, {});
 };
 
-const file = eJF(path.join(process.cwd(), "package.json"));
+const filePath = path.join(process.cwd(), "package.json");
+const {indent} = detectIndent(fs.readFileSync(filePath, "utf8"));
 
-export const readPackageFile = (): PackageFile => {
-	return file.get();
-};
+const file = eJF(filePath, {
+	// eslint-disable-next-line @typescript-eslint/camelcase
+	stringify_width: indent || 2,
+});
 
 export const readPackageScripts = (ignores: Array<string>): PackageScripts => {
-	const {scripts} = readPackageFile();
+	const {scripts} = file.get();
 
 	return filterPackageScriptsByKeys(scripts, [
 		...IGNORE_SCRIPT_NAMES,
