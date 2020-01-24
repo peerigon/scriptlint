@@ -1,7 +1,7 @@
 import path from "path";
-import fs from "fs";
-import {PackageScripts} from "./types";
+import eJF from "edit-json-file";
 import {IGNORE_SCRIPT_NAMES} from "./constants";
+import {PackageScripts, PackageFile} from "./types";
 
 type Config = {
 	ignore: Array<string>;
@@ -20,26 +20,27 @@ export const filterPackageScriptsByKeys = (
 		}, {});
 };
 
-export const readPackageScripts = (
-	cwd: string,
-	ignores: Array<string>
-): PackageScripts => {
-	try {
-		const packageLocation = path.join(cwd, "package.json");
-		const packageJson = fs.readFileSync(packageLocation, "utf-8");
-		const {scripts} = JSON.parse(packageJson);
+const file = eJF(path.join(process.cwd(), "package.json"));
 
-		return filterPackageScriptsByKeys(scripts, [
-			...IGNORE_SCRIPT_NAMES,
-			...ignores,
-		]);
-	} catch (_) {
-		throw new Error("Cannot read package.json");
-	}
+export const readPackageFile = (): PackageFile => {
+	return file.get();
+};
+
+export const readPackageScripts = (ignores: Array<string>): PackageScripts => {
+	const {scripts} = readPackageFile();
+
+	return filterPackageScriptsByKeys(scripts, [
+		...IGNORE_SCRIPT_NAMES,
+		...ignores,
+	]);
 };
 
 const readPackageJsonFromCwd = (ignores: Array<string>): PackageScripts => {
-	return readPackageScripts(process.cwd(), ignores);
+	return readPackageScripts(ignores);
+};
+
+export const writePackageScripts = (scripts: PackageScripts): boolean => {
+	return file.set("scripts", scripts);
 };
 
 export default readPackageJsonFromCwd;

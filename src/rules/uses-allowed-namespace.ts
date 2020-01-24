@@ -10,4 +10,5 @@ export default {
 		NAMESPACES.some(n => key.startsWith(`${n}:`)) ||
 		NAMESPACES.some(n => key.startsWith("pre")) ||
 		NAMESPACES.some(n => key.startsWith("post")),
+	fix: (key: string, value: string) => ([`other:${key}`, value]),
 };

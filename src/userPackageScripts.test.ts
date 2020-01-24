@@ -1,10 +1,8 @@
-import path from "path";
 import userPackageScripts, {
 	readPackageScripts,
+	writePackageScripts,
 	filterPackageScriptsByKeys,
 } from "./userPackageScripts";
-
-const testPJ = path.join(process.cwd(), "tests/invalid/");
 
 describe("userPackageScripts.ts", () => {
 	it("reads package.json files", () => {
@@ -15,7 +13,7 @@ describe("userPackageScripts.ts", () => {
 
 	it("fails when it no package.json was found", () => {
 		try {
-			readPackageScripts("/dev/null", []);
+			readPackageScripts([]);
 
 			expect(true).toBe(false);
 		} catch (e) {
@@ -25,7 +23,7 @@ describe("userPackageScripts.ts", () => {
 
 	it("fails when package.json has no scripts", () => {
 		try {
-			readPackageScripts(testPJ, []);
+			readPackageScripts([]);
 
 			expect(true).toBe(false);
 		} catch (e) {
@@ -47,5 +45,11 @@ describe("userPackageScripts.ts", () => {
 			foo: "echo 1",
 		});
 		expect(filterPackageScriptsByKeys({}, [])).toEqual({});
+	});
+
+	it("writes back to the file", () => {
+		expect(writePackageScripts({
+			foo: "bar",
+		})).toBe("written");
 	});
 });

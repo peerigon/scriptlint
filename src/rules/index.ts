@@ -4,6 +4,7 @@ import correctCasing from "./correct-casing";
 import noAliases from "./no-aliases";
 import prePostTriggerDefined from "./prepost-trigger-defined";
 import usesAllowedNamespace from "./uses-allowed-namespace";
+import alphabeticOrder from "./alphabetic-order";
 import {Rule} from "../types";
 
 const rules: Array<Rule> = [
@@ -15,6 +16,7 @@ const rules: Array<Rule> = [
 	noAliases,
 	usesAllowedNamespace,
 	prePostTriggerDefined,
+	alphabeticOrder,
 ];
 
 export default rules;

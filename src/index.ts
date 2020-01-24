@@ -2,7 +2,7 @@
 
 import loadUserConfig from "./userConfig";
 import loadCliConfig from "./cliConfig";
-import userPackageScripts from "./userPackageScripts";
+import userPackageScripts, {writePackageScripts} from "./userPackageScripts";
 import {loadRulesFromRuleConfig} from "./loadRules";
 import execute from "./execute";
 
@@ -17,7 +17,9 @@ const rules = loadRulesFromRuleConfig(
 	config.customRules
 );
 
-const issues = execute(rules, scripts);
+const [issues, fixedScripts] = execute(rules, scripts, config.fix);
+
+writePackageScripts(fixedScripts);
 
 if (issues.length > 0) {
 	// eslint-disable-next-line no-process-exit

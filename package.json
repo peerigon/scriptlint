@@ -12,18 +12,18 @@
 	"scripts": {
 		"build": "yarn build:clean && tsc -p tsconfig.json && chmod +x ./dist/index.js",
 		"build:clean": "rimraf ./dist",
-		"dev": "yarn build && nodemon -e js,ts --watch src --exec \"yarn run build:dev\"",
 		"build:dev": "tsc -p tsconfig.json",
+		"dev": "yarn build && nodemon -e js,ts --watch src --exec \"yarn run build:dev\"",
+		"format:eslint": "yarn test:lint --fix",
+		"other:selfupdate": "updtr",
 		"start": "node dist/index.js",
 		"test": "yarn test:lint && yarn test:types && yarn test:unit && yarn test:self",
-		"test:types": "tsc -p tsconfig.json --noEmit true",
-		"test:unit": "yarn jest --coverage",
-		"test:watch": "yarn jest --watch --coverage",
-		"test:update": "yarn jest -u",
 		"test:lint": "eslint ./src  --ext js,ts,tsx",
 		"test:self": "yarn build && node ./dist/index.js",
-		"format:eslint": "yarn test:lint --fix",
-		"other:selfupdate": "updtr"
+		"test:types": "tsc -p tsconfig.json --noEmit true",
+		"test:unit": "yarn jest --coverage",
+		"test:update": "yarn jest -u",
+		"test:watch": "yarn jest --watch --coverage"
 	},
 	"husky": {
 		"hooks": {
@@ -60,6 +60,7 @@
 		"@types/node": "13.1.8",
 		"chalk": "^3.0.0",
 		"commander": "^4.1.0",
-		"cosmiconfig": "^6.0.0"
+		"cosmiconfig": "^6.0.0",
+		"edit-json-file": "^1.4.0"
 	}
 }

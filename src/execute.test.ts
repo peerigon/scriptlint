@@ -1,36 +1,57 @@
-import execute from "./execute";
+import execute, {patchScriptObjectEntry} from "./execute";
 import {loadRulesFromRuleConfig} from "./loadRules";
 
 const rulesNonStrict = loadRulesFromRuleConfig(false);
 const rulesStrict = loadRulesFromRuleConfig(true);
 
 describe("execute.ts", () => {
-	it("errors by default on empty scripts", () => {
-		const executed = execute(rulesNonStrict, {});
+	describe("patchScriptObjectEntry()", () => {
+		expect(
+			patchScriptObjectEntry(
+				{
+					bar: "1",
+					foo: "2",
+				},
+				"bar",
+				"xxx",
+				"5"
+			)
+		).toEqual({
+			xxx: "5",
+			foo: "2",
+		});
+	});
 
-		expect(executed).toEqual([
+	it("errors by default on empty scripts", () => {
+		const [issues, fixed] = execute(rulesNonStrict, {});
+
+		expect(fixed).toEqual({});
+		expect(issues).toEqual([
 			"mandatory-test",
 			"mandatory-start",
 			"mandatory-dev",
 		]);
 	});
 
-	it("doesn't complain about correct scripts (default)", () => {
-		const executed2 = execute(rulesNonStrict, {
+	it("doesn't complain about correct scripts (default, fixing)", () => {
+		const scripts = {
 			dev: "echo 1",
 			start: "echo 1",
 			test: "echo 1",
-		});
+		};
 
-		expect(executed2).toEqual([]);
+		const [issues, fixed] = execute(rulesNonStrict, scripts, true);
+
+		expect(fixed).toEqual(scripts);
+		expect(issues).toEqual([]);
 	});
 
 	it("complains about rule violations (strict) #1", () => {
-		const executed2 = execute(rulesStrict, {
+		const [issues] = execute(rulesStrict, {
 			foo: "echo 1",
 		});
 
-		expect(executed2).toEqual([
+		expect(issues).toEqual([
 			"mandatory-test",
 			"mandatory-start",
 			"mandatory-dev",
@@ -39,25 +60,51 @@ describe("execute.ts", () => {
 	});
 
 	it("complains about rule violations (strict) #2", () => {
-		const executed2 = execute(rulesStrict, {
+		const [issues] = execute(rulesStrict, {
 			dev: "echo 1",
 			start: "echo 1",
 			test: "echo 1",
 			"preother:foobar": "echo 1",
 		});
 
-		expect(executed2).toEqual(["prepost-trigger-defined"]);
+		expect(issues).toEqual(["prepost-trigger-defined", "alphabetic-order"]);
 	});
 
-	it("doesn't complain about correct scripts (default)", () => {
-		const executed2 = execute(rulesStrict, {
+	it("complains about rule violations (strict, fixed) #3", () => {
+		const scripts = {
+			"wrong-place-no-category-wrong-case": "echo 1",
 			dev: "echo 1",
 			start: "echo 1",
 			test: "echo 1",
+		};
+
+		const fixedShouldBe = {
+			dev: "echo 1",
+			"other:wrong-place-no-category-wrong-case": "echo 1",
+			start: "echo 1",
+			test: "echo 1",
+		};
+
+		const [issues, fixed] = execute(rulesStrict, scripts, true);
+
+		expect(issues).toEqual(["correct-casing (wrong-place-no-category-wrong-case)"]);
+
+		expect(fixed).toEqual(fixedShouldBe);
+
+		expect(Object.keys(fixed).join(", ")).toEqual(
+			Object.keys(fixedShouldBe).join(", ")
+		);
+	});
+
+	it("doesn't complain about correct scripts (default)", () => {
+		const [issues] = execute(rulesStrict, {
+			dev: "echo 1",
 			prepublishOnly: "echo 1",
+			start: "echo 1",
+			test: "echo 1",
 		});
 
-		expect(executed2).toEqual([]);
+		expect(issues).toEqual([]);
 	});
 });
 

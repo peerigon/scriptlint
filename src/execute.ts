@@ -1,16 +1,45 @@
 import {Rule, PackageScripts} from "./types";
 import {dump, warning} from "./reporter";
 
+export const fromEntries = (
+	iterable: Array<[string, string]>
+): PackageScripts => {
+	return [...iterable].reduce((obj: PackageScripts, [key, val]) => {
+		obj[key] = val;
+
+		return obj;
+	}, {});
+};
+
+export const patchScriptObjectEntry = (
+	scripts: PackageScripts,
+	fromKey: string,
+	toKey: string,
+	value: string
+) =>
+	fromEntries(
+		Object.entries(scripts).map(([k, v]) => {
+			return k === fromKey ? [toKey, value] : [k, v];
+		})
+	);
+
 const execute = (
 	rules: Array<Rule>,
-	scripts: PackageScripts
-): Array<string> => {
+	scripts: PackageScripts,
+	configFix = false
+): [Array<string>, PackageScripts] => {
 	dump();
 	const issues: Array<string> = [];
 
-	const executeObjectRule = ({validate, message, name}: Rule) => {
+	const patchPackageFile = (newScripts: PackageScripts) => {
+		scripts = newScripts;
+	};
+
+	const executeObjectRule = ({validate, message, name, fix}: Rule) => {
 		const validationResult =
 			typeof validate === "function" && validate(scripts);
+
+		const fixable = typeof fix === "function";
 
 		const valid =
 			typeof validationResult === "boolean" ?
@@ -18,6 +47,12 @@ const execute = (
 				validationResult.length < 1;
 
 		if (!valid) {
+			if (configFix && fixable && fix) {
+				patchPackageFile(fix(scripts));
+
+				return;
+			}
+
 			issues.push(name);
 			if (typeof validationResult === "boolean") {
 				warning(`${message} (${name})`);
@@ -29,7 +64,8 @@ const execute = (
 		}
 	};
 
-	const executeEntryRule = ({validate, message, name}: Rule) => {
+	const executeEntryRule = ({validate, message, name, fix}: Rule) => {
+		const fixable = typeof fix === "function";
 		const pairs = Object.entries(scripts);
 
 		pairs.forEach(([key, value]) => {
@@ -37,6 +73,20 @@ const execute = (
 				typeof validate === "function" && validate(key, value, scripts);
 
 			if (!valid) {
+				if (configFix && fixable && fix) {
+					const fixedEntry = fix(key, value);
+
+					const fixedScripts = patchScriptObjectEntry(
+						scripts,
+						key,
+						fixedEntry[0],
+						fixedEntry[1]
+					);
+
+					patchPackageFile(fixedScripts);
+
+					return;
+				}
 				issues.push(`${name} (${key})`);
 				warning(`${message} (${name})`, {name: key});
 			}
@@ -53,7 +103,7 @@ const execute = (
 
 	dump();
 
-	return issues;
+	return [issues, scripts];
 };
 
 export default execute;

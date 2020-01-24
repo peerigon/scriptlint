@@ -3,6 +3,8 @@ export type Rule = {
 	name: string;
 	message: string;
 	validate: unknown;
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
+	fix?: (a: unknown, b?: unknown, c?: unknown) => PackageScripts & [string, string];
 };
 
 export type PackageScripts = {
@@ -21,4 +23,9 @@ export type Config = {
 
 export type RulesConfig = {
 	[key: string]: boolean;
+};
+
+export type PackageFile = {
+	[key: string]: unknown;
+	scripts: PackageScripts;
 };
