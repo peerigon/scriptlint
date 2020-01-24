@@ -1,5 +1,5 @@
 import {Rule, PackageScripts} from "./types";
-import {dump, warning} from "./reporter";
+import {warning, makeMessage} from "./reporter";
 
 export const fromEntries = (
 	iterable: Array<[string, string]>
@@ -27,11 +27,12 @@ const execute = (
 	rules: Array<Rule>,
 	scripts: PackageScripts,
 	configFix = false
-): [Array<string>, PackageScripts] => {
-	dump();
+): [Array<string>, PackageScripts, number] => {
 	const issues: Array<string> = [];
+	let issuesFixed = 0;
 
 	const patchPackageFile = (newScripts: PackageScripts) => {
+		issuesFixed++;
 		scripts = newScripts;
 	};
 
@@ -47,6 +48,13 @@ const execute = (
 				validationResult.length < 1;
 
 		if (!valid) {
+			const warningMessage =
+				typeof validationResult === "boolean" ?
+					`${message} (${name})` :
+					makeMessage(`${message} (${name})`, {
+						names: validationResult.join(", "),
+					});
+
 			if (configFix && fixable && fix) {
 				patchPackageFile(fix(scripts));
 
@@ -54,13 +62,7 @@ const execute = (
 			}
 
 			issues.push(name);
-			if (typeof validationResult === "boolean") {
-				warning(`${message} (${name})`);
-			} else {
-				warning(`${message} (${name})`, {
-					names: validationResult.join(", "),
-				});
-			}
+			warning(warningMessage);
 		}
 	};
 
@@ -73,6 +75,8 @@ const execute = (
 				typeof validate === "function" && validate(key, value, scripts);
 
 			if (!valid) {
+				const warningMessage = makeMessage(`${message} (${name})`, {name: key});
+
 				if (configFix && fixable && fix) {
 					const fixedEntry = fix(key, value);
 
@@ -88,7 +92,7 @@ const execute = (
 					return;
 				}
 				issues.push(`${name} (${key})`);
-				warning(`${message} (${name})`, {name: key});
+				warning(warningMessage);
 			}
 		});
 	};
@@ -101,9 +105,7 @@ const execute = (
 		}
 	});
 
-	dump();
-
-	return [issues, scripts];
+	return [issues, scripts, issuesFixed];
 };
 
 export default execute;

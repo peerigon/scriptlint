@@ -50,6 +50,6 @@ describe("userPackageScripts.ts", () => {
 	it("writes back to the file", () => {
 		expect(writePackageScripts({
 			foo: "bar",
-		})).toBe("written");
+		})).toEqual(undefined);
 	});
 });

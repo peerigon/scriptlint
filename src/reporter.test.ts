@@ -1,5 +1,5 @@
 import mockConsole from "jest-mock-console";
-import {dump, error, warning} from "./reporter";
+import {dump, error, warning, success} from "./reporter";
 
 describe("reporter.ts", () => {
 	test("should console.log", () => {
@@ -13,6 +13,17 @@ describe("reporter.ts", () => {
 		const restoreConsole = mockConsole();
 
 		error("foobar");
+		// eslint-disable-next-line no-console
+		expect(console.log).toHaveBeenCalled();
+		restoreConsole();
+	});
+
+	test("success()", () => {
+		const restoreConsole = mockConsole();
+
+		success("foobar");
+		dump();
+		// eslint-disable-next-line no-console
 		expect(console.log).toHaveBeenCalled();
 		restoreConsole();
 	});

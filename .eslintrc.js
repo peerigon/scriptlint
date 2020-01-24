@@ -11,6 +11,7 @@ module.exports = {
   },
   root: true,
   rules: {
+    "no-console": "warn",
     "import/no-anonymous-default-export": "off",
     "import/prefer-default-export": "warn",
     indent: ["error", "tab"],

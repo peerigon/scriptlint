@@ -39,8 +39,9 @@ const readPackageJsonFromCwd = (ignores: Array<string>): PackageScripts => {
 	return readPackageScripts(ignores);
 };
 
-export const writePackageScripts = (scripts: PackageScripts): boolean => {
-	return file.set("scripts", scripts);
+export const writePackageScripts = (scripts: PackageScripts) => {
+	file.set("scripts", scripts);
+	file.save();
 };
 
 export default readPackageJsonFromCwd;

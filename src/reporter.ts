@@ -2,7 +2,7 @@ import chalk from "chalk";
 
 const PREFIX = "𝖘";
 
-type MessageType = "error" | "warning";
+type MessageType = "error" | "warning" | "success";
 
 type Message = {
 	message: string;
@@ -17,7 +17,7 @@ type Values =
 			[key: string]: string;
 	};
 
-const makeMessage = (template: string, values: Values): string => {
+export const makeMessage = (template: string, values: Values): string => {
 	let message = template;
 
 	if (values !== undefined) {
@@ -45,6 +45,11 @@ export const warning = (template: string, values?: Values): void => {
 
 	stash(message, "warning");
 };
+export const success = (template: string, values?: Values): void => {
+	const message = makeMessage(template, values);
+
+	stash(message, "success");
+};
 
 export const error = (message: string): void => {
 	print("error", message);
@@ -65,6 +70,7 @@ export const dump = (): number => {
 const print = (type: MessageType, message: string) => {
 	switch (type) {
 	case "error": {
+		// eslint-disable-next-line no-console
 		console.log(chalk.bold.red(`${PREFIX} [error] ${message}`));
 		break;
 	}
@@ -73,7 +79,13 @@ const print = (type: MessageType, message: string) => {
 		const notUnderlined = chalk.yellow.bold(`${PREFIX} [${type}]`);
 		const underlined = chalk.yellow.underline(message);
 
+		// eslint-disable-next-line no-console
 		console.log(`${notUnderlined} ${underlined}`);
+		break;
+	}
+	case "success": {
+		// eslint-disable-next-line no-console
+		console.log(chalk.bold.gray(`${PREFIX} [✔️] ${message}`));
 		break;
 	}
 	}

@@ -20,5 +20,6 @@ const demoJson = {
 };
 module.exports = () => ({
 	get: () => { return demoJson },
-	set: () => { return "written" }
+	set: () => { return "written" },
+	save: () => { return "saved" }
 });
