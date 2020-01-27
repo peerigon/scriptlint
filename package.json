@@ -21,7 +21,7 @@
     "start": "node dist/index.js",
     "test": "yarn test:lint && yarn test:types && yarn test:unit && yarn test:self",
     "test:lint": "eslint ./src  --ext js,ts,tsx",
-    "test:self": "yarn build && node ./dist/index.js",
+    "test:self": "scriptlint",
     "test:types": "tsc -p tsconfig.json --noEmit true",
     "test:unit": "yarn jest --coverage",
     "test:update": "yarn jest -u",
@@ -54,6 +54,7 @@
     "lint-staged": "10.0.2",
     "nodemon": "2.0.2",
     "rimraf": "^3.0.0",
+    "scriptlint": "^0.0.1",
     "ts-jest": "24.3.0",
     "typescript": "3.7.5",
     "updtr": "^3.1.0"
