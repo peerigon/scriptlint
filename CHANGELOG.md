@@ -1,3 +1,10 @@
+## [1.1.1](https://github.com/peerigon/scriptlint/compare/v1.1.0...v1.1.1) (2020-01-27)
+
+
+### Bug Fixes
+
+* **release:** make release action build stuff first :D ([9b34329](https://github.com/peerigon/scriptlint/commit/9b34329))
+
 # [1.1.0](https://github.com/peerigon/scriptlint/compare/v1.0.0...v1.1.0) (2020-01-27)
 
 
