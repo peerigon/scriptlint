@@ -10,7 +10,7 @@ export const NAMESPACES = [
 	"start",
 	"test",
 ];
-export const IGNORE_SCRIPT_NAMES = [
+export const DEFAULT_NPM_HOOKS = [
 	"install",
 	"postinstall",
 	"postpack",
