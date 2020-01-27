@@ -1,4 +1,4 @@
-# scriptlint
+# 📜 scriptlint
 
 an enforceable script naming standard for your package.json scripts
 
