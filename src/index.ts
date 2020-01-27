@@ -31,7 +31,7 @@ const run = () => {
 		totalIssuesFixed += issuesFixed;
 		scripts = fixedScripts;
 		run();
-	} else {
+	} else if (config.fix) {
 		writePackageScripts(fixedScripts);
 	}
 
