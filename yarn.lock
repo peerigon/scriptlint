@@ -4500,6 +4500,18 @@ saxes@^3.1.9:
   dependencies:
     xmlchars "^2.1.1"
 
+scriptlint@^0.0.1:
+  version "0.0.1"
+  resolved "https://registry.yarnpkg.com/scriptlint/-/scriptlint-0.0.1.tgz#a810a866cb6cd5af4045e08b40e5d6b64fabad45"
+  integrity sha512-RGrAhqNqV5toMCc+7QSEaTcUIHkT+OqGDuTu+t1bWbYMSNAzjmGlUw1QnvCo9DvpCUuTuTNCN1hX/ljEQS9cIQ==
+  dependencies:
+    "@types/node" "13.1.8"
+    chalk "^3.0.0"
+    commander "^4.1.0"
+    cosmiconfig "^6.0.0"
+    detect-indent "^6.0.0"
+    edit-json-file "^1.4.0"
+
 semver-compare@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/semver-compare/-/semver-compare-1.0.0.tgz#0dee216a1c941ab37e9efb1788f6afc5ff5537fc"

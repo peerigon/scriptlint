@@ -1,4 +1,4 @@
-import {IGNORE_SCRIPT_NAMES} from "../constants";
+import {DEFAULT_NPM_HOOKS} from "../constants";
 import {PackageScripts} from "../types";
 import {filterPackageScriptsByKeys} from "../userPackageScripts";
 
@@ -24,7 +24,7 @@ export default {
 	message:
 		"some custom hooks ({{names}}) are missing their trigger script(s)",
 	validate: (scripts: PackageScripts): boolean | Array<string> => {
-		scripts = filterPackageScriptsByKeys(scripts, IGNORE_SCRIPT_NAMES);
+		scripts = filterPackageScriptsByKeys(scripts, DEFAULT_NPM_HOOKS);
 		const preHooksMissing = getMissingHooks("pre", scripts);
 		const postHooksMissing = getMissingHooks("post", scripts);
 		const allMissing = [...preHooksMissing, ...postHooksMissing];
