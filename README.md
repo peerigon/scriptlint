@@ -4,6 +4,8 @@ an enforceable script naming standard for your package.json scripts
 
 ![CI badge](https://github.com/peerigon/scriptlint/workflows/ci/badge.svg)
 
+![Issue badge](https://img.shields.io/github/issues/peerigon/scriptlint)
+
 ## intro
 
 When frequently switching between projects, keeping track run/dev commands and helper scripts is hard. Was it `npm run dev` or `npm run start:development`? Was it `yarn lint` or `yarn eslint`? Until now, there's no convention or standard to follow or enforce but now there is! This document aims to define an easy to comply style guide how to name (and use) your package scripts, as well as a enforceable set of rules to improve their intuitive use. We created a CLI tool to lint your package scripts, so to speak.
