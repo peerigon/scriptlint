@@ -5,6 +5,8 @@ describe("mandatoryScriptFactory.ts", () => {
 		const rule = factory("dev");
 		const validate = rule.validate;
 
+		expect(typeof validate).toBe("function");
+
 		if (typeof validate !== "function") {
 			return;
 		}
