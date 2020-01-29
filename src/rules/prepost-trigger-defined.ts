@@ -27,7 +27,11 @@ export default {
 		scripts = filterPackageScriptsByKeys(scripts, DEFAULT_NPM_HOOKS);
 		const preHooksMissing = getMissingHooks("pre", scripts);
 		const postHooksMissing = getMissingHooks("post", scripts);
-		const allMissing = [...preHooksMissing, ...postHooksMissing];
+
+		const allMissing = [
+			...preHooksMissing.map(s => `pre${s}`),
+			...postHooksMissing.map(s => `post${s}`),
+		];
 
 		return allMissing.length < 1 ? true : allMissing;
 	},
