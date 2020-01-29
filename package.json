@@ -14,7 +14,8 @@
     "/README.md"
   ],
   "scripts": {
-    "build": "run-s build:clean build:scripts",
+    "build": "run-s build:clean build:scripts build:chmod",
+    "build:chmod": "chmod +x ./dist/index.js",
     "build:clean": "rimraf ./dist",
     "build:dev": "tsc -p tsconfig.json",
     "build:scripts": "tsc -p tsconfig.json",
