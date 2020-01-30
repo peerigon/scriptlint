@@ -73,7 +73,6 @@
     "chalk": "^3.0.0",
     "commander": "^4.1.0",
     "cosmiconfig": "^6.0.0",
-    "detect-indent": "^6.0.0",
-    "edit-json-file": "^1.4.0"
+    "detect-indent": "^6.0.0"
   }
 }
