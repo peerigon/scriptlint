@@ -1,4 +1,5 @@
 import makeMandatory from "./mandatoryScriptFactory";
+import makeForbidUnixOperators from "./noShellSpecificsFactory";
 import noDefaultTest from "./no-default-test";
 import correctCasing from "./correct-casing";
 import noAliases from "./no-aliases";
@@ -17,6 +18,9 @@ const rules: Array<Rule> = [
 	usesAllowedNamespace,
 	prePostTriggerDefined,
 	alphabeticOrder,
+	makeForbidUnixOperators(/rm /, "rm -rf", "rimraf"),
+	makeForbidUnixOperators(/ && /, "unix double ampersand (&&)", "npm-run-all/run-s"),
+	makeForbidUnixOperators(/ & /, "unix single ampersand (&)", "npm-run-all/run-p"),
 ];
 
 export default rules;

@@ -9,28 +9,36 @@
   "bin": {
     "scriptlint": "./dist/index.js"
   },
-  "files": ["/dist", "/README.md"],
+  "files": [
+    "/dist",
+    "/README.md"
+  ],
   "scripts": {
-    "build": "yarn build:clean && tsc -p tsconfig.json && chmod +x ./dist/index.js",
+    "build": "run-s build:clean build:scripts build:chmod",
+    "build:chmod": "chmod +x ./dist/index.js",
     "build:clean": "rimraf ./dist",
     "build:dev": "tsc -p tsconfig.json",
-    "dev": "yarn build && nodemon -e js,ts --watch src --exec \"yarn run build:dev\"",
-    "format": "yarn test:self --fix && yarn test:lint --fix",
+    "build:scripts": "tsc -p tsconfig.json",
+    "dev": "run-s build other:watch",
+    "format": "run-p test:self:fix test:lint:fix",
     "other:selfupdate": "updtr",
-    "prepublishOnly": "yarn build",
+    "other:watch": "nodemon -e js,ts --watch src --exec 'run-p build:dev'",
+    "prepublishOnly": "run-p build",
     "start": "node dist/index.js",
-    "test": "yarn test:lint && yarn test:types && yarn test:unit && yarn test:self",
+    "test": "run-s test:lint test:types test:unit test:self",
     "test:lint": "eslint ./src  --ext js,ts,tsx",
+    "test:lint:fix": "eslint ./src  --ext js,ts,tsx --fix",
     "test:self": "scriptlint",
+    "test:self:fix": "scriptlint --fix",
     "test:types": "tsc -p tsconfig.json --noEmit true",
-    "test:unit": "yarn jest --coverage",
-    "test:update": "yarn jest -u",
-    "test:watch": "yarn jest --watch --coverage"
+    "test:unit": "jest --coverage",
+    "test:update": "jest -u",
+    "test:watch": "jest --watch --coverage"
   },
   "husky": {
     "hooks": {
-      "pre-commit": "yarn test",
-      "pre-push": "yarn test"
+      "pre-commit": "run-p test",
+      "pre-push": "run-p test"
     }
   },
   "lint-staged": {
@@ -41,30 +49,30 @@
   },
   "devDependencies": {
     "@types/cosmiconfig": "^6.0.0",
-    "@types/jest": "24.9.0",
-    "@typescript-eslint/eslint-plugin": "2.17.0",
-    "@typescript-eslint/parser": "2.17.0",
+    "@types/jest": "25.1.1",
+    "@typescript-eslint/eslint-plugin": "2.18.0",
+    "@typescript-eslint/parser": "2.18.0",
     "eslint": "6.8.0",
     "eslint-config-peerigon": "25.2.0",
     "eslint-import-resolver-typescript": "^2.0.0",
     "eslint-plugin-prefer-arrow": "1.1.7",
-    "husky": "4.2.0",
+    "husky": "4.2.1",
     "jest": "25.1.0",
     "jest-mock-console": "^1.0.0",
-    "lint-staged": "10.0.2",
+    "lint-staged": "10.0.6",
     "nodemon": "2.0.2",
-    "rimraf": "^3.0.0",
-    "scriptlint": "^0.0.1",
-    "ts-jest": "24.3.0",
+    "npm-run-all": "^4.1.5",
+    "rimraf": "3.0.1",
+    "scriptlint": "^1.1.1",
+    "ts-jest": "25.1.0",
     "typescript": "3.7.5",
     "updtr": "^3.1.0"
   },
   "dependencies": {
-    "@types/node": "13.1.8",
+    "@types/node": "13.5.2",
     "chalk": "^3.0.0",
     "commander": "^4.1.0",
     "cosmiconfig": "^6.0.0",
-    "detect-indent": "^6.0.0",
-    "edit-json-file": "^1.4.0"
+    "detect-indent": "^6.0.0"
   }
 }

@@ -9,10 +9,17 @@ describe("prepost-trigger-defined.ts", () => {
 				foo: "echo 1",
 			})
 		).toBe(true);
+
 		expect(
 			rule.validate({
 				prefoo: "echo 1",
 			})
-		).toEqual(["foo"]);
+		).toEqual(["prefoo"]);
+
+		expect(
+			rule.validate({
+				postfoo: "echo 1",
+			})
+		).toEqual(["postfoo"]);
 	});
 });

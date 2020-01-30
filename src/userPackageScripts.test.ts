@@ -1,8 +1,21 @@
 import userPackageScripts, {
 	readPackageScripts,
 	writePackageScripts,
-	filterPackageScriptsByKeys,
 } from "./userPackageScripts";
+
+const setMock = jest.fn();
+const saveMock = jest.fn();
+
+jest.mock("./editJson", () => () => ({
+	get: () => ({
+		scripts: {
+			foo: "bar",
+		},
+	}),
+	set: (path: string, content: Record<string, unknown>) =>
+		setMock(path, content),
+	save: () => saveMock(),
+}));
 
 describe("userPackageScripts.ts", () => {
 	it("reads package.json files", () => {
@@ -31,25 +44,13 @@ describe("userPackageScripts.ts", () => {
 		}
 	});
 
-	it("filters objects by keys correctly", () => {
-		expect(
-			filterPackageScriptsByKeys(
-				{foo: "echo 1", bar: "echo 2", baz: "echo 3"},
-				["bar"]
-			)
-		).toEqual({
-			baz: "echo 3",
-			foo: "echo 1",
-		});
-		expect(filterPackageScriptsByKeys({foo: "echo 1"}, [])).toEqual({
-			foo: "echo 1",
-		});
-		expect(filterPackageScriptsByKeys({}, [])).toEqual({});
-	});
-
 	it("writes back to the file", () => {
-		expect(writePackageScripts({
+		writePackageScripts({
 			foo: "bar",
-		})).toEqual(undefined);
+		});
+		expect(setMock).toHaveBeenCalledWith("scripts", {
+			foo: "bar",
+		});
+		expect(saveMock).toHaveBeenCalled();
 	});
 });
