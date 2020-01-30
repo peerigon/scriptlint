@@ -1,14 +1,14 @@
 import detectIndent from "detect-indent";
-import editJson from "./editJson";
+import EditJson from "./editJson";
 
 jest.mock("fs");
 
 describe("editJson.ts", () => {
 	describe("it throws on file not found", () => {
-		expect(() => editJson("foo/bar/baz")).toThrow();
+		expect(() => new EditJson("foo/bar/baz")).toThrow();
 	});
 
-	const file = editJson("real/existing/path/package.json");
+	const file = new EditJson("real/existing/path/package.json");
 
 	it("reads files", () => {
 		expect(file).toMatchSnapshot();
@@ -43,7 +43,7 @@ describe("editJson.ts", () => {
 	});
 
 	it("respects indentation 2", () => {
-		const file2 = editJson("real/existing/path/package-with-tabs.json");
+		const file2 = new EditJson("real/existing/path/package-with-tabs.json");
 
 		file2.set("scripts", {foo: "bar"});
 		const saved2 = file2.save();

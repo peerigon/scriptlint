@@ -2,7 +2,7 @@ import fs from "fs";
 import detectIndent, {Indent} from "detect-indent";
 import {PackageFile} from "./types";
 
-class EditJson {
+export default class {
 	path: string;
 	indent: Indent;
 	package: PackageFile;
@@ -35,7 +35,3 @@ class EditJson {
 		return fs.writeFileSync(this.path, json);
 	}
 }
-
-export default (path: string) => {
-	return new EditJson(path);
-};

@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`editJson.ts creates files 1`] = `
-EditJson {
+default_1 {
   "fileContents": "{
   \\"scripts\\": {
     \\"foo\\": \\"bar\\"
@@ -22,7 +22,7 @@ EditJson {
 `;
 
 exports[`editJson.ts reads files 1`] = `
-EditJson {
+default_1 {
   "fileContents": "{
   \\"scripts\\": {
     \\"foo\\": \\"bar\\"
