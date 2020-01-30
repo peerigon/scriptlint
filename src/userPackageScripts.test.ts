@@ -1,7 +1,6 @@
 import userPackageScripts, {
 	readPackageScripts,
-	writePackageScripts,
-	filterPackageScriptsByKeys,
+	// writePackageScripts,
 } from "./userPackageScripts";
 
 describe("userPackageScripts.ts", () => {
@@ -31,25 +30,11 @@ describe("userPackageScripts.ts", () => {
 		}
 	});
 
-	it("filters objects by keys correctly", () => {
-		expect(
-			filterPackageScriptsByKeys(
-				{foo: "echo 1", bar: "echo 2", baz: "echo 3"},
-				["bar"]
-			)
-		).toEqual({
-			baz: "echo 3",
-			foo: "echo 1",
-		});
-		expect(filterPackageScriptsByKeys({foo: "echo 1"}, [])).toEqual({
-			foo: "echo 1",
-		});
-		expect(filterPackageScriptsByKeys({}, [])).toEqual({});
-	});
-
-	it("writes back to the file", () => {
-		expect(writePackageScripts({
-			foo: "bar",
-		})).toEqual(undefined);
-	});
+	// it("writes back to the file", () => {
+	// 	expect(
+	// 		writePackageScripts({
+	// 			foo: "bar",
+	// 		})
+	// 	).toEqual(undefined);
+	// });
 });

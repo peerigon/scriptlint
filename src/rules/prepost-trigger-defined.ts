@@ -1,6 +1,6 @@
 import {DEFAULT_NPM_HOOKS} from "../constants";
 import {PackageScripts} from "../types";
-import {filterPackageScriptsByKeys} from "../userPackageScripts";
+import {filterPackageScriptsByKeys} from "../utils";
 
 const getMissingHooks = (prefix: string, scripts: PackageScripts) => {
 	const keys = Object.keys(scripts);
