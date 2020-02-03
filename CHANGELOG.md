@@ -1,3 +1,15 @@
+# [1.3.0](https://github.com/peerigon/scriptlint/compare/v1.2.0...v1.3.0) (2020-02-03)
+
+
+### Bug Fixes
+
+* **CLI:** add `-V` option to CLI ([4925cc9](https://github.com/peerigon/scriptlint/commit/4925cc9))
+
+
+### Features
+
+* **cli:** JSON output and config inspection (-j -c) ([0ada14f](https://github.com/peerigon/scriptlint/commit/0ada14f))
+
 # [1.2.0](https://github.com/peerigon/scriptlint/compare/v1.1.1...v1.2.0) (2020-01-30)
 
 
