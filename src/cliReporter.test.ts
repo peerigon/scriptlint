@@ -1,5 +1,7 @@
 import mockConsole from "jest-mock-console";
-import {dump, error, warning, success} from "./cliReporter";
+import makeReporter, {error} from "./cliReporter";
+
+const {warning, dump, success} = makeReporter("cli");
 
 describe("reporter.ts", () => {
 	test("should console.log", () => {

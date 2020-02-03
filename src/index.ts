@@ -5,8 +5,9 @@ import loadCliConfig from "./cliConfig";
 import userPackageScriptContext from "./userPackageScripts";
 import {loadRulesFromRuleConfig} from "./loadRules";
 import execute from "./execute";
-import {success, dump} from "./cliReporter";
+import makeReporter from "./cliReporter";
 
+const {success, warning, dump} = makeReporter("cli");
 const userConfig = loadUserConfig();
 const cliConfig = loadCliConfig(process.argv);
 const config = {...userConfig, ...cliConfig};
@@ -29,6 +30,7 @@ const run = () => {
 	const [issues, fixedScripts, issuesFixed] = execute(
 		rules,
 		scripts,
+		warning,
 		config.fix
 	);
 

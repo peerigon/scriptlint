@@ -11,7 +11,7 @@ type Message = {
 
 type MessageBuffer = Array<Message>;
 
-type Values =
+export type Values =
 	| undefined
 	| {
 			[key: string]: string;
@@ -40,31 +40,35 @@ const stash = (message: string, type: MessageType): void => {
 	});
 };
 
-export const warning = (template: string, values?: Values): void => {
-	const message = makeMessage(template, values);
+export default (reporterType: "cli" | "json") => {
+	return {
+		warning: (template: string, values?: Values): void => {
+			const message = makeMessage(template, values);
 
-	stash(message, "warning");
-};
-export const success = (template: string, values?: Values): void => {
-	const message = makeMessage(template, values);
+			stash(message, "warning");
+		},
+		success: (template: string, values?: Values): void => {
+			const message = makeMessage(template, values);
 
-	stash(message, "success");
+			stash(message, "success");
+		},
+
+		dump: (): number => {
+			const problemCount = stashed.length;
+
+			stashed.forEach(({message, type}) => {
+				print(type, message);
+			});
+
+			stashed = [];
+
+			return problemCount;
+		},
+	};
 };
 
 export const error = (message: string): void => {
 	print("error", message);
-};
-
-export const dump = (): number => {
-	const problemCount = stashed.length;
-
-	stashed.forEach(({message, type}) => {
-		print(type, message);
-	});
-
-	stashed = [];
-
-	return problemCount;
 };
 
 const print = (type: MessageType, message: string) => {

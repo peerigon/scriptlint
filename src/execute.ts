@@ -1,5 +1,5 @@
 import {Rule, PackageScripts} from "./types";
-import {warning, makeMessage} from "./cliReporter";
+import {makeMessage, Values} from "./cliReporter";
 
 export const fromEntries = (
 	iterable: Array<[string, string]>
@@ -26,6 +26,7 @@ export const patchScriptObjectEntry = (
 const execute = (
 	rules: Array<Rule>,
 	scripts: PackageScripts,
+	warning?: (template: string, values?: Values) => void,
 	configFix = false
 ): [Array<string>, PackageScripts, number] => {
 	const issues: Array<string> = [];
@@ -36,6 +37,7 @@ const execute = (
 		scripts = newScripts;
 	};
 
+	// eslint-disable-next-line complexity
 	const executeObjectRule = ({validate, message, name, fix}: Rule) => {
 		const validationResult =
 			typeof validate === "function" && validate(scripts);
@@ -62,7 +64,9 @@ const execute = (
 			}
 
 			issues.push(name);
-			warning(warningMessage);
+			if (typeof warning === "function") {
+				warning(warningMessage);
+			}
 		}
 	};
 
@@ -75,7 +79,9 @@ const execute = (
 				typeof validate === "function" && validate(key, value, scripts);
 
 			if (!valid) {
-				const warningMessage = makeMessage(`${message} (${name})`, {name: key});
+				const warningMessage = makeMessage(`${message} (${name})`, {
+					name: key,
+				});
 
 				if (configFix && fixable && fix) {
 					const fixedEntry = fix(key, value);
@@ -92,7 +98,9 @@ const execute = (
 					return;
 				}
 				issues.push(`${name} (${key})`);
-				warning(warningMessage);
+				if (typeof warning === "function") {
+					warning(warningMessage);
+				}
 			}
 		});
 	};

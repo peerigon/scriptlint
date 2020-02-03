@@ -40,7 +40,7 @@ describe("execute.ts", () => {
 			test: "echo 1",
 		};
 
-		const [issues, fixed] = execute(rulesNonStrict, scripts, true);
+		const [issues, fixed] = execute(rulesNonStrict, scripts, () => {}, true);
 
 		expect(fixed).toEqual(scripts);
 		expect(issues).toEqual([]);
@@ -60,14 +60,17 @@ describe("execute.ts", () => {
 	});
 
 	it("complains about rule violations (strict) #2", () => {
+		const mockWarningFn = jest.fn();
+
 		const [issues] = execute(rulesStrict, {
 			dev: "echo 1",
 			start: "echo 1",
 			test: "echo 1",
 			"preother:foobar": "echo 1",
-		});
+		}, mockWarningFn);
 
 		expect(issues).toEqual(["prepost-trigger-defined", "alphabetic-order"]);
+		expect(mockWarningFn).toHaveBeenCalled();
 	});
 
 	it("complains about rule violations (strict, fixed) #3", () => {
@@ -85,8 +88,10 @@ describe("execute.ts", () => {
 			test: "echo 1",
 		};
 
-		const [issues, fixed] = execute(rulesStrict, scripts, true);
+		const mockWarningFn = jest.fn();
+		const [issues, fixed] = execute(rulesStrict, scripts, mockWarningFn, true);
 
+		expect(mockWarningFn).toHaveBeenCalled();
 		expect(issues).toEqual(["correct-casing (wrong-place-no-category-wrong-case)"]);
 
 		expect(fixed).toEqual(fixedShouldBe);
