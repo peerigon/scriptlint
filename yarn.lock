@@ -562,11 +562,6 @@
   resolved "https://registry.yarnpkg.com/@types/json5/-/json5-0.0.29.tgz#ee28707ae94e11d2b827bcbe5270bcea7f3e71ee"
   integrity sha1-7ihweulOEdK4J7y+UnC86n8+ce4=
 
-"@types/node@13.5.2":
-  version "13.5.2"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-13.5.2.tgz#3de53b55fd39efc428a901a0f6db31f761cfa131"
-  integrity sha512-Fr6a47c84PRLfd7M7u3/hEknyUdQrrBA6VoPmkze0tcflhU5UnpWEX2kn12ktA/lb+MNHSqFlSiPHIHsaErTPA==
-
 "@types/node@13.7.0":
   version "13.7.0"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-13.7.0.tgz#b417deda18cf8400f278733499ad5547ed1abec4"
@@ -1241,7 +1236,7 @@ commander@4.1.1:
   resolved "https://registry.yarnpkg.com/commander/-/commander-4.1.1.tgz#9fd602bd936294e9e9ef46a3f4d6964044b18068"
   integrity sha512-NOKm8xhkzAjzFx8B2v5OAHT+u5pRQc2UCa2Vq9jYL/31o2wi9mxBA7LIFs3sV5VSC49z6pEhfbMULvShKj26WA==
 
-commander@^4.0.1, commander@^4.1.0:
+commander@^4.0.1:
   version "4.1.0"
   resolved "https://registry.yarnpkg.com/commander/-/commander-4.1.0.tgz#545983a0603fe425bc672d66c9e3c89c42121a83"
   integrity sha512-NIQrwvv9V39FHgGFm36+U9SMQzbiHvU79k+iADraJTpmrFFfx7Ds0IvDoAdZsDrknlkRk14OYoWXb57uTh7/sw==
@@ -4544,14 +4539,14 @@ saxes@^3.1.9:
   dependencies:
     xmlchars "^2.1.1"
 
-scriptlint@1.2.0:
-  version "1.2.0"
-  resolved "https://registry.yarnpkg.com/scriptlint/-/scriptlint-1.2.0.tgz#fe197cd01ceb3480611cc1aa75ac78ee2754466b"
-  integrity sha512-tn2V7Yr2EHBrVODRceEkipbkD6mDo71Mr3e/Svdsl8fbLAmisVvWrhCA9IJYcT3m2KJnPNdFN/spLocVBtAOuQ==
+scriptlint@^1.3.0:
+  version "1.3.0"
+  resolved "https://registry.yarnpkg.com/scriptlint/-/scriptlint-1.3.0.tgz#9d81e2007c30ec110f289e6c9b561b79aa0be525"
+  integrity sha512-eQB18uI2BDJ7EQvmfRehyqlzEwhQ6YoroF0I1UUnJXkrAi4HMYLmFM55pBkvsx+0vdWePwdARU9sThrBBTKU+g==
   dependencies:
-    "@types/node" "13.5.2"
+    "@types/node" "13.7.0"
     chalk "^3.0.0"
-    commander "^4.1.0"
+    commander "4.1.1"
     cosmiconfig "^6.0.0"
     detect-indent "^6.0.0"
 
