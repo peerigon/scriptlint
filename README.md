@@ -7,8 +7,6 @@ Enforceable standards for your package.json scripts – like eslint for `npm run
 ![dependency badge](https://img.shields.io/librariesio/release/npm/scriptlint)
 ![npm version badge](https://img.shields.io/npm/v/scriptlint)
 
-**[tl;dr](#tldr)**
-
 ## Intro
 
 There are quite a few pitfalls when it comes to using `package.json` scripts:
@@ -66,9 +64,12 @@ uses-allowed-namespace     script name should start with one of the allowed name
 Usage: scriptlint [options]
 
 Options:
-  -s, --strict  strict mode
-  -f, --fix     autofixing
-  -h, --help    output usage information
+  -V, --version  output the version number
+  -s, --strict   strict mode
+  -j, --json     JSON output
+  -c, --config   inspect the config
+  -f, --fix      autofixing
+  -h, --help     output usage information
 ```
 
 ### Project configuration
@@ -81,6 +82,8 @@ This is the default:
 {
 	"strict": false,
 	"fix": false,
+	"config": false,
+	"json": false,
 	"rules": {},
 	"ignoreScripts": [],
 	"customRules": []
@@ -102,6 +105,32 @@ Turn a rule on/off like this:
 	}
 }
 ```
+
+#### `json`
+
+Output the issues in a json format
+
+```json
+[
+  …
+  {
+    "message": "Use of unix double ampersand (&&) in script 'test' is not allowed, consider using npm-run-all/run-s (no-unix-double-ampersand)",
+    "type": "warning",
+    "affected": "test"
+  }
+  …
+]
+```
+
+#### `config`
+
+Print the config as json for debugging purposes.
+
+#### `fix`
+
+🚨 **This alters the contents of your `package.json`, only use it in a version controlled environment!**
+
+Attempt to fix all found issues. Not every rule has a autofix function ready, but some do. 
 
 #### ignore scripts
 
@@ -288,6 +317,3 @@ Since npm does it, we should do it:
 ```
 
 Then run with `yarn test:lint:scripts` to see the problems in that project's package scripts.
-
-
-## tdlr
