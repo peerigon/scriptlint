@@ -7,18 +7,20 @@ type Config = {
 	ignore: Array<string>;
 };
 
-const file = new EditJson(path.join(process.cwd(), "package.json"));
+export default (cwd: string) => {
+	const file = new EditJson(path.join(cwd, "package.json"));
 
-export const readPackageScripts = (ignores: Array<string>): PackageScripts => {
-	const {scripts} = file.get();
+	return {
+		readPackageScripts: (ignores: Array<string>): PackageScripts => {
+			const {scripts} = file.get();
 
-	return filterPackageScriptsByKeys(scripts, ignores);
+			return filterPackageScriptsByKeys(scripts, ignores);
+		},
+
+		writePackageScripts: (scripts: PackageScripts) => {
+			file.set("scripts", scripts);
+
+			return file.save();
+		},
+	};
 };
-
-export const writePackageScripts = (scripts: PackageScripts) => {
-	file.set("scripts", scripts);
-
-	return file.save();
-};
-
-export default readPackageScripts;

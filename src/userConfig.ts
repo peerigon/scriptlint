@@ -1,6 +1,6 @@
 import {cosmiconfigSync} from "cosmiconfig";
 import {Config as CosmiconfigConfig} from "cosmiconfig/dist/types";
-import {error} from "./reporter";
+import {error} from "./cliReporter";
 import {PROJECT_NAME} from "./constants";
 // Types
 import {Config} from "./types";
@@ -8,6 +8,7 @@ import {Config} from "./types";
 export const defaultConfig: Config = {
 	strict: false,
 	fix: false,
+	json: false,
 	rules: {},
 	customRules: [],
 	ignoreScripts: [],

@@ -13,6 +13,7 @@ export default (argv: Array<string>): CliConfig => {
 	program
 		.version(`${version}`)
 		.option("-s, --strict", "strict mode")
+		.option("-j, --json", "JSON output")
 		.option("-f, --fix", "autofixing");
 
 	program.parse(argv);

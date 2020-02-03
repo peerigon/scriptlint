@@ -2,15 +2,20 @@
 
 import loadUserConfig from "./userConfig";
 import loadCliConfig from "./cliConfig";
-import userPackageScripts, {writePackageScripts} from "./userPackageScripts";
+import userPackageScriptContext from "./userPackageScripts";
 import {loadRulesFromRuleConfig} from "./loadRules";
 import execute from "./execute";
-import {success, dump} from "./reporter";
+import {success, dump} from "./cliReporter";
 
 const userConfig = loadUserConfig();
 const cliConfig = loadCliConfig(process.argv);
 const config = {...userConfig, ...cliConfig};
-let scripts = userPackageScripts(config.ignoreScripts);
+
+const {readPackageScripts, writePackageScripts} = userPackageScriptContext(
+	process.cwd()
+);
+
+let scripts = readPackageScripts(config.ignoreScripts);
 
 const rules = loadRulesFromRuleConfig(
 	config.strict,
@@ -37,7 +42,11 @@ const run = () => {
 
 	if (issues.length > 0) {
 		if (totalIssuesFixed > 0) {
-			success(`Fixed ${totalIssuesFixed} issue${totalIssuesFixed > 1 ? "s" : ""}!`);
+			success(
+				`Fixed ${totalIssuesFixed} issue${
+					totalIssuesFixed > 1 ? "s" : ""
+				}!`
+			);
 		}
 		dump();
 		// eslint-disable-next-line no-process-exit

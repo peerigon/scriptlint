@@ -1,5 +1,5 @@
 import {Rule, PackageScripts} from "./types";
-import {warning, makeMessage} from "./reporter";
+import {warning, makeMessage} from "./cliReporter";
 
 export const fromEntries = (
 	iterable: Array<[string, string]>

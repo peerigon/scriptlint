@@ -7,6 +7,7 @@ Object {
   "ignoreScripts": Array [
     "foobar",
   ],
+  "json": false,
   "rules": Object {
     "mandatory-dev": false,
   },

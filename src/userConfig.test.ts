@@ -3,6 +3,7 @@ import loadConfig, {sanitizeConfig, defaultConfig} from "./userConfig";
 const validConfig = {
 	strict: true,
 	fix: false,
+	json: false,
 	rules: {foo: "bar"},
 	ignoreScripts: ["foo"],
 	customRules: [
