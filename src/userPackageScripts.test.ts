@@ -1,7 +1,9 @@
-import userPackageScripts, {
+import context from "./userPackageScripts";
+
+const {
 	readPackageScripts,
 	writePackageScripts,
-} from "./userPackageScripts";
+} = context("real/existing/path/package.json");
 
 const setMock = jest.fn();
 const saveMock = jest.fn();
@@ -19,7 +21,7 @@ jest.mock("./editJson", () => () => ({
 
 describe("userPackageScripts.ts", () => {
 	it("reads package.json files", () => {
-		const thisPackageJson = userPackageScripts([]);
+		const thisPackageJson = readPackageScripts([]);
 
 		expect(Object.keys(thisPackageJson).length > 0).toBe(true);
 	});

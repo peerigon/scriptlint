@@ -2,15 +2,29 @@
 
 import loadUserConfig from "./userConfig";
 import loadCliConfig from "./cliConfig";
-import userPackageScripts, {writePackageScripts} from "./userPackageScripts";
+import userPackageScriptContext from "./userPackageScripts";
 import {loadRulesFromRuleConfig} from "./loadRules";
 import execute from "./execute";
-import {success, dump} from "./reporter";
+import makeReporter from "./reporters";
 
 const userConfig = loadUserConfig();
 const cliConfig = loadCliConfig(process.argv);
 const config = {...userConfig, ...cliConfig};
-let scripts = userPackageScripts(config.ignoreScripts);
+
+if (config.config) {
+	const json = JSON.stringify(config, null, 2);
+
+	// eslint-disable-next-line no-console
+	console.log(`\n\n${json}\n\n`);
+}
+
+const {success, warning, dump} = makeReporter(config.json ? "json" : "cli");
+
+const {readPackageScripts, writePackageScripts} = userPackageScriptContext(
+	process.cwd()
+);
+
+let scripts = readPackageScripts(config.ignoreScripts);
 
 const rules = loadRulesFromRuleConfig(
 	config.strict,
@@ -24,6 +38,7 @@ const run = () => {
 	const [issues, fixedScripts, issuesFixed] = execute(
 		rules,
 		scripts,
+		warning,
 		config.fix
 	);
 
@@ -37,7 +52,11 @@ const run = () => {
 
 	if (issues.length > 0) {
 		if (totalIssuesFixed > 0) {
-			success(`Fixed ${totalIssuesFixed} issue${totalIssuesFixed > 1 ? "s" : ""}!`);
+			success(
+				`Fixed ${totalIssuesFixed} issue${
+					totalIssuesFixed > 1 ? "s" : ""
+				}!`
+			);
 		}
 		dump();
 		// eslint-disable-next-line no-process-exit

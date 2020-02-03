@@ -2,11 +2,13 @@
 
 exports[`reporter.ts loadConfig() 1`] = `
 Object {
+  "config": false,
   "customRules": Array [],
   "fix": false,
   "ignoreScripts": Array [
     "foobar",
   ],
+  "json": false,
   "rules": Object {
     "mandatory-dev": false,
   },
