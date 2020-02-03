@@ -2,8 +2,10 @@ import cliConfig from "./cliConfig";
 
 describe("cliConfig.ts", () => {
 	it("should parse CLI params", () => {
-		expect(cliConfig(["bar", "foo", "--strict", "--fix"])).toEqual({
+		expect(cliConfig(["bar", "foo", "--strict", "--fix", "--json", "--config"])).toEqual({
+			config: true,
 			fix: true,
+			json: true,
 			strict: true,
 		});
 	});

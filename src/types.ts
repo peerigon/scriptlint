@@ -4,7 +4,11 @@ export type Rule = {
 	message: string;
 	validate: unknown;
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
-	fix?: (a: unknown, b?: unknown, c?: unknown) => PackageScripts & [string, string];
+	fix?: (
+		a: unknown,
+		b?: unknown,
+		c?: unknown
+	) => PackageScripts & [string, string];
 };
 
 export type PackageScripts = {
@@ -15,6 +19,7 @@ export type Config = {
 	strict: boolean;
 	fix: boolean;
 	json: boolean;
+	config: boolean;
 	rules: {
 		[key: string]: boolean;
 	};
@@ -30,3 +35,20 @@ export type PackageFile = {
 	[key: string]: unknown;
 	scripts: PackageScripts;
 };
+
+export type Values =
+	| undefined
+	| string
+	| Array<string>
+	| {
+			[key: string]: string;
+	};
+
+export type MessageType = "error" | "warning" | "success";
+
+export type Message = {
+	message: string;
+	type: MessageType;
+};
+
+export type MessageBuffer = Array<Message>;

@@ -9,6 +9,7 @@ export const defaultConfig: Config = {
 	strict: false,
 	fix: false,
 	json: false,
+	config: false,
 	rules: {},
 	customRules: [],
 	ignoreScripts: [],

@@ -1,5 +1,5 @@
 import {Rule, PackageScripts} from "./types";
-import {makeMessage, Values} from "./cliReporter";
+import {makeMessage} from "./utils";
 
 export const fromEntries = (
 	iterable: Array<[string, string]>
@@ -26,7 +26,7 @@ export const patchScriptObjectEntry = (
 const execute = (
 	rules: Array<Rule>,
 	scripts: PackageScripts,
-	warning?: (template: string, values?: Values) => void,
+	warning?: (template: string, values?: string | Array<string>) => void,
 	configFix = false
 ): [Array<string>, PackageScripts, number] => {
 	const issues: Array<string> = [];
@@ -65,7 +65,7 @@ const execute = (
 
 			issues.push(name);
 			if (typeof warning === "function") {
-				warning(warningMessage);
+				warning(warningMessage, validationResult);
 			}
 		}
 	};
@@ -99,7 +99,7 @@ const execute = (
 				}
 				issues.push(`${name} (${key})`);
 				if (typeof warning === "function") {
-					warning(warningMessage);
+					warning(warningMessage, key);
 				}
 			}
 		});

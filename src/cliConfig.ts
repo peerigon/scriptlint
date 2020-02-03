@@ -5,6 +5,8 @@ const {version} = require("../package.json");
 type CliConfig = {
 	fix?: boolean;
 	strict?: boolean;
+	json?: boolean;
+	config?: boolean;
 };
 
 export default (argv: Array<string>): CliConfig => {
@@ -14,6 +16,7 @@ export default (argv: Array<string>): CliConfig => {
 		.version(`${version}`)
 		.option("-s, --strict", "strict mode")
 		.option("-j, --json", "JSON output")
+		.option("-c, --config", "inspect the config")
 		.option("-f, --fix", "autofixing");
 
 	program.parse(argv);
@@ -26,6 +29,14 @@ export default (argv: Array<string>): CliConfig => {
 
 	if (program.strict !== undefined) {
 		cliConfig.strict = program.strict;
+	}
+
+	if (program.json !== undefined) {
+		cliConfig.json = program.json;
+	}
+
+	if (program.config !== undefined) {
+		cliConfig.config = program.config;
 	}
 
 	return cliConfig;

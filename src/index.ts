@@ -5,12 +5,20 @@ import loadCliConfig from "./cliConfig";
 import userPackageScriptContext from "./userPackageScripts";
 import {loadRulesFromRuleConfig} from "./loadRules";
 import execute from "./execute";
-import makeReporter from "./cliReporter";
+import makeReporter from "./reporters";
 
-const {success, warning, dump} = makeReporter("cli");
 const userConfig = loadUserConfig();
 const cliConfig = loadCliConfig(process.argv);
 const config = {...userConfig, ...cliConfig};
+
+if (config.config) {
+	const json = JSON.stringify(config, null, 2);
+
+	// eslint-disable-next-line no-console
+	console.log(`\n\n${json}\n\n`);
+}
+
+const {success, warning, dump} = makeReporter(config.json ? "json" : "cli");
 
 const {readPackageScripts, writePackageScripts} = userPackageScriptContext(
 	process.cwd()

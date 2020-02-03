@@ -1,6 +1,6 @@
 /* eslint-disable import/prefer-default-export */
 
-import {PackageScripts} from "./types";
+import {PackageScripts, Values} from "./types";
 
 export const slugify = (str: string): string =>
 	str
@@ -22,4 +22,18 @@ export const filterPackageScriptsByKeys = (
 
 			return obj;
 		}, {});
+};
+
+export const makeMessage = (template: string, values: Values): string => {
+	let message = template;
+
+	if (values !== undefined) {
+		const pairs = Object.entries(values);
+
+		pairs.forEach(([key, value]) => {
+			message = message.replace(`{{${key}}}`, value);
+		});
+	}
+
+	return message;
 };

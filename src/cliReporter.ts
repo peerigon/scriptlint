@@ -1,36 +1,8 @@
 import chalk from "chalk";
+import {Values, MessageBuffer, MessageType} from "./types";
+import {makeMessage} from "./utils";
 
 const PREFIX = "𝖘";
-
-type MessageType = "error" | "warning" | "success";
-
-type Message = {
-	message: string;
-	type: MessageType;
-};
-
-type MessageBuffer = Array<Message>;
-
-export type Values =
-	| undefined
-	| {
-			[key: string]: string;
-	};
-
-export const makeMessage = (template: string, values: Values): string => {
-	let message = template;
-
-	if (values !== undefined) {
-		const pairs = Object.entries(values);
-
-		pairs.forEach(([key, value]) => {
-			message = message.replace(`{{${key}}}`, value);
-		});
-	}
-
-	return message;
-};
-
 let stashed: MessageBuffer = [];
 
 const stash = (message: string, type: MessageType): void => {
@@ -40,31 +12,29 @@ const stash = (message: string, type: MessageType): void => {
 	});
 };
 
-export default (reporterType: "cli" | "json") => {
-	return {
-		warning: (template: string, values?: Values): void => {
-			const message = makeMessage(template, values);
+export default {
+	warning: (template: string, values?: Values): void => {
+		const message = makeMessage(template, values);
 
-			stash(message, "warning");
-		},
-		success: (template: string, values?: Values): void => {
-			const message = makeMessage(template, values);
+		stash(message, "warning");
+	},
+	success: (template: string, values?: Values): void => {
+		const message = makeMessage(template, values);
 
-			stash(message, "success");
-		},
+		stash(message, "success");
+	},
 
-		dump: (): number => {
-			const problemCount = stashed.length;
+	dump: (): number => {
+		const problemCount = stashed.length;
 
-			stashed.forEach(({message, type}) => {
-				print(type, message);
-			});
+		stashed.forEach(({message, type}) => {
+			print(type, message);
+		});
 
-			stashed = [];
+		stashed = [];
 
-			return problemCount;
-		},
-	};
+		return problemCount;
+	},
 };
 
 export const error = (message: string): void => {
