@@ -1,3 +1,10 @@
+## [1.3.1](https://github.com/peerigon/scriptlint/compare/v1.3.0...v1.3.1) (2020-02-03)
+
+
+### Bug Fixes
+
+* **readme:** Add missing parts of the README ([08726a9](https://github.com/peerigon/scriptlint/commit/08726a9))
+
 # [1.3.0](https://github.com/peerigon/scriptlint/compare/v1.2.0...v1.3.0) (2020-02-03)
 
 
