@@ -1,6 +1,6 @@
 {
   "name": "scriptlint",
-  "version": "0.0.1",
+  "version": "1.2.0",
   "description": "an enforcable script naming standard for package.json",
   "main": "dist/index.js",
   "repository": "https://github.com/peerigon/scriptlint",
