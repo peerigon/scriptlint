@@ -1,4 +1,6 @@
 import commander from "commander";
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const {version} = require("../package.json");
 
 type CliConfig = {
 	fix?: boolean;
@@ -9,6 +11,7 @@ export default (argv: Array<string>): CliConfig => {
 	const program = new commander.Command();
 
 	program
+		.version(`${version}`)
 		.option("-s, --strict", "strict mode")
 		.option("-f, --fix", "autofixing");
 
