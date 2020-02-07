@@ -1,8 +1,7 @@
 import mockConsole from "jest-mock-console";
-import {error} from "./cliReporter";
-import makeReporter from "./reporters";
+import makeReporter from "../src/reporters";
 
-const {warning, dump, success} = makeReporter("cli");
+const {warning, dump, success} = makeReporter("json");
 
 describe("reporter.ts", () => {
 	test("should console.log", () => {
@@ -10,15 +9,6 @@ describe("reporter.ts", () => {
 		warning("foo");
 		warning("foo");
 		expect(dump()).toBe(3);
-	});
-
-	test("error()", () => {
-		const restoreConsole = mockConsole();
-
-		error("foobar");
-		// eslint-disable-next-line no-console
-		expect(console.log).toHaveBeenCalled();
-		restoreConsole();
 	});
 
 	test("success()", () => {

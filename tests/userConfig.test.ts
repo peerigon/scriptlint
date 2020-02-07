@@ -1,4 +1,4 @@
-import loadConfig, {sanitizeConfig, defaultConfig} from "./userConfig";
+import loadConfig, {sanitizeConfig, defaultConfig} from "../src/userConfig";
 
 const validConfig = {
 	strict: true,

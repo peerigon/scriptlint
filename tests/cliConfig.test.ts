@@ -1,4 +1,4 @@
-import cliConfig from "./cliConfig";
+import cliConfig from "../src/cliConfig";
 
 describe("cliConfig.ts", () => {
 	it("should parse CLI params", () => {
