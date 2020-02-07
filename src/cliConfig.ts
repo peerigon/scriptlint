@@ -1,4 +1,3 @@
-import path from "path";
 import commander from "commander";
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const {version} = require("../package.json");
@@ -13,13 +12,13 @@ type CliConfig = {
 
 export default (argv: Array<string>): CliConfig => {
 	const program = new commander.Command();
-	let pathArg = "";
+	let packageFile = "";
 
 	program
 		.version(`${version}`)
 		.arguments("<packageFile>")
 		.action((arg: string) => {
-			pathArg = arg;
+			packageFile = arg;
 		})
 		.option("-s, --strict", "strict mode")
 		.option("-j, --json", "JSON output")
@@ -27,12 +26,6 @@ export default (argv: Array<string>): CliConfig => {
 		.option("-f, --fix", "autofixing");
 
 	program.parse(argv);
-
-	let packageFile = path.resolve(pathArg);
-
-	packageFile = packageFile.endsWith("/package.json") ?
-		packageFile :
-		packageFile + "/package.json";
 
 	const cliConfig: CliConfig = {packageFile};
 

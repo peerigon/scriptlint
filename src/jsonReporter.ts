@@ -1,11 +1,5 @@
-import {Values, MessageType} from "./types";
+import {Values, MessageType, JsonMessage} from "./types";
 import {makeMessage} from "./utils";
-
-type JsonMessage = {
-	type: string;
-	message: string;
-	affected: Values;
-};
 
 type JsonMessageBuffer = Array<JsonMessage>;
 
@@ -35,4 +29,6 @@ export default {
 
 		return problemCount;
 	},
+
+	get: () => ([...stashed]),
 };

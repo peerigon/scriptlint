@@ -1,6 +1,6 @@
-import cliReporter from "./cliReporter";
+import consoleReporter from "./consoleReporter";
 import jsonReporter from "./jsonReporter";
 
-export default (type: "cli" | "json") => {
-	return type === "cli" ? cliReporter : jsonReporter;
+export default (type: "console.log" | "json") => {
+	return type === "console.log" ? consoleReporter : jsonReporter;
 };

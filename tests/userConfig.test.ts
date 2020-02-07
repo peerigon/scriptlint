@@ -29,7 +29,9 @@ describe("reporter.ts", () => {
 		expect(sanitizeConfig(null)).toEqual(defaultConfig);
 	});
 	it("should sanitize configs: invalid keys", () => {
-		expect(sanitizeConfig(invalidConfig)).toEqual(defaultConfig);
+		expect(() => {
+			sanitizeConfig(invalidConfig);
+		}).toThrowErrorMatchingSnapshot();
 	});
 	it("should sanitize configs: valid => valid", () => {
 		expect(sanitizeConfig(validConfig)).toEqual(validConfig);

@@ -3,11 +3,12 @@
   "version": "0.0.0-released-semantically",
   "description": "an enforcable script naming standard for package.json",
   "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "repository": "https://github.com/peerigon/scriptlint",
   "author": "Peerigon GmbH",
   "license": "MIT",
   "bin": {
-    "scriptlint": "./dist/index.js"
+    "scriptlint": "./dist/cli.js"
   },
   "files": [
     "/dist",
@@ -15,7 +16,7 @@
   ],
   "scripts": {
     "build": "run-s build:clean build:scripts build:chmod",
-    "build:chmod": "chmod +x ./dist/index.js",
+    "build:chmod": "chmod +x ./dist/cli.js",
     "build:clean": "rimraf ./dist",
     "build:dev": "tsc -p tsconfig.build.json",
     "build:scripts": "tsc -p tsconfig.build.json",

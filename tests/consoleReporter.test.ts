@@ -1,14 +1,19 @@
 import mockConsole from "jest-mock-console";
-import {error} from "../src/cliReporter";
+import {error} from "../src/consoleReporter";
 import makeReporter from "../src/reporters";
 
-const {warning, dump, success} = makeReporter("cli");
+const {warning, dump, success, get} = makeReporter("console.log");
 
 describe("reporter.ts", () => {
 	test("should console.log", () => {
 		warning("foo");
 		warning("foo");
 		warning("foo");
+		expect(get()).toEqual([
+			{message: "foo", type: "warning"},
+			{message: "foo", type: "warning"},
+			{message: "foo", type: "warning"},
+		]);
 		expect(dump()).toBe(3);
 	});
 

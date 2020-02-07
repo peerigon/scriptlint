@@ -1,17 +1,18 @@
 {
 	"compilerOptions": {
-		"resolveJsonModule": true,
-		"target": "es5",
-		"module": "commonjs",
-		"lib": ["es2015"],
-		"outDir": "./dist",
-		"strict": true,
-		"noImplicitAny": true,
-		"strictNullChecks": true,
-		"strictFunctionTypes": true,
 		"allowSyntheticDefaultImports": true,
+		"declaration": true,
 		"esModuleInterop": true,
-		"forceConsistentCasingInFileNames": true
+		"forceConsistentCasingInFileNames": true,
+		"lib": ["es2015"],
+		"module": "commonjs",
+		"noImplicitAny": true,
+		"outDir": "./dist",
+		"resolveJsonModule": true,
+		"strict": true,
+		"strictFunctionTypes": true,
+		"strictNullChecks": true,
+		"target": "es5"
 	},
 	"include": ["./src", "./tests"]
 }

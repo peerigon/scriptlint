@@ -8,10 +8,13 @@ Object {
   "ignoreScripts": Array [
     "foobar",
   ],
-  "json": false,
+  "json": true,
+  "packageFile": undefined,
   "rules": Object {
     "mandatory-dev": false,
   },
   "strict": true,
 }
 `;
+
+exports[`reporter.ts should sanitize configs: invalid keys 1`] = `"unknown config key \\"invalid\\""`;

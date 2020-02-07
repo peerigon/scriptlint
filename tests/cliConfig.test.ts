@@ -12,7 +12,7 @@ describe("cliConfig.ts", () => {
 			"-c",
 		]);
 
-		expect(packageFile.endsWith("/package.json")).toBe(true);
+		expect(packageFile).toBe("foo/bar/baz");
 
 		expect(config).toEqual({
 			config: true,
@@ -34,7 +34,7 @@ describe("cliConfig.ts", () => {
 			pJName,
 		]);
 
-		expect(packageFile.endsWith(pJName)).toBe(true);
+		expect(packageFile).toBe(pJName);
 
 		expect(config).toEqual({
 			config: true,
@@ -51,7 +51,7 @@ describe("cliConfig.ts", () => {
 			"-f",
 		]);
 
-		expect(packageFile.endsWith("/package.json")).toBe(true);
+		expect(packageFile).toBe("");
 
 		expect(config).toEqual({
 			fix: true,
