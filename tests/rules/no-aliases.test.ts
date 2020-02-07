@@ -1,4 +1,4 @@
-import rule from "./no-aliases";
+import rule from "../../src/rules/no-aliases";
 
 describe("no-aliases.ts", () => {
 	it("should validate correctly", () => {

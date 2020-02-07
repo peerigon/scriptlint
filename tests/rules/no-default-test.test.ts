@@ -1,4 +1,4 @@
-import rule from "./no-default-test";
+import rule from "../../src/rules/no-default-test";
 
 describe("no-default-test.ts", () => {
 	it("should validate correctly", () => {

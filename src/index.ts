@@ -1,5 +1,4 @@
 #!/usr/bin/env node
-
 import loadUserConfig from "./userConfig";
 import loadCliConfig from "./cliConfig";
 import userPackageScriptContext from "./userPackageScripts";
@@ -21,7 +20,7 @@ if (config.config) {
 const {success, warning, dump} = makeReporter(config.json ? "json" : "cli");
 
 const {readPackageScripts, writePackageScripts} = userPackageScriptContext(
-	process.cwd()
+	config.packageFile
 );
 
 let scripts = readPackageScripts(config.ignoreScripts);
