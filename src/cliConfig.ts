@@ -16,7 +16,7 @@ export default (argv: Array<string>): CliConfig => {
 
 	program
 		.version(`${version}`)
-		.arguments("<packageFile>")
+		.arguments("[packageFile]")
 		.action((arg: string) => {
 			packageFile = arg;
 		})
