@@ -51,7 +51,7 @@ describe("cliConfig.ts", () => {
 			"-f",
 		]);
 
-		expect(packageFile).toBe("");
+		expect(packageFile).not.toBeDefined();
 
 		expect(config).toEqual({
 			fix: true,

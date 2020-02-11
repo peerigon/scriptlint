@@ -3,7 +3,7 @@ import commander from "commander";
 const {version} = require("../package.json");
 
 type CliConfig = {
-	packageFile: string;
+	packageFile?: string;
 	fix?: boolean;
 	strict?: boolean;
 	json?: boolean;
@@ -12,7 +12,7 @@ type CliConfig = {
 
 export default (argv: Array<string>): CliConfig => {
 	const program = new commander.Command();
-	let packageFile = "";
+	let packageFile;
 
 	program
 		.version(`${version}`)
