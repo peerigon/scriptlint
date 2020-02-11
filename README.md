@@ -320,7 +320,7 @@ Since npm does it, we should do it:
 
 You can install scriptlint as a dependency and call it as a function like this:
 
-```
+```js
 const scriptlint = require("scriptlint");
 
 const scriptlintIssues = scriptlint({
