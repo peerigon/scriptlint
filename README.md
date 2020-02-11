@@ -62,7 +62,7 @@ uses-allowed-namespace     script name should start with one of the allowed name
 ### CLI options
 
 ```
-Usage: scriptlint [options] <packageFile>
+Usage: scriptlint [options] [packageFile]
 
 Options:
   -V, --version  output the version number
