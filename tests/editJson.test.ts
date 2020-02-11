@@ -1,5 +1,5 @@
 import detectIndent from "detect-indent";
-import EditJson from "./editJson";
+import EditJson from "../src/editJson";
 
 jest.mock("fs");
 

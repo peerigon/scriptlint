@@ -2,10 +2,11 @@
 
 Enforceable standards for your package.json scripts – like eslint for `npm run`
 
-![CI badge](https://github.com/peerigon/scriptlint/workflows/ci/badge.svg)
-![Issue badge](https://img.shields.io/github/issues/peerigon/scriptlint)
-![dependency badge](https://img.shields.io/librariesio/release/npm/scriptlint)
-![npm version badge](https://img.shields.io/npm/v/scriptlint)
+
+[![npm version badge](https://img.shields.io/npm/v/scriptlint)](npmjs.com/package/scriptlint)  
+[![dependency badge](https://img.shields.io/librariesio/release/npm/scriptlint)](https://libraries.io/npm/scriptlint)  
+[![CI badge](https://github.com/peerigon/scriptlint/workflows/ci/badge.svg)](https://github.com/peerigon/scriptlint/actions?query=workflow%3Aci)  
+[![Issue badge](https://img.shields.io/github/issues/peerigon/scriptlint)](https://github.com/peerigon/scriptlint/issues)  
 
 ## Intro
 
@@ -61,7 +62,7 @@ uses-allowed-namespace     script name should start with one of the allowed name
 ### CLI options
 
 ```
-Usage: scriptlint [options]
+Usage: scriptlint [options] [packageFile]
 
 Options:
   -V, --version  output the version number
@@ -71,6 +72,22 @@ Options:
   -f, --fix      autofixing
   -h, --help     output usage information
 ```
+
+#### Examples
+
+**Find problems in the current directory's `package.json`:**  
+`scriptlint`
+
+**Find problems in the current directory's `package.json` in strict mode:**  
+`scriptlint --strict` or `scriptlint -s`
+
+**Fix autofixable problems in the current directory's `package.json` in strict mode:**  
+`scriptlint --fix`
+
+**Find problems in a specific `package.json`:**  
+`scriptlint ~/foo/project-dir/package.json`
+
+and so on...
 
 ### Project configuration
 
@@ -298,6 +315,36 @@ Since npm does it, we should do it:
 - of course all the [default hooks and scripts](https://docs.npmjs.com/misc/scripts) are fine as they are
 - Scripts like this `"eslint": "eslint"` used to be common to make dependencies executable with `npm run`. Since [`npx`](https://www.npmjs.com/package/npx) (and with yarn of course) this is obsolete. There's a lint rule in the CLI for this.
 - scripts that start with `pre*` or `post*` should only be used as hooks for built-in commands or other scripts
+
+## scriptlint as a module dependency
+
+You can install scriptlint as a dependency and call it as a function like this:
+
+```js
+const scriptlint = require("scriptlint");
+
+const scriptlintIssues = scriptlint({
+	strict: true,
+	packageFile: "/Users/foobar/project-dir"
+});
+
+```
+The function returns found issues as an array:
+
+```js
+[
+  {
+    "message": "must contain a \"start\" script (mandatory-start)",
+    "type": "warning",
+    "affected": false // script name or false for object rules
+  },
+  {
+    "message": "Use of unix double ampersand (&&) in script 'test' is not allowed, consider using npm-run-all/run-s (no-unix-double-ampersand)",
+    "type": "warning",
+    "affected": "test"
+  }
+]
+```
 
 ## local dev
 

@@ -1,3 +1,5 @@
+export type RuntimeEnv = "cli" | "module";
+
 export type Rule = {
 	isObjectRule: boolean;
 	name: string;
@@ -17,6 +19,7 @@ export type PackageScripts = {
 
 export type Config = {
 	strict: boolean;
+	packageFile?: string;
 	fix: boolean;
 	json: boolean;
 	config: boolean;
@@ -52,3 +55,9 @@ export type Message = {
 };
 
 export type MessageBuffer = Array<Message>;
+
+export type JsonMessage = {
+	type: string;
+	message: string;
+	affected: Values;
+};

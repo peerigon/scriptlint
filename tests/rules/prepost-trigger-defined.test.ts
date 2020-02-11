@@ -1,4 +1,4 @@
-import rule from "./prepost-trigger-defined";
+import rule from "../../src/rules/prepost-trigger-defined";
 
 describe("prepost-trigger-defined.ts", () => {
 	it("should validate correctly", () => {

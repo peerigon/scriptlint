@@ -1,6 +1,5 @@
 import {cosmiconfigSync} from "cosmiconfig";
 import {Config as CosmiconfigConfig} from "cosmiconfig/dist/types";
-import {error} from "./cliReporter";
 import {PROJECT_NAME} from "./constants";
 // Types
 import {Config} from "./types";
@@ -8,8 +7,9 @@ import {Config} from "./types";
 export const defaultConfig: Config = {
 	strict: false,
 	fix: false,
-	json: false,
+	json: true,
 	config: false,
+	packageFile: undefined,
 	rules: {},
 	customRules: [],
 	ignoreScripts: [],
@@ -23,7 +23,7 @@ export const sanitizeConfig = (loadedConfig: CosmiconfigConfig): Config => {
 
 		if (!keyExists) {
 			delete sanitized[key];
-			error(`unknown config key "${key}"`);
+			throw new Error(`unknown config key "${key}"`);
 		}
 	});
 

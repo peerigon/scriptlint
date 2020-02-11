@@ -1,5 +1,5 @@
-import {loadRulesFromRuleConfig, getRuleByName} from "./loadRules";
-import defaultRules from "./rules";
+import {loadRulesFromRuleConfig, getRuleByName} from "../src/loadRules";
+import defaultRules from "../src/rules";
 
 describe("rules.ts", () => {
 	const defaultRulesLoaded = loadRulesFromRuleConfig(false);

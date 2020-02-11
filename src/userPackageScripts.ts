@@ -1,4 +1,3 @@
-import path from "path";
 import EditJson from "./editJson";
 import {PackageScripts} from "./types";
 import {filterPackageScriptsByKeys} from "./utils";
@@ -7,8 +6,8 @@ type Config = {
 	ignore: Array<string>;
 };
 
-export default (cwd: string) => {
-	const file = new EditJson(path.join(cwd, "package.json"));
+export default (wd: string) => {
+	const file = new EditJson(wd);
 
 	return {
 		readPackageScripts: (ignores: Array<string>): PackageScripts => {
