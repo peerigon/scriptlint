@@ -331,7 +331,7 @@ const scriptlintIssues = scriptlint({
 ```
 The function returns found issues as an array:
 
-```
+```js
 [
   {
     "message": "must contain a \"start\" script (mandatory-start)",
