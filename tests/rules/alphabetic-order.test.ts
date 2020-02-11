@@ -1,4 +1,4 @@
-import rule, {sortScripts} from "./alphabetic-order";
+import rule, {sortScripts} from "../../src/rules/alphabetic-order";
 
 describe("alphabetic-order.ts", () => {
 	const invalidScripts = {

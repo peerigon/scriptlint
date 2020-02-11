@@ -1,4 +1,4 @@
-import factory from "./noShellSpecificsFactory";
+import factory from "../../src/rules/noShellSpecificsFactory";
 
 describe("mandatoryScriptFactory.ts", () => {
 	it("should validate correctly 1", () => {

@@ -1,4 +1,4 @@
-import context from "./userPackageScripts";
+import context from "../src/userPackageScripts";
 
 const {
 	readPackageScripts,
@@ -8,7 +8,7 @@ const {
 const setMock = jest.fn();
 const saveMock = jest.fn();
 
-jest.mock("./editJson", () => () => ({
+jest.mock("../src/editJson", () => () => ({
 	get: () => ({
 		scripts: {
 			foo: "bar",

@@ -1,4 +1,4 @@
-import rule from "./uses-allowed-namespace";
+import rule from "../../src/rules/uses-allowed-namespace";
 
 describe("uses-allowed-namespace.ts", () => {
 	it("should validate correctly", () => {

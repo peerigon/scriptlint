@@ -1,4 +1,4 @@
-import rule from "./correct-casing";
+import rule from "../../src/rules/correct-casing";
 
 describe("correct-casing.ts", () => {
 	it("should validate correctly", () => {

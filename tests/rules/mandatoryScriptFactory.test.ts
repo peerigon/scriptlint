@@ -1,4 +1,4 @@
-import factory from "./mandatoryScriptFactory";
+import factory from "../../src/rules/mandatoryScriptFactory";
 
 describe("mandatoryScriptFactory.ts", () => {
 	it("should validate correctly", () => {

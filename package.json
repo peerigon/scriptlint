@@ -3,11 +3,12 @@
   "version": "0.0.0-released-semantically",
   "description": "an enforcable script naming standard for package.json",
   "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "repository": "https://github.com/peerigon/scriptlint",
   "author": "Peerigon GmbH",
   "license": "MIT",
   "bin": {
-    "scriptlint": "./dist/index.js"
+    "scriptlint": "./dist/cli.js"
   },
   "files": [
     "/dist",
@@ -15,10 +16,10 @@
   ],
   "scripts": {
     "build": "run-s build:clean build:scripts build:chmod",
-    "build:chmod": "chmod +x ./dist/index.js",
+    "build:chmod": "chmod +x ./dist/cli.js",
     "build:clean": "rimraf ./dist",
-    "build:dev": "tsc -p tsconfig.json",
-    "build:scripts": "tsc -p tsconfig.json",
+    "build:dev": "tsc -p tsconfig.build.json",
+    "build:scripts": "tsc -p tsconfig.build.json",
     "dev": "run-s build other:watch",
     "format": "run-p test:self:fix test:lint:fix",
     "other:selfupdate": "updtr",
@@ -26,8 +27,8 @@
     "prepublishOnly": "run-p build",
     "start": "node dist/index.js",
     "test": "run-s test:lint test:types test:unit test:self",
-    "test:lint": "eslint ./src  --ext js,ts,tsx",
-    "test:lint:fix": "eslint ./src  --ext js,ts,tsx --fix",
+    "test:lint": "eslint ./src ./tests --ext js,ts,tsx",
+    "test:lint:fix": "eslint ./src ./tests --ext js,ts,tsx --fix",
     "test:self": "scriptlint",
     "test:self:fix": "scriptlint --fix",
     "test:types": "tsc -p tsconfig.json --noEmit true",

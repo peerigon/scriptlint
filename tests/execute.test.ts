@@ -1,5 +1,5 @@
-import execute, {patchScriptObjectEntry} from "./execute";
-import {loadRulesFromRuleConfig} from "./loadRules";
+import execute, {patchScriptObjectEntry} from "../src/execute";
+import {loadRulesFromRuleConfig} from "../src/loadRules";
 
 const rulesNonStrict = loadRulesFromRuleConfig(false);
 const rulesStrict = loadRulesFromRuleConfig(true);

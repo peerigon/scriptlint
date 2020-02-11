@@ -1,4 +1,4 @@
-import {slugify, filterPackageScriptsByKeys} from "./utils";
+import {slugify, filterPackageScriptsByKeys} from "../src/utils";
 
 describe("slugify()", () => {
 	it("should leave empty strings alone", () => {

@@ -1,5 +1,5 @@
 import chalk from "chalk";
-import {Values, MessageBuffer, MessageType} from "./types";
+import {Values, Message, MessageBuffer, MessageType} from "./types";
 import {makeMessage} from "./utils";
 
 const PREFIX = "𝖘";
@@ -35,6 +35,8 @@ export default {
 
 		return problemCount;
 	},
+
+	get: (): Array<Message> => ([...stashed]),
 };
 
 export const error = (message: string): void => {
