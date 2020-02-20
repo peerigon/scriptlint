@@ -2,4 +2,4 @@
 import scriptlint from "./main";
 import { Config } from "./types";
 
-module.exports = (config: Partial<Config>) => scriptlint(config, "module");
+export = (config: Partial<Config>) => scriptlint(config, "module");

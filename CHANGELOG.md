@@ -1,3 +1,17 @@
+# [1.4.0](https://github.com/peerigon/scriptlint/compare/v1.3.2...v1.4.0) (2020-02-11)
+
+
+### Bug Fixes
+
+* **refactoring:** move tests into seperate dir ([e6c83b9](https://github.com/peerigon/scriptlint/commit/e6c83b9))
+* Improve typing and defaults of CLI command handling ([febdf8d](https://github.com/peerigon/scriptlint/commit/febdf8d))
+
+
+### Features
+
+* **CLI:** opationally take package.json or project dir as argument and fallback to process.cwd() ([2b36142](https://github.com/peerigon/scriptlint/commit/2b36142))
+* **structure:** make scriptlint usable as a required module ([048e35d](https://github.com/peerigon/scriptlint/commit/048e35d))
+
 ## [1.3.2](https://github.com/peerigon/scriptlint/compare/v1.3.1...v1.3.2) (2020-02-03)
 
 
