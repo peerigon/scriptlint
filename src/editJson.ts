@@ -13,7 +13,13 @@ export default class {
 	constructor(path: string) {
 		this.path = path;
 		this.fileContents = fs.readFileSync(path, "utf-8");
-		this.package = JSON.parse(this.fileContents);
+		const fileParsed = JSON.parse(this.fileContents);
+
+		if(!fileParsed.scripts) {
+			fileParsed.scripts = {};
+		}
+		
+		this.package = fileParsed;
 		this.indent = detectIndent(this.fileContents);
 	}
 

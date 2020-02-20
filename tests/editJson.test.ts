@@ -9,16 +9,18 @@ describe("editJson.ts", () => {
 		expect(() => new EditJson("foo/bar/baz")).toThrow();
 	});
 
+	it("has a default scripts section", () => {
+		const fileWithoutScripts = new EditJson("real/existing/path/package-without-scripts.json");
+
+		expect(fileWithoutScripts.get().scripts).toEqual({});
+	});
+
+
 	const file = new EditJson("real/existing/path/package.json");
 
 	it("reads files", () => {
 		expect(file).toMatchSnapshot();
 	});
-
-	it("creates files", () => {
-		expect(file).toMatchSnapshot();
-	});
-
 	test("get()", () => {
 		expect(file.get()).toEqual({ scripts: { foo: "bar" } });
 	});
