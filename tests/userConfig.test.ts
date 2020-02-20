@@ -1,24 +1,24 @@
-import loadConfig, {sanitizeConfig, defaultConfig} from "../src/userConfig";
+import loadConfig, { sanitizeConfig, defaultConfig } from "../src/userConfig";
 
 const validConfig = {
 	strict: true,
 	fix: false,
 	json: false,
 	config: false,
-	rules: {foo: "bar"},
+	rules: { foo: "bar" },
 	ignoreScripts: ["foo"],
 	customRules: [
 		{
 			isObjectRule: false,
 			name: "foobar",
 			message: "barbaz",
-			validate: () => true,
-		},
-	],
+			validate: () => true
+		}
+	]
 };
 
 const invalidConfig = {
-	invalid: 3,
+	invalid: 3
 };
 
 describe("reporter.ts", () => {

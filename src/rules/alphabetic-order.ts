@@ -1,11 +1,11 @@
-import {PackageScripts} from "../types";
+import { PackageScripts } from "../types";
 
 export const sortScripts = (scripts: PackageScripts): PackageScripts =>
 	Object.entries(scripts)
 		.sort((a, b) => {
 			return a < b ? -1 : 1;
 		})
-		.reduce((r, [k, v]) => ({...r, [k]: v}), {});
+		.reduce((r, [k, v]) => ({ ...r, [k]: v }), {});
 
 export default {
 	name: "alphabetic-order",
@@ -16,5 +16,5 @@ export default {
 
 		return Object.keys(sorted).join("|") === Object.keys(scripts).join("|");
 	},
-	fix: (scripts: PackageScripts) => sortScripts(scripts),
+	fix: (scripts: PackageScripts) => sortScripts(scripts)
 };

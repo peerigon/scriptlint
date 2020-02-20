@@ -1,4 +1,4 @@
-import {loadRulesFromRuleConfig, getRuleByName} from "../src/loadRules";
+import { loadRulesFromRuleConfig, getRuleByName } from "../src/loadRules";
 import defaultRules from "../src/rules";
 
 describe("rules.ts", () => {
@@ -10,13 +10,13 @@ describe("rules.ts", () => {
 			name: "test-custom-rule-foobar",
 			isObjectRule: false,
 			message: "foobar",
-			validate: () => true,
+			validate: () => true
 		};
 
 		const rulesWithCustomRule = loadRulesFromRuleConfig(
 			false,
 			{
-				[customRule.name]: true,
+				[customRule.name]: true
 			},
 			[customRule]
 		);
@@ -43,7 +43,7 @@ describe("rules.ts", () => {
 		const rules = loadRulesFromRuleConfig(true, {
 			"mandatory-dev": false,
 			"mandatory-start": false,
-			"mandatory-test": false,
+			"mandatory-test": false
 		});
 
 		expect(rules[0].name).toEqual("no-default-test");

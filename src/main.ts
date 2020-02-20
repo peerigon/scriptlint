@@ -1,28 +1,26 @@
-/* eslint-disable complexity */
 import path from "path";
 import fs from "fs";
 import loadUserConfig from "./userConfig";
 import loadCliConfig from "./cliConfig";
 import userPackageScriptContext from "./userPackageScripts";
-import {loadRulesFromRuleConfig} from "./loadRules";
+import { loadRulesFromRuleConfig } from "./loadRules";
 import execute from "./execute";
 import makeReporter from "./reporters";
-import {Config, RuntimeEnv, JsonMessage, Message} from "./types";
+import { Config, RuntimeEnv, JsonMessage, Message } from "./types";
 
-// eslint-disable-next-line prefer-arrow/prefer-arrow-functions
 export default (
 	moduleConfig: Partial<Config> = {
-		json: true,
+		json: true
 	},
 	runtimeEnv: RuntimeEnv = "module"
 ) => {
 	const userConfig = loadUserConfig();
-	let config = {...userConfig, ...moduleConfig};
+	let config = { ...userConfig, ...moduleConfig };
 
 	if (runtimeEnv === "cli") {
 		const cliConfig = loadCliConfig(process.argv);
 
-		config = {...userConfig, ...cliConfig, ...moduleConfig};
+		config = { ...userConfig, ...cliConfig, ...moduleConfig };
 	}
 
 	if (!config.json && config.config && runtimeEnv === "cli") {
@@ -32,22 +30,22 @@ export default (
 		console.log(`\n\n${json}\n\n`);
 	}
 
-	config.packageFile = path.resolve(config.packageFile || "./");
-	config.packageFile = config.packageFile.endsWith("/package.json") ?
-		config.packageFile :
-		config.packageFile + "/package.json";
+	config.packageFile = path.resolve(config.packageFile ?? "./");
+	config.packageFile = config.packageFile.endsWith("/package.json")
+		? config.packageFile
+		: config.packageFile + "/package.json";
 
 	if (!fs.existsSync(config.packageFile)) {
 		throw new Error(`No such package.json found: ${config.packageFile}`);
 	}
 
-	const {success, warning, dump, get} = makeReporter(
+	const { success, warning, dump, get } = makeReporter(
 		config.json ? "json" : "console.log"
 	);
 
 	const {
 		readPackageScripts,
-		writePackageScripts,
+		writePackageScripts
 	} = userPackageScriptContext(config.packageFile);
 
 	let scripts = readPackageScripts(config.ignoreScripts);

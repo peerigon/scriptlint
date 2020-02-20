@@ -1,5 +1,5 @@
-import {Values, MessageType, JsonMessage} from "./types";
-import {makeMessage} from "./utils";
+import { Values, MessageType, JsonMessage } from "./types";
+import { makeMessage } from "./utils";
 
 type JsonMessageBuffer = Array<JsonMessage>;
 
@@ -9,7 +9,7 @@ const stash = (message: string, type: MessageType, values?: Values): void => {
 	stashed.push({
 		message,
 		type,
-		affected: values,
+		affected: values
 	});
 };
 
@@ -30,5 +30,5 @@ export default {
 		return problemCount;
 	},
 
-	get: () => ([...stashed]),
+	get: () => [...stashed]
 };
