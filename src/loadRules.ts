@@ -39,9 +39,9 @@ export const loadRulesFromRuleConfig = (
 ): Array<Rule> => {
 	const rules = loadDefaultRulesFromSet(strict);
 
-	const loadedCustomRules = (customRules ?? []).filter((cr: Rule) =>
-		Boolean(rulesConfig?.[cr.name])
-	);
+	const loadedCustomRules = (rulesConfig && customRules) ? customRules.filter(
+		(cr: Rule) => rulesConfig[cr.name]
+	) : [];
 
 	const loadedRules = [...loadedCustomRules, ...rules];
 

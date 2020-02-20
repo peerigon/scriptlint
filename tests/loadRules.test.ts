@@ -48,4 +48,32 @@ describe("rules.ts", () => {
 
 		expect(rules[0].name).toEqual("no-default-test");
 	});
+
+	test("loadRulesFromSet() adds custom rules", () => {
+		const rules = loadRulesFromRuleConfig(true, {
+			"foobarbaz": true
+		}, [
+			{
+				name: "foobarbaz",
+				isObjectRule: true,
+				message: "barbazfoo",
+				validate: () => true
+			}
+		]);
+
+		expect(rules[0].name).toEqual("foobarbaz");
+	});
+
+	test("loadRulesFromSet() ignores custom rules that are not loaded", () => {
+		const rules = loadRulesFromRuleConfig(false, {}, [
+			{
+				name: "foobarbaz",
+				isObjectRule: true,
+				message: "barbazfoo",
+				validate: () => true
+			}
+		]);
+
+		expect((rules.map(r => r.name)).includes("foobarbaz")).toBe(false);
+	});
 });
