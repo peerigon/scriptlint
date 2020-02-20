@@ -5,7 +5,7 @@ export type Rule = {
 	name: string;
 	message: string;
 	validate: unknown;
-	// eslint-disable-next-line @typescript-eslint/no-explicit-any
+
 	fix?: (
 		a: unknown,
 		b?: unknown,
@@ -45,7 +45,7 @@ export type Values =
 	| Array<string>
 	| {
 			[key: string]: string;
-	};
+	  };
 
 export type MessageType = "error" | "warning" | "success";
 

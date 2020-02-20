@@ -1,5 +1,5 @@
-import {Rule, PackageScripts} from "./types";
-import {makeMessage} from "./utils";
+import { Rule, PackageScripts } from "./types";
+import { makeMessage } from "./utils";
 
 export const fromEntries = (
 	iterable: Array<[string, string]>
@@ -37,25 +37,24 @@ const execute = (
 		scripts = newScripts;
 	};
 
-	// eslint-disable-next-line complexity
-	const executeObjectRule = ({validate, message, name, fix}: Rule) => {
+	const executeObjectRule = ({ validate, message, name, fix }: Rule) => {
 		const validationResult =
 			typeof validate === "function" && validate(scripts);
 
 		const fixable = typeof fix === "function";
 
 		const valid =
-			typeof validationResult === "boolean" ?
-				validationResult :
-				validationResult.length < 1;
+			typeof validationResult === "boolean"
+				? validationResult
+				: validationResult.length < 1;
 
 		if (!valid) {
 			const warningMessage =
-				typeof validationResult === "boolean" ?
-					`${message} (${name})` :
-					makeMessage(`${message} (${name})`, {
-						names: validationResult.join(", "),
-					});
+				typeof validationResult === "boolean"
+					? `${message} (${name})`
+					: makeMessage(`${message} (${name})`, {
+						names: validationResult.join(", ")
+					  });
 
 			if (configFix && fixable && fix) {
 				patchPackageFile(fix(scripts));
@@ -70,7 +69,7 @@ const execute = (
 		}
 	};
 
-	const executeEntryRule = ({validate, message, name, fix}: Rule) => {
+	const executeEntryRule = ({ validate, message, name, fix }: Rule) => {
 		const fixable = typeof fix === "function";
 		const pairs = Object.entries(scripts);
 
@@ -80,7 +79,7 @@ const execute = (
 
 			if (!valid) {
 				const warningMessage = makeMessage(`${message} (${name})`, {
-					name: key,
+					name: key
 				});
 
 				if (configFix && fixable && fix) {

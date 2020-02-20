@@ -1,6 +1,6 @@
-import {DEFAULT_NPM_HOOKS} from "../constants";
-import {PackageScripts} from "../types";
-import {filterPackageScriptsByKeys} from "../utils";
+import { DEFAULT_NPM_HOOKS } from "../constants";
+import { PackageScripts } from "../types";
+import { filterPackageScriptsByKeys } from "../utils";
 
 const getMissingHooks = (prefix: string, scripts: PackageScripts) => {
 	const keys = Object.keys(scripts);
@@ -30,9 +30,9 @@ export default {
 
 		const allMissing = [
 			...preHooksMissing.map(s => `pre${s}`),
-			...postHooksMissing.map(s => `post${s}`),
+			...postHooksMissing.map(s => `post${s}`)
 		];
 
 		return allMissing.length < 1 ? true : allMissing;
-	},
+	}
 };

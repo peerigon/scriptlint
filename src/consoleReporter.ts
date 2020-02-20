@@ -1,6 +1,6 @@
 import chalk from "chalk";
-import {Values, Message, MessageBuffer, MessageType} from "./types";
-import {makeMessage} from "./utils";
+import { Values, Message, MessageBuffer, MessageType } from "./types";
+import { makeMessage } from "./utils";
 
 const PREFIX = "𝖘";
 let stashed: MessageBuffer = [];
@@ -8,7 +8,7 @@ let stashed: MessageBuffer = [];
 const stash = (message: string, type: MessageType): void => {
 	stashed.push({
 		message,
-		type,
+		type
 	});
 };
 
@@ -27,7 +27,7 @@ export default {
 	dump: (): number => {
 		const problemCount = stashed.length;
 
-		stashed.forEach(({message, type}) => {
+		stashed.forEach(({ message, type }) => {
 			print(type, message);
 		});
 
@@ -36,7 +36,7 @@ export default {
 		return problemCount;
 	},
 
-	get: (): Array<Message> => ([...stashed]),
+	get: (): Array<Message> => [...stashed]
 };
 
 export const error = (message: string): void => {

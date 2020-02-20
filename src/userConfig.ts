@@ -1,8 +1,8 @@
-import {cosmiconfigSync} from "cosmiconfig";
-import {Config as CosmiconfigConfig} from "cosmiconfig/dist/types";
-import {PROJECT_NAME} from "./constants";
+import { cosmiconfigSync } from "cosmiconfig";
+import { Config as CosmiconfigConfig } from "cosmiconfig/dist/types";
+import { PROJECT_NAME } from "./constants";
 // Types
-import {Config} from "./types";
+import { Config } from "./types";
 
 export const defaultConfig: Config = {
 	strict: false,
@@ -12,16 +12,17 @@ export const defaultConfig: Config = {
 	packageFile: undefined,
 	rules: {},
 	customRules: [],
-	ignoreScripts: [],
+	ignoreScripts: []
 };
 
 export const sanitizeConfig = (loadedConfig: CosmiconfigConfig): Config => {
-	const sanitized = {...defaultConfig, ...loadedConfig};
+	const sanitized = { ...defaultConfig, ...loadedConfig };
 
 	Object.keys(sanitized).forEach((key: string) => {
 		const keyExists = Object.keys(defaultConfig).includes(key);
 
 		if (!keyExists) {
+			// eslint-disable-next-line @typescript-eslint/no-dynamic-delete
 			delete sanitized[key];
 			throw new Error(`unknown config key "${key}"`);
 		}

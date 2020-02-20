@@ -1,6 +1,6 @@
 import commander from "commander";
 // eslint-disable-next-line @typescript-eslint/no-var-requires
-const {version} = require("../package.json");
+const { version } = require("../package.json");
 
 type CliConfig = {
 	packageFile?: string;
@@ -27,7 +27,7 @@ export default (argv: Array<string>): CliConfig => {
 
 	program.parse(argv);
 
-	const cliConfig: CliConfig = {packageFile};
+	const cliConfig: CliConfig = { packageFile };
 
 	if (program.fix !== undefined) {
 		cliConfig.fix = program.fix;

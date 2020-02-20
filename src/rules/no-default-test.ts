@@ -1,4 +1,4 @@
-import {PackageScripts} from "../types";
+import { PackageScripts } from "../types";
 
 export default {
 	name: "no-default-test",
@@ -10,5 +10,5 @@ export default {
 		}
 
 		return true;
-	},
+	}
 };

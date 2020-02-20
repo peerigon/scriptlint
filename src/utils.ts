@@ -1,6 +1,4 @@
-/* eslint-disable import/prefer-default-export */
-
-import {PackageScripts, Values} from "./types";
+import { PackageScripts, Values } from "./types";
 
 export const slugify = (str: string): string =>
 	str
