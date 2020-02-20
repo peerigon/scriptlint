@@ -1,11 +1,11 @@
 #!/usr/bin/env node
 import scriptlint from "./main";
-import {error} from "./consoleReporter";
+import { error } from "./consoleReporter";
 
 try {
 	scriptlint(
 		{
-			json: false,
+			json: false
 		},
 		"cli"
 	);

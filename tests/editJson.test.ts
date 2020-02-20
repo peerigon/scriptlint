@@ -1,5 +1,6 @@
-import detectIndent from "detect-indent";
 import EditJson from "../src/editJson";
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const detectIndent = require("detect-indent");
 
 jest.mock("fs");
 
@@ -8,28 +9,30 @@ describe("editJson.ts", () => {
 		expect(() => new EditJson("foo/bar/baz")).toThrow();
 	});
 
+	it("has a default scripts section", () => {
+		const fileWithoutScripts = new EditJson("real/existing/path/package-without-scripts.json");
+
+		expect(fileWithoutScripts.get().scripts).toEqual({});
+	});
+
+
 	const file = new EditJson("real/existing/path/package.json");
 
 	it("reads files", () => {
 		expect(file).toMatchSnapshot();
 	});
-
-	it("creates files", () => {
-		expect(file).toMatchSnapshot();
-	});
-
 	test("get()", () => {
-		expect(file.get()).toEqual({scripts: {foo: "bar"}});
+		expect(file.get()).toEqual({ scripts: { foo: "bar" } });
 	});
 
 	test("set()", () => {
-		expect(file.set("scripts", {foo: "bar"}).get()).toEqual({
-			scripts: {foo: "bar"},
+		expect(file.set("scripts", { foo: "bar" }).get()).toEqual({
+			scripts: { foo: "bar" }
 		});
 	});
 
 	it("should preserve indentation", () => {
-		expect(file.indent).toEqual({amount: 2, indent: "  ", type: "space"});
+		expect(file.indent).toEqual({ amount: 2, indent: "  ", type: "space" });
 	});
 
 	const saved = file.save();
@@ -45,7 +48,7 @@ describe("editJson.ts", () => {
 	it("respects indentation 2", () => {
 		const file2 = new EditJson("real/existing/path/package-with-tabs.json");
 
-		file2.set("scripts", {foo: "bar"});
+		file2.set("scripts", { foo: "bar" });
 		const saved2 = file2.save();
 
 		expect(detectIndent((saved2 as any).content).type).toEqual("tab");

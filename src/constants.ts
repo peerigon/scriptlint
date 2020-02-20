@@ -8,7 +8,7 @@ export const NAMESPACES = [
 	"report",
 	"setup",
 	"start",
-	"test",
+	"test"
 ];
 export const DEFAULT_NPM_HOOKS = [
 	"install",
@@ -41,5 +41,5 @@ export const DEFAULT_NPM_HOOKS = [
 	"shrinkwrap",
 	"stop",
 	"uninstall",
-	"version",
+	"version"
 ];

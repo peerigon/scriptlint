@@ -14,6 +14,11 @@ const mockFiles = {
 		null,
 		2
 	),
+	"real/existing/path/package-without-scripts.json": JSON.stringify(
+		{},
+		null,
+		2
+	),
 	"real/existing/path/package-with-tabs.json": JSON.stringify(
 		{ ...packageFile },
 		null,

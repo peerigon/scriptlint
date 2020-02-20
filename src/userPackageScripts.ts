@@ -1,6 +1,6 @@
 import EditJson from "./editJson";
-import {PackageScripts} from "./types";
-import {filterPackageScriptsByKeys} from "./utils";
+import { PackageScripts } from "./types";
+import { filterPackageScriptsByKeys } from "./utils";
 
 type Config = {
 	ignore: Array<string>;
@@ -11,7 +11,7 @@ export default (wd: string) => {
 
 	return {
 		readPackageScripts: (ignores: Array<string>): PackageScripts => {
-			const {scripts} = file.get();
+			const { scripts } = file.get();
 
 			return filterPackageScriptsByKeys(scripts, ignores);
 		},
@@ -20,6 +20,6 @@ export default (wd: string) => {
 			file.set("scripts", scripts);
 
 			return file.save();
-		},
+		}
 	};
 };

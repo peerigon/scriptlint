@@ -1,4 +1,4 @@
-import {slugify, filterPackageScriptsByKeys} from "../src/utils";
+import { slugify, filterPackageScriptsByKeys } from "../src/utils";
 
 describe("slugify()", () => {
 	it("should leave empty strings alone", () => {
@@ -36,15 +36,15 @@ describe("filterPackageScriptsByKeys()", () => {
 	it("filters objects by keys correctly", () => {
 		expect(
 			filterPackageScriptsByKeys(
-				{foo: "echo 1", bar: "echo 2", baz: "echo 3"},
+				{ foo: "echo 1", bar: "echo 2", baz: "echo 3" },
 				["bar"]
 			)
 		).toEqual({
 			baz: "echo 3",
-			foo: "echo 1",
+			foo: "echo 1"
 		});
-		expect(filterPackageScriptsByKeys({foo: "echo 1"}, [])).toEqual({
-			foo: "echo 1",
+		expect(filterPackageScriptsByKeys({ foo: "echo 1" }, [])).toEqual({
+			foo: "echo 1"
 		});
 		expect(filterPackageScriptsByKeys({}, [])).toEqual({});
 	});
