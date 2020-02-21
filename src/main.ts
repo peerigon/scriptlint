@@ -53,11 +53,11 @@ export default (
 		config.json ? "json" : "console.log"
 	);
 
-	let scripts = moduleConfig.packageScripts || {};
+	let scripts = moduleConfig.packageScripts ?? {};
 	let writePackageScripts = (scripts: PackageScripts) => {};
 
 	if (!moduleConfig.packageScripts) {
-		config.packageFile = path.resolve(config.packageFile || "./");
+		config.packageFile = path.resolve(config.packageFile ?? "./");
 		config.packageFile = config.packageFile.endsWith("/package.json") ?
 			config.packageFile :
 			config.packageFile + "/package.json";

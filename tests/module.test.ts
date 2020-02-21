@@ -1,4 +1,3 @@
-/* eslint-disable import/unambiguous */
 /* eslint-disable @typescript-eslint/no-var-requires */
 
 // We require from the build here to test if the build exports correctly!
