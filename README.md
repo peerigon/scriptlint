@@ -329,6 +329,24 @@ const scriptlintIssues = scriptlint({
 });
 
 ```
+
+… **OR** you pass in a script object directly …
+
+```js
+const scriptlint = require("scriptlint");
+
+const scriptlintIssues = scriptlint({
+	strict: true,
+	packageScripts: {
+    "foo": "bar",
+    "test": "jest"
+    …
+  }
+});
+```
+
+**BUT NOT BOTH!**
+
 The function returns found issues as an array:
 
 ```js
@@ -345,6 +363,8 @@ The function returns found issues as an array:
   }
 ]
 ```
+
+**Note**: local user config (in `.scriptlintrc` or similar) is ignored in the module, you have to configure the module directly!
 
 ## local dev
 

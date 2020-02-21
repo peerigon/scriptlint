@@ -18,6 +18,7 @@ export default (
 		json: true
 	},
 	runtimeEnv: RuntimeEnv = "module"
+
 // eslint-disable-next-line consistent-return
 ) => {
 	if (moduleConfig.packageFile && moduleConfig.packageScripts) {
@@ -82,8 +83,6 @@ export default (
 
 	let totalIssuesFixed = 0;
 
-	// eslint-disable-next-line consistent-return
-
 	const [issues, fixedScripts, issuesFixed] = execute(
 		rules,
 		scripts,
@@ -109,7 +108,10 @@ export default (
 		if (runtimeEnv === "cli") {
 			dump();
 		} else {
-			return get();
+			return {
+				issues: get(),
+				scripts: config.fix ? fixedScripts : scripts,
+			};
 		}
 		// eslint-disable-next-line no-process-exit
 		process.exit(1);
@@ -118,7 +120,10 @@ export default (
 			success("✨  All good");
 			dump();
 		} else {
-			return [];
+			return {
+				issues: [],
+				scripts,
+			};
 		}
 		// eslint-disable-next-line no-process-exit
 		process.exit(0);
