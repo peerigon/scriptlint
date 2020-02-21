@@ -26,7 +26,7 @@ describe("execute.ts", () => {
 		const [issues, fixed] = execute(rulesNonStrict, {});
 
 		expect(fixed).toEqual({});
-		expect(issues).toEqual([
+		expect(issues.map(i => i.name)).toEqual([
 			"mandatory-test",
 			"mandatory-start",
 			"mandatory-dev"
@@ -56,11 +56,11 @@ describe("execute.ts", () => {
 			foo: "echo 1"
 		});
 
-		expect(issues).toEqual([
+		expect(issues.map(i => i.name)).toEqual([
 			"mandatory-test",
 			"mandatory-start",
 			"mandatory-dev",
-			"uses-allowed-namespace (foo)"
+			"uses-allowed-namespace"
 		]);
 	});
 
@@ -78,7 +78,10 @@ describe("execute.ts", () => {
 			mockWarningFn
 		);
 
-		expect(issues).toEqual(["prepost-trigger-defined", "alphabetic-order"]);
+		expect(issues.map(i => i.name)).toEqual([
+			"prepost-trigger-defined",
+			"alphabetic-order"
+		]);
 		expect(mockWarningFn).toHaveBeenCalled();
 	});
 
@@ -106,9 +109,7 @@ describe("execute.ts", () => {
 		);
 
 		expect(mockWarningFn).toHaveBeenCalled();
-		expect(issues).toEqual([
-			"correct-casing (wrong-place-no-category-wrong-case)"
-		]);
+		expect(issues.map(i => i.name)).toEqual(["correct-casing"]);
 
 		expect(fixed).toEqual(fixedShouldBe);
 

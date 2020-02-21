@@ -1,4 +1,22 @@
+import fs from "fs";
+import path from "path";
 import { PackageScripts, Values } from "./types";
+
+export const makePackageFilePath = (packageFile: string): string => {
+	// resolve package.json path
+	packageFile = packageFile.endsWith("/package.json")
+		? packageFile
+		: packageFile + "/package.json";
+
+	packageFile = path.resolve(packageFile);
+
+	// does it exist?
+	if (!fs.existsSync(packageFile)) {
+		throw new Error(`No such package.json found: ${packageFile}`);
+	}
+
+	return packageFile;
+};
 
 export const slugify = (str: string): string =>
 	str

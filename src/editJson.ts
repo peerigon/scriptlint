@@ -15,10 +15,10 @@ export default class {
 		this.fileContents = fs.readFileSync(path, "utf-8");
 		const fileParsed = JSON.parse(this.fileContents);
 
-		if(!fileParsed.scripts) {
+		if (!fileParsed.scripts) {
 			fileParsed.scripts = {};
 		}
-		
+
 		this.package = fileParsed;
 		this.indent = detectIndent(this.fileContents);
 	}

@@ -58,6 +58,7 @@ export type Message = {
 export type MessageBuffer = Array<Message>;
 
 export type JsonMessage = {
+	name: string;
 	type: string;
 	message: string;
 	affected: Values;

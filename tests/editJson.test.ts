@@ -10,11 +10,12 @@ describe("editJson.ts", () => {
 	});
 
 	it("has a default scripts section", () => {
-		const fileWithoutScripts = new EditJson("real/existing/path/package-without-scripts.json");
+		const fileWithoutScripts = new EditJson(
+			"real/existing/path/package-without-scripts.json"
+		);
 
 		expect(fileWithoutScripts.get().scripts).toEqual({});
 	});
-
 
 	const file = new EditJson("real/existing/path/package.json");
 

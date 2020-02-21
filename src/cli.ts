@@ -1,14 +1,93 @@
 #!/usr/bin/env node
-import scriptlint from "./main";
-import { error } from "./consoleReporter";
+import loadUserConfig from "./userConfig";
+import loadCliConfig from "./cliConfig";
+import { makePackageFilePath } from "./utils";
+import userPackageScriptContext from "./userPackageScripts";
+import { loadRulesFromRuleConfig } from "./loadRules";
+import execute from "./execute";
+import { success, warning, dump, error } from "./consoleReporter";
+import {
+	DEFAULT_CONFIG,
+	PROCESS_EXIT_ERROR,
+	PROCESS_EXIT_OK
+} from "./constants";
 
-try {
-	scriptlint(
-		{
-			json: false
-		},
-		"cli"
-	);
-} catch (err) {
-	error(err);
-}
+export const cliRun = () => {
+	try {
+		/**
+		 * config assembly
+		 */
+
+		const userConfig = loadUserConfig();
+		const cliConfig = loadCliConfig(process.argv);
+		const config = {
+			...DEFAULT_CONFIG,
+			...{ json: false },
+			...userConfig,
+			...cliConfig
+		};
+
+		// output the config (--config) but only if we don't want JSON output on the CLI
+		if (!config.json && config.config) {
+			const json = JSON.stringify(config, null, 2);
+
+			// eslint-disable-next-line no-console
+			console.log(`\n\n${json}\n\n`);
+		}
+
+		/**
+		 * package.json
+		 */
+
+		const {
+			writePackageScripts,
+			readPackageScripts
+		} = userPackageScriptContext(
+			makePackageFilePath(config.packageFile ?? process.cwd())
+		);
+
+		const scripts = readPackageScripts(config.ignoreScripts);
+
+		/**
+		 * rule loading
+		 */
+
+		const rules = loadRulesFromRuleConfig(
+			config.strict,
+			config.rules,
+			config.customRules
+		);
+
+		/**
+		 * and go!
+		 */
+		const [issues, fixedScripts, issuesFixed] = execute(
+			rules,
+			scripts,
+			warning,
+			config.fix
+		);
+
+		if (config.fix && issuesFixed > 0) {
+			writePackageScripts(fixedScripts);
+			success(`Fixed ${issuesFixed} issue${issuesFixed > 1 ? "s" : ""}!`);
+		}
+
+		if (issues.length - issuesFixed === 0) {
+			success("✨  All good");
+
+			dump(config.json);
+
+			// eslint-disable-next-line no-process-exit
+			process.exit(PROCESS_EXIT_OK);
+		}
+
+		dump(config.json);
+		// eslint-disable-next-line no-process-exit
+		process.exit(PROCESS_EXIT_ERROR);
+	} catch (err) {
+		error(err);
+	}
+};
+
+cliRun();

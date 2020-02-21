@@ -1,4 +1,4 @@
-import { Rule, PackageScripts } from "./types";
+import { Rule, PackageScripts, JsonMessage } from "./types";
 import { makeMessage } from "./utils";
 
 export const fromEntries = (
@@ -28,8 +28,8 @@ const execute = (
 	scripts: PackageScripts,
 	warning?: (template: string, values?: string | Array<string>) => void,
 	configFix = false
-): [Array<string>, PackageScripts, number] => {
-	const issues: Array<string> = [];
+): [Array<JsonMessage>, PackageScripts, number] => {
+	const issues: Array<JsonMessage> = [];
 	let issuesFixed = 0;
 
 	const patchPackageFile = (newScripts: PackageScripts) => {
@@ -62,7 +62,12 @@ const execute = (
 				return;
 			}
 
-			issues.push(name);
+			issues.push({
+				name,
+				affected: undefined,
+				type: "warning", // at some point we should really use this
+				message: warningMessage
+			});
 			if (typeof warning === "function") {
 				warning(warningMessage, validationResult);
 			}
@@ -96,7 +101,12 @@ const execute = (
 
 					return;
 				}
-				issues.push(`${name} (${key})`);
+				issues.push({
+					name,
+					affected: key,
+					type: "warning", // at some point we should really use this
+					message: warningMessage
+				});
 				if (typeof warning === "function") {
 					warning(warningMessage, key);
 				}
