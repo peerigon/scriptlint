@@ -1,4 +1,4 @@
-import scriptlint from "../src";
+import scriptlint from "../src/module";
 
 jest.mock("fs");
 jest.mock("path");
