@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`reporter.ts loadConfig() 1`] = `
+exports[`userConfig.ts loadConfig() 1`] = `
 Object {
   "config": false,
   "customRules": Array [],
@@ -17,4 +17,4 @@ Object {
 }
 `;
 
-exports[`reporter.ts should sanitize configs: invalid keys 1`] = `"unknown config key \\"invalid\\""`;
+exports[`userConfig.ts should sanitize configs: invalid keys 1`] = `"unknown config key \\"invalid\\""`;
