@@ -336,32 +336,38 @@ const scriptlintIssues = scriptlint({
 const scriptlint = require("scriptlint");
 
 const scriptlintIssues = scriptlint({
+	fix: true,
 	strict: true,
 	packageScripts: {
     "foo": "bar",
     "test": "jest"
-    …
   }
 });
 ```
 
 **BUT NOT BOTH!**
 
-The function returns found issues as an array:
+The function returns an object with found issues and the (potentially fixed if `fix: true`) scripts object in question:
 
 ```js
-[
-  {
-    "message": "must contain a \"start\" script (mandatory-start)",
-    "type": "warning",
-    "affected": false // script name or false for object rules
-  },
-  {
-    "message": "Use of unix double ampersand (&&) in script 'test' is not allowed, consider using npm-run-all/run-s (no-unix-double-ampersand)",
-    "type": "warning",
-    "affected": "test"
+{
+  "issues": [
+    {
+      "message": "must contain a \"start\" script (mandatory-start)",
+      "type": "warning",
+      "affected": false
+    },
+    {
+      "message": "must contain a \"dev\" script (mandatory-dev)",
+      "type": "warning",
+      "affected": false
+    }
+  ],
+  "scripts": {
+    "other:foo": "bar",
+    "test": "jest"
   }
-]
+}
 ```
 
 **Note**: local user config (in `.scriptlintrc` or similar) is ignored in the module, you have to configure the module directly!
