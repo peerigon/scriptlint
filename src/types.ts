@@ -20,6 +20,7 @@ export type PackageScripts = {
 export type Config = {
 	strict: boolean;
 	packageFile?: string;
+	packageScripts?: PackageScripts;
 	fix: boolean;
 	json: boolean;
 	config: boolean;

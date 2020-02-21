@@ -1,5 +1,20 @@
+import {Config} from "./types";
+
+export const DEFAULT_CONFIG: Config = {
+	strict: false,
+	fix: false,
+	json: true,
+	config: false,
+	packageFile: undefined,
+	rules: {},
+	customRules: [],
+	ignoreScripts: [],
+};
+
 export const PROJECT_NAME = "scriptlint";
+
 export const NAME_REGEX = /^[\d:A-Za-z]+$/;
+
 export const NAMESPACES = [
 	"build",
 	"dev",
@@ -10,6 +25,7 @@ export const NAMESPACES = [
 	"start",
 	"test"
 ];
+
 export const DEFAULT_NPM_HOOKS = [
 	"install",
 	"postinstall",
