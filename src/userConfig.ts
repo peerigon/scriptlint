@@ -1,25 +1,14 @@
-import { cosmiconfigSync } from "cosmiconfig";
-import { Config as CosmiconfigConfig } from "cosmiconfig/dist/types";
-import { PROJECT_NAME } from "./constants";
+import {cosmiconfigSync} from "cosmiconfig";
+import {Config as CosmiconfigConfig} from "cosmiconfig/dist/types";
+import {PROJECT_NAME, DEFAULT_CONFIG} from "./constants";
 // Types
 import { Config } from "./types";
 
-export const defaultConfig: Config = {
-	strict: false,
-	fix: false,
-	json: true,
-	config: false,
-	packageFile: undefined,
-	rules: {},
-	customRules: [],
-	ignoreScripts: []
-};
-
 export const sanitizeConfig = (loadedConfig: CosmiconfigConfig): Config => {
-	const sanitized = { ...defaultConfig, ...loadedConfig };
+	const sanitized = {...DEFAULT_CONFIG, ...loadedConfig};
 
 	Object.keys(sanitized).forEach((key: string) => {
-		const keyExists = Object.keys(defaultConfig).includes(key);
+		const keyExists = Object.keys(DEFAULT_CONFIG).includes(key);
 
 		if (!keyExists) {
 			// eslint-disable-next-line @typescript-eslint/no-dynamic-delete
@@ -36,7 +25,7 @@ const loadConfig = (name = PROJECT_NAME): Config => {
 	const searchedFor = explorerSync.search();
 
 	if (!searchedFor) {
-		return defaultConfig;
+		return DEFAULT_CONFIG;
 	}
 
 	return sanitizeConfig(searchedFor.config);
