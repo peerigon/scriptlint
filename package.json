@@ -26,6 +26,7 @@
     "other:selfupdate": "updtr",
     "other:watch": "nodemon -e js,ts --watch src --exec 'run-p build:dev'",
     "prepublishOnly": "run-p build",
+    "pretest": "run-s build",
     "start": "node dist/index.js",
     "test": "run-s test:lint test:types test:unit test:self",
     "test:lint": "eslint ./src ./tests --ext js,ts,tsx",
