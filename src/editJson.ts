@@ -1,6 +1,7 @@
 import fs from "fs";
 import { Indent } from "detect-indent";
 import { PackageFile } from "./types";
+import { PackageFileNotFoundError } from "./errors";
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const detectIndent = require("detect-indent");
 
@@ -13,12 +14,16 @@ export default class {
 	constructor(path: string) {
 		this.path = path;
 		this.fileContents = fs.readFileSync(path, "utf-8");
+		if (!this.fileContents) {
+			throw new PackageFileNotFoundError(path);
+		}
+
 		const fileParsed = JSON.parse(this.fileContents);
 
-		if(!fileParsed.scripts) {
+		if (!fileParsed.scripts) {
 			fileParsed.scripts = {};
 		}
-		
+
 		this.package = fileParsed;
 		this.indent = detectIndent(this.fileContents);
 	}

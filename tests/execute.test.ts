@@ -1,36 +1,48 @@
-import execute, { patchScriptObjectEntry } from "../src/execute";
+import execute from "../src/execute";
 import { loadRulesFromRuleConfig } from "../src/loadRules";
+import { ValidationFunctionInvalidError } from "../src/errors";
 
 const rulesNonStrict = loadRulesFromRuleConfig(false);
 const rulesStrict = loadRulesFromRuleConfig(true);
 
 describe("execute.ts", () => {
-	describe("patchScriptObjectEntry()", () => {
-		expect(
-			patchScriptObjectEntry(
-				{
-					bar: "1",
-					foo: "2"
-				},
-				"bar",
-				"xxx",
-				"5"
-			)
-		).toEqual({
-			xxx: "5",
-			foo: "2"
-		});
-	});
-
 	it("errors by default on empty scripts", () => {
 		const [issues, fixed] = execute(rulesNonStrict, {});
 
 		expect(fixed).toEqual({});
-		expect(issues).toEqual([
+		expect(issues.map(i => i.name)).toEqual([
 			"mandatory-test",
 			"mandatory-start",
 			"mandatory-dev"
 		]);
+	});
+
+	describe("errors for invalid validation functions", () => {
+		const rules = [
+			{
+				isObjectRule: true,
+				name: "foo",
+				message: "bar",
+				validate: "unknown"
+			}
+		];
+
+		const scripts = {
+			foo: "bar"
+		};
+
+		test("object rule", () => {
+			expect(() => {
+				execute(rules, scripts);
+			}).toThrowError(ValidationFunctionInvalidError);
+		});
+
+		test("entry rule", () => {
+			rules[0].isObjectRule = false;
+			expect(() => {
+				execute(rules, scripts);
+			}).toThrowError(ValidationFunctionInvalidError);
+		});
 	});
 
 	it("doesn't complain about correct scripts (default, fixing)", () => {
@@ -56,11 +68,11 @@ describe("execute.ts", () => {
 			foo: "echo 1"
 		});
 
-		expect(issues).toEqual([
+		expect(issues.map(i => i.name)).toEqual([
 			"mandatory-test",
 			"mandatory-start",
 			"mandatory-dev",
-			"uses-allowed-namespace (foo)"
+			"uses-allowed-namespace"
 		]);
 	});
 
@@ -78,7 +90,10 @@ describe("execute.ts", () => {
 			mockWarningFn
 		);
 
-		expect(issues).toEqual(["prepost-trigger-defined", "alphabetic-order"]);
+		expect(issues.map(i => i.name)).toEqual([
+			"prepost-trigger-defined",
+			"alphabetic-order"
+		]);
 		expect(mockWarningFn).toHaveBeenCalled();
 	});
 
@@ -106,9 +121,7 @@ describe("execute.ts", () => {
 		);
 
 		expect(mockWarningFn).toHaveBeenCalled();
-		expect(issues).toEqual([
-			"correct-casing (wrong-place-no-category-wrong-case)"
-		]);
+		expect(issues.map(i => i.name)).toEqual(["correct-casing"]);
 
 		expect(fixed).toEqual(fixedShouldBe);
 

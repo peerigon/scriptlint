@@ -1,5 +1,5 @@
-import {DEFAULT_CONFIG} from "../src/constants";
-import loadConfig, {sanitizeConfig} from "../src/userConfig";
+import { DEFAULT_CONFIG } from "../src/constants";
+import loadConfig, { sanitizeConfig } from "../src/userConfig";
 
 const validConfig = {
 	strict: true,

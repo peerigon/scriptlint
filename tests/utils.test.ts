@@ -1,4 +1,31 @@
-import { slugify, filterPackageScriptsByKeys } from "../src/utils";
+import {
+	slugify,
+	filterPackageScriptsByKeys,
+	makeMessage,
+	makePackageFilePath,
+	patchScriptObjectEntry
+} from "../src/utils";
+import { PackageFileNotFoundError } from "../src/errors";
+
+jest.mock("fs");
+jest.mock("path");
+
+describe("patchScriptObjectEntry()", () => {
+	expect(
+		patchScriptObjectEntry(
+			{
+				bar: "1",
+				foo: "2"
+			},
+			"bar",
+			"xxx",
+			"5"
+		)
+	).toEqual({
+		xxx: "5",
+		foo: "2"
+	});
+});
 
 describe("slugify()", () => {
 	it("should leave empty strings alone", () => {
@@ -47,5 +74,31 @@ describe("filterPackageScriptsByKeys()", () => {
 			foo: "echo 1"
 		});
 		expect(filterPackageScriptsByKeys({}, [])).toEqual({});
+	});
+});
+
+describe("makePackageFilePath()", () => {
+	it("throws on file not found", () => {
+		expect(() => {
+			makePackageFilePath("foo/bar/baz");
+		}).toThrowError(PackageFileNotFoundError);
+	});
+
+	it("works with package.json", () => {
+		const path = makePackageFilePath("real/existing/path/package.json");
+
+		expect(path).toEqual("real/existing/path/package.json");
+	});
+
+	it("works without package.json", () => {
+		const path = makePackageFilePath("real/existing/path");
+
+		expect(path).toEqual("real/existing/path/package.json");
+	});
+});
+
+describe("makeMessage()", () => {
+	it("compiles correctly", () => {
+		expect(makeMessage("foo {{bar}}", { bar: "test" })).toEqual("foo test");
 	});
 });

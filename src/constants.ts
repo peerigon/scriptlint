@@ -1,14 +1,17 @@
-import {Config} from "./types";
+import { Config } from "./types";
+
+export const PROCESS_EXIT_ERROR = 1;
+export const PROCESS_EXIT_OK = 0;
 
 export const DEFAULT_CONFIG: Config = {
 	strict: false,
 	fix: false,
-	json: true,
+	json: false,
 	config: false,
 	packageFile: undefined,
 	rules: {},
 	customRules: [],
-	ignoreScripts: [],
+	ignoreScripts: []
 };
 
 export const PROJECT_NAME = "scriptlint";

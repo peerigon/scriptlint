@@ -1,9 +1,9 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
+import scriptlint from "../src/module";
 
-// We require from the build here to test if the build exports correctly!
-const scriptlint = require("../dist/index");
+jest.mock("fs");
+jest.mock("path");
 
-describe("scriptlint module export", () => {
+describe("index.ts", () => {
 	it("should export a function", () => {
 		expect(typeof scriptlint).toBe("function");
 	});
@@ -13,8 +13,8 @@ describe("scriptlint module export", () => {
 			scriptlint({
 				packageFile: "foo/bar/baz",
 				packageScripts: {
-					foo: "bar",
-				},
+					foo: "bar"
+				}
 			});
 		}).toThrowError(/not both/);
 	});
@@ -25,11 +25,19 @@ describe("scriptlint module export", () => {
 		}).toThrowError(/location or a scripts/);
 	});
 
+	it("should lint files", () => {
+		expect(
+			scriptlint({
+				packageFile: "real/existing/path/package.json"
+			})
+		).toMatchSnapshot();
+	});
+
 	it("should lint correctly", () => {
 		expect(
 			scriptlint({
 				strict: true,
-				packageScripts: {},
+				packageScripts: {}
 			}).issues.length
 		).toBe(3);
 	});
@@ -41,8 +49,8 @@ describe("scriptlint module export", () => {
 				packageScripts: {
 					dev: "echo 1",
 					test: "echo 1",
-					start: "echo 1",
-				},
+					start: "echo 1"
+				}
 			}).issues.length
 		).toBe(0);
 	});
@@ -57,8 +65,8 @@ describe("scriptlint module export", () => {
 						start: "echo 1",
 						test: "echo 1",
 						dev: "echo 1",
-						foo: "bar",
-					},
+						foo: "bar"
+					}
 				}).scripts
 			)
 		).toEqual(["dev", "other:foo", "start", "test"]);

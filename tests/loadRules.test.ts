@@ -1,7 +1,7 @@
 import { loadRulesFromRuleConfig, getRuleByName } from "../src/loadRules";
 import defaultRules from "../src/rules";
 
-describe("rules.ts", () => {
+describe("loadRules.ts", () => {
 	const defaultRulesLoaded = loadRulesFromRuleConfig(false);
 	const strictRulesLoaded = loadRulesFromRuleConfig(true);
 
@@ -50,16 +50,20 @@ describe("rules.ts", () => {
 	});
 
 	test("loadRulesFromSet() adds custom rules", () => {
-		const rules = loadRulesFromRuleConfig(true, {
-			"foobarbaz": true
-		}, [
+		const rules = loadRulesFromRuleConfig(
+			true,
 			{
-				name: "foobarbaz",
-				isObjectRule: true,
-				message: "barbazfoo",
-				validate: () => true
-			}
-		]);
+				foobarbaz: true
+			},
+			[
+				{
+					name: "foobarbaz",
+					isObjectRule: true,
+					message: "barbazfoo",
+					validate: () => true
+				}
+			]
+		);
 
 		expect(rules[0].name).toEqual("foobarbaz");
 	});
@@ -74,6 +78,6 @@ describe("rules.ts", () => {
 			}
 		]);
 
-		expect((rules.map(r => r.name)).includes("foobarbaz")).toBe(false);
+		expect(rules.map(r => r.name).includes("foobarbaz")).toBe(false);
 	});
 });

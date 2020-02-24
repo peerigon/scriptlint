@@ -1,5 +1,5 @@
 import chalk from "chalk";
-import { Values, Message, MessageBuffer, MessageType } from "./types";
+import { Values, MessageBuffer, MessageType } from "./types";
 import { makeMessage } from "./utils";
 
 const PREFIX = "𝖘";
@@ -12,31 +12,33 @@ const stash = (message: string, type: MessageType): void => {
 	});
 };
 
-export default {
-	warning: (template: string, values?: Values): void => {
-		const message = makeMessage(template, values);
+export const warning = (template: string, values?: Values): void => {
+	const message = makeMessage(template, values);
 
-		stash(message, "warning");
-	},
-	success: (template: string, values?: Values): void => {
-		const message = makeMessage(template, values);
+	stash(message, "warning");
+};
 
-		stash(message, "success");
-	},
+export const success = (template: string, values?: Values): void => {
+	const message = makeMessage(template, values);
 
-	dump: (): number => {
-		const problemCount = stashed.length;
+	stash(message, "success");
+};
 
+export const dump = (jsonOutput: boolean): number => {
+	const problemCount = stashed.length;
+
+	if (jsonOutput) {
+		// eslint-disable-next-line no-console
+		console.log(JSON.stringify(stashed, null, "\t"));
+	} else {
 		stashed.forEach(({ message, type }) => {
 			print(type, message);
 		});
+	}
 
-		stashed = [];
+	stashed = [];
 
-		return problemCount;
-	},
-
-	get: (): Array<Message> => [...stashed]
+	return problemCount;
 };
 
 export const error = (message: string): void => {
