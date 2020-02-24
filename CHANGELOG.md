@@ -1,3 +1,21 @@
+# [2.0.0](https://github.com/peerigon/scriptlint/compare/v1.4.0...v2.0.0) (2020-02-24)
+
+
+* Release (#20) ([c9a58be](https://github.com/peerigon/scriptlint/commit/c9a58be)), closes [#20](https://github.com/peerigon/scriptlint/issues/20) [#21](https://github.com/peerigon/scriptlint/issues/21) [#22](https://github.com/peerigon/scriptlint/issues/22)
+
+
+### BREAKING CHANGES
+
+* you may need to load your configurations differently
+
+* chore(tests): improved tests
+
+* feat(core): scripts can be passed to the module directly as a parameter
+
+* fix(code): eslint --fix
+
+* chore(readme): Update README
+
 # [1.4.0](https://github.com/peerigon/scriptlint/compare/v1.3.2...v1.4.0) (2020-02-11)
 
 
