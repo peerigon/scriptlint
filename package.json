@@ -28,7 +28,8 @@
     "prepublishOnly": "run-p build",
     "pretest": "run-s build",
     "start": "node dist/index.js",
-    "test": "run-s test:lint test:types test:unit:ci test:self",
+    "test": "run-s test:exports test:lint test:types test:unit:ci test:self",
+    "test:exports": "ts-unused-exports tsconfig.json --ignoreFiles src/index.ts",
     "test:lint": "eslint ./src ./tests --ext js,ts,tsx",
     "test:lint:fix": "eslint ./src ./tests --ext js,ts,tsx --fix",
     "test:self": "scriptlint",
@@ -70,6 +71,7 @@
     "rimraf": "3.0.2",
     "scriptlint": "1.4.0",
     "ts-jest": "25.2.1",
+    "ts-unused-exports": "^6.0.0",
     "typescript": "3.7.5",
     "updtr": "^3.1.0"
   },

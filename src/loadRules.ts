@@ -20,7 +20,7 @@ export const getRuleByName = (
 	return filtered[0];
 };
 
-export const loadDefaultRulesFromSet = (strict: boolean): Array<Rule> => {
+const loadDefaultRulesFromSet = (strict: boolean): Array<Rule> => {
 	if (strict) {
 		return defaultRuleSets.strict
 			.map((name: string) => getRuleByName(defaultRules, name))

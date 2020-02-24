@@ -55,7 +55,7 @@ export const makeMessage = (template: string, values: Values): string => {
 	return message;
 };
 
-export const fromEntries = (
+const fromEntries = (
 	iterable: Array<[string, string]>
 ): PackageScripts => {
 	return [...iterable].reduce((obj: PackageScripts, [key, val]) => {

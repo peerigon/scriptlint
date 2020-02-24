@@ -1,5 +1,3 @@
-export type RuntimeEnv = "cli" | "module";
-
 export type Rule = {
 	isObjectRule: boolean;
 	name: string;
@@ -31,7 +29,7 @@ export type Config = {
 	ignoreScripts: Array<string>;
 };
 
-export type RulesConfig = {
+type RulesConfig = {
 	[key: string]: boolean;
 };
 
@@ -50,7 +48,7 @@ export type Values =
 
 export type MessageType = "error" | "warning" | "success";
 
-export type Message = {
+type Message = {
 	message: string;
 	type: MessageType;
 };
