@@ -72,7 +72,7 @@
     "scriptlint": "1.4.0",
     "ts-jest": "25.2.1",
     "ts-unused-exports": "^6.0.0",
-    "typescript": "3.7.5",
+    "typescript": "^3.8.2",
     "updtr": "^3.1.0"
   },
   "dependencies": {
