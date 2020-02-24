@@ -1,27 +1,10 @@
-import execute, { patchScriptObjectEntry } from "../src/execute";
+import execute from "../src/execute";
 import { loadRulesFromRuleConfig } from "../src/loadRules";
 
 const rulesNonStrict = loadRulesFromRuleConfig(false);
 const rulesStrict = loadRulesFromRuleConfig(true);
 
 describe("execute.ts", () => {
-	describe("patchScriptObjectEntry()", () => {
-		expect(
-			patchScriptObjectEntry(
-				{
-					bar: "1",
-					foo: "2"
-				},
-				"bar",
-				"xxx",
-				"5"
-			)
-		).toEqual({
-			xxx: "5",
-			foo: "2"
-		});
-	});
-
 	it("errors by default on empty scripts", () => {
 		const [issues, fixed] = execute(rulesNonStrict, {});
 

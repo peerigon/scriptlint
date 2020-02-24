@@ -1,27 +1,5 @@
 import { Rule, PackageScripts, JsonMessage } from "./types";
-import { makeMessage } from "./utils";
-
-export const fromEntries = (
-	iterable: Array<[string, string]>
-): PackageScripts => {
-	return [...iterable].reduce((obj: PackageScripts, [key, val]) => {
-		obj[key] = val;
-
-		return obj;
-	}, {});
-};
-
-export const patchScriptObjectEntry = (
-	scripts: PackageScripts,
-	fromKey: string,
-	toKey: string,
-	value: string
-) =>
-	fromEntries(
-		Object.entries(scripts).map(([k, v]) => {
-			return k === fromKey ? [toKey, value] : [k, v];
-		})
-	);
+import { makeMessage, patchScriptObjectEntry } from "./utils";
 
 const execute = (
 	rules: Array<Rule>,

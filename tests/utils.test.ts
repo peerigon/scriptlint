@@ -2,11 +2,29 @@ import {
 	slugify,
 	filterPackageScriptsByKeys,
 	makeMessage,
-	makePackageFilePath
+	makePackageFilePath,
+	patchScriptObjectEntry
 } from "../src/utils";
 
 jest.mock("fs");
 jest.mock("path");
+
+describe("patchScriptObjectEntry()", () => {
+	expect(
+		patchScriptObjectEntry(
+			{
+				bar: "1",
+				foo: "2"
+			},
+			"bar",
+			"xxx",
+			"5"
+		)
+	).toEqual({
+		xxx: "5",
+		foo: "2"
+	});
+});
 
 describe("slugify()", () => {
 	it("should leave empty strings alone", () => {
