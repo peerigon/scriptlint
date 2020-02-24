@@ -20,14 +20,14 @@ const processExit = (code: number) => {
 	}
 };
 
-export const cliRun = () => {
+export default (argv: Array<string>) => {
 	try {
 		/**
 		 * config assembly
 		 */
 
 		const userConfig = loadUserConfig();
-		const cliConfig = loadCliConfig(process.argv);
+		const cliConfig = loadCliConfig(argv);
 		const config = {
 			...DEFAULT_CONFIG,
 			...{ json: false },
@@ -95,5 +95,3 @@ export const cliRun = () => {
 		error(err);
 	}
 };
-
-cliRun();

@@ -9,5 +9,5 @@ module.exports = {
 	moduleFileExtensions: ["ts", "tsx", "js", "jsx", "json", "node"],
 	modulePathIgnorePatterns: ["out-ts", "dist"],
 	setupFilesAfterEnv: ["<rootDir>/jest-setup.js"],
-	collectCoverageFrom: ["src/**/*.ts", "!src/index.ts"]
+	collectCoverageFrom: ["src/**/*.ts", "!src/index.ts", "!src/cliEntry.ts"]
 };

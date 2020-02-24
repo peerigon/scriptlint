@@ -1,12 +1,12 @@
 /* eslint-disable no-console */
 import mockConsole from "jest-mock-console";
-import { cliRun } from "../src/cli";
+import cli from "../src/cli";
 
 jest.mock("fs");
 jest.mock("path");
 
 let restoreConsole: any;
-const processArgv = process.argv;
+const processArgv = [process.argv[0], process.argv[1]];
 
 beforeEach(() => {
 	restoreConsole = mockConsole();
@@ -20,52 +20,49 @@ afterAll(() => {
 
 describe("cli.ts", () => {
 	it("should lint files", () => {
-		process.argv = [...processArgv, "real/existing/path/package.json"];
-		cliRun();
+		cli([...processArgv, "real/existing/path/package.json"]);
 
 		expect((console.log as any).mock.calls.length).toEqual(3);
 	});
 
+	it("should catch errors", () => {
+		expect(() => {
+			cli([...processArgv, "not/existing/package.json"]);
+		}).not.toThrowError(/foo/);
+	});
+
 	it("should fix 1 issue", () => {
-		process.argv = [
+		cli([
 			...processArgv,
 			"real/existing/path/fixable/package.json",
 			"--fix"
-		];
-		cliRun();
+		]);
 
 		expect((console.log as any).mock.calls[0][0]).toMatch(/Fixed 1 issue/);
 	});
 
 	it("should fix 2 issues", () => {
-		process.argv = [
+		cli([
 			...processArgv,
 			"real/existing/path/fixable2/package.json",
 			"--fix"
-		];
-		cliRun();
+		]);
 
 		expect((console.log as any).mock.calls[0][0]).toMatch(/Fixed 2 issues/);
 	});
 
 	it("should be all good man", () => {
-		process.argv = [
+		cli([
 			...processArgv,
 			"real/existing/path/correct/package.json",
 			"--fix"
-		];
-		cliRun();
+		]);
 
 		expect((console.log as any).mock.calls[0][0]).toMatch(/All good/);
 	});
 
 	it("prints --json", () => {
-		process.argv = [
-			...processArgv,
-			"real/existing/path/package.json",
-			"--json"
-		];
-		cliRun();
+		cli([...processArgv, "real/existing/path/package.json", "--json"]);
 
 		const calls = (console.log as any).mock.calls;
 
@@ -74,12 +71,7 @@ describe("cli.ts", () => {
 	});
 
 	it("prints --config", () => {
-		process.argv = [
-			...processArgv,
-			"real/existing/path/package.json",
-			"--config"
-		];
-		cliRun();
+		cli([...processArgv, "real/existing/path/package.json", "--config"]);
 
 		const calls = (console.log as any).mock.calls;
 
