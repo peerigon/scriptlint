@@ -1,25 +1,18 @@
 /* eslint-disable no-console */
-import { mockProcessExit } from "jest-mock-process";
 import mockConsole from "jest-mock-console";
 import { cliRun } from "../src/cli";
 
 jest.mock("fs");
 jest.mock("path");
-const mockExit = mockProcessExit();
 
 let restoreConsole: any;
-let processArgv: Array<string>;
-
-beforeAll(() => {
-	processArgv = process.argv;
-});
+const processArgv = process.argv;
 
 beforeEach(() => {
 	restoreConsole = mockConsole();
 });
 
 afterAll(() => {
-	mockExit.mockRestore();
 	if (restoreConsole) {
 		restoreConsole();
 	}
@@ -31,8 +24,6 @@ describe("cli.ts", () => {
 		cliRun();
 
 		expect((console.log as any).mock.calls.length).toEqual(3);
-
-		expect(mockExit).toHaveBeenCalledWith(1);
 	});
 
 	it("should fix 1 issue", () => {
@@ -66,8 +57,6 @@ describe("cli.ts", () => {
 		cliRun();
 
 		expect((console.log as any).mock.calls[0][0]).toMatch(/All good/);
-
-		expect(mockExit).toHaveBeenCalledWith(0);
 	});
 
 	it("prints --json", () => {

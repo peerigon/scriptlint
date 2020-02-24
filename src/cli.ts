@@ -12,6 +12,14 @@ import {
 	PROCESS_EXIT_OK
 } from "./constants";
 
+/* istanbul ignore next */
+const processExit = (code: number) => {
+	if (typeof process.env.JEST_WORKER_ID === "undefined") {
+		// eslint-disable-next-line no-process-exit
+		process.exit(code);
+	}
+};
+
 export const cliRun = () => {
 	try {
 		/**
@@ -78,13 +86,11 @@ export const cliRun = () => {
 
 			dump(config.json);
 
-			// eslint-disable-next-line no-process-exit
-			process.exit(PROCESS_EXIT_OK);
+			processExit(PROCESS_EXIT_OK);
 		}
 
 		dump(config.json);
-		// eslint-disable-next-line no-process-exit
-		process.exit(PROCESS_EXIT_ERROR);
+		processExit(PROCESS_EXIT_ERROR);
 	} catch (err) {
 		error(err);
 	}
