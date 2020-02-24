@@ -1,3 +1,10 @@
+## [2.0.1](https://github.com/peerigon/scriptlint/compare/v2.0.0...v2.0.1) (2020-02-24)
+
+
+### Bug Fixes
+
+* **build:** Fix CLI usage :scream: ([cb24eb9](https://github.com/peerigon/scriptlint/commit/cb24eb9))
+
 # [2.0.0](https://github.com/peerigon/scriptlint/compare/v1.4.0...v2.0.0) (2020-02-24)
 
 
