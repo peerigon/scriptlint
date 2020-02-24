@@ -8,13 +8,21 @@ const execute = (
 	warning?: (template: string, values?: string | Array<string>) => void,
 	configFix = false
 ): [Array<JsonMessage>, PackageScripts, number] => {
+	/**
+	 * keep track of everything
+	 */
+
 	const issues: Array<JsonMessage> = [];
 	let issuesFixed = 0;
 
-	const patchPackageFile = (newScripts: PackageScripts) => {
+	const patchScripts = (newScripts: PackageScripts) => {
 		issuesFixed++;
 		scripts = newScripts;
 	};
+
+	/**
+	 * execution functions
+	 */
 
 	const executeObjectRule = ({ validate, message, name, fix }: Rule) => {
 		if (typeof validate !== "function") {
@@ -27,6 +35,10 @@ const execute = (
 
 		const fixable = typeof fix === "function";
 
+		/**
+		 * validate
+		 */
+
 		const valid =
 			typeof validationResult === "boolean"
 				? validationResult
@@ -36,6 +48,9 @@ const execute = (
 			return;
 		}
 
+		/**
+		 * warn of invalidity
+		 */
 		const warningMessage =
 			typeof validationResult === "boolean"
 				? `${message} (${name})`
@@ -43,11 +58,19 @@ const execute = (
 					names: validationResult.join(", ")
 				  });
 
+		/**
+		 * potentially fix
+		 */
+
 		if (configFix && fixable && fix) {
-			patchPackageFile(fix(scripts));
+			patchScripts(fix(scripts));
 
 			return;
 		}
+
+		/**
+		 * keep track of everything
+		 */
 
 		issues.push({
 			name,
@@ -69,6 +92,10 @@ const execute = (
 		const fixable = typeof fix === "function";
 		const pairs = Object.entries(scripts);
 
+		/**
+		 * iterate all the scripts
+		 */
+
 		pairs.forEach(([key, value]) => {
 			const valid = validate(key, value, scripts);
 
@@ -80,6 +107,10 @@ const execute = (
 				name: key
 			});
 
+			/**
+			 * potentially fix
+			 */
+
 			if (configFix && fixable && fix) {
 				const [toKey, fixedValue] = fix(key, value);
 
@@ -90,10 +121,14 @@ const execute = (
 					fixedValue
 				);
 
-				patchPackageFile(fixedScripts);
+				patchScripts(fixedScripts);
 
 				return;
 			}
+
+			/**
+			 * keep track of everything
+			 */
 
 			issues.push({
 				name,
@@ -107,6 +142,10 @@ const execute = (
 			}
 		});
 	};
+
+	/**
+	 * and go!
+	 */
 
 	rules.forEach(rule => {
 		if (rule.isObjectRule) {
