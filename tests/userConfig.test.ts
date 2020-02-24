@@ -1,32 +1,33 @@
-import loadConfig, {sanitizeConfig, defaultConfig} from "../src/userConfig";
+import { DEFAULT_CONFIG } from "../src/constants";
+import loadConfig, { sanitizeConfig } from "../src/userConfig";
 
 const validConfig = {
 	strict: true,
 	fix: false,
 	json: false,
 	config: false,
-	rules: {foo: "bar"},
+	rules: { foo: "bar" },
 	ignoreScripts: ["foo"],
 	customRules: [
 		{
 			isObjectRule: false,
 			name: "foobar",
 			message: "barbaz",
-			validate: () => true,
-		},
-	],
+			validate: () => true
+		}
+	]
 };
 
 const invalidConfig = {
-	invalid: 3,
+	invalid: 3
 };
 
-describe("reporter.ts", () => {
+describe("userConfig.ts", () => {
 	it("should sanitize configs: empty config => default", () => {
-		expect(sanitizeConfig({})).toEqual(defaultConfig);
+		expect(sanitizeConfig({})).toEqual(DEFAULT_CONFIG);
 	});
 	it("should sanitize configs: null => default", () => {
-		expect(sanitizeConfig(null)).toEqual(defaultConfig);
+		expect(sanitizeConfig(null)).toEqual(DEFAULT_CONFIG);
 	});
 	it("should sanitize configs: invalid keys", () => {
 		expect(() => {
@@ -46,7 +47,7 @@ describe("reporter.ts", () => {
 	test("loadConfig() with config missing", () => {
 		const loaded = loadConfig("missing");
 
-		expect(loaded).toBe(defaultConfig);
+		expect(loaded).toBe(DEFAULT_CONFIG);
 	});
 });
 

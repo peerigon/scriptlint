@@ -1,7 +1,7 @@
 import defaultRuleSets from "./defaultRuleSets";
 import defaultRules from "./rules";
 // Types
-import {Rule} from "./types";
+import { Rule } from "./types";
 
 type RulesConfig = {
 	[key: string]: boolean;
@@ -20,7 +20,7 @@ export const getRuleByName = (
 	return filtered[0];
 };
 
-export const loadDefaultRulesFromSet = (strict: boolean): Array<Rule> => {
+const loadDefaultRulesFromSet = (strict: boolean): Array<Rule> => {
 	if (strict) {
 		return defaultRuleSets.strict
 			.map((name: string) => getRuleByName(defaultRules, name))
@@ -39,9 +39,10 @@ export const loadRulesFromRuleConfig = (
 ): Array<Rule> => {
 	const rules = loadDefaultRulesFromSet(strict);
 
-	const loadedCustomRules = (customRules || []).filter(
-		(cr: Rule) => Boolean(rulesConfig && rulesConfig[cr.name])
-	);
+	const loadedCustomRules =
+		rulesConfig && customRules
+			? customRules.filter((cr: Rule) => rulesConfig[cr.name])
+			: [];
 
 	const loadedRules = [...loadedCustomRules, ...rules];
 
@@ -51,11 +52,7 @@ export const loadRulesFromRuleConfig = (
 
 	return loadedRules
 		.map((rule: Rule) => {
-			if (
-				rulesConfig &&
-				rule.name in rulesConfig &&
-				rulesConfig[rule.name] === false
-			) {
+			if (rule.name in rulesConfig && rulesConfig[rule.name] === false) {
 				return null;
 			}
 

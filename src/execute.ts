@@ -1,109 +1,151 @@
-import {Rule, PackageScripts} from "./types";
-import {makeMessage} from "./utils";
-
-export const fromEntries = (
-	iterable: Array<[string, string]>
-): PackageScripts => {
-	return [...iterable].reduce((obj: PackageScripts, [key, val]) => {
-		obj[key] = val;
-
-		return obj;
-	}, {});
-};
-
-export const patchScriptObjectEntry = (
-	scripts: PackageScripts,
-	fromKey: string,
-	toKey: string,
-	value: string
-) =>
-	fromEntries(
-		Object.entries(scripts).map(([k, v]) => {
-			return k === fromKey ? [toKey, value] : [k, v];
-		})
-	);
+import { Rule, PackageScripts, JsonMessage } from "./types";
+import { makeMessage, patchScriptObjectEntry } from "./utils";
+import { ValidationFunctionInvalidError } from "./errors";
 
 const execute = (
 	rules: Array<Rule>,
 	scripts: PackageScripts,
 	warning?: (template: string, values?: string | Array<string>) => void,
 	configFix = false
-): [Array<string>, PackageScripts, number] => {
-	const issues: Array<string> = [];
+): [Array<JsonMessage>, PackageScripts, number] => {
+	/**
+	 * keep track of everything
+	 */
+
+	const issues: Array<JsonMessage> = [];
 	let issuesFixed = 0;
 
-	const patchPackageFile = (newScripts: PackageScripts) => {
+	const patchScripts = (newScripts: PackageScripts) => {
 		issuesFixed++;
 		scripts = newScripts;
 	};
 
-	// eslint-disable-next-line complexity
-	const executeObjectRule = ({validate, message, name, fix}: Rule) => {
-		const validationResult =
-			typeof validate === "function" && validate(scripts);
+	/**
+	 * execution functions
+	 */
+
+	const executeObjectRule = ({ validate, message, name, fix }: Rule) => {
+		if (typeof validate !== "function") {
+			throw new ValidationFunctionInvalidError(
+				`Rule validation function is not a function (${name})`
+			);
+		}
+
+		const validationResult = validate(scripts);
 
 		const fixable = typeof fix === "function";
 
-		const valid =
-			typeof validationResult === "boolean" ?
-				validationResult :
-				validationResult.length < 1;
+		/**
+		 * validate
+		 */
 
-		if (!valid) {
-			const warningMessage =
-				typeof validationResult === "boolean" ?
-					`${message} (${name})` :
-					makeMessage(`${message} (${name})`, {
-						names: validationResult.join(", "),
-					});
+		const valid =
+			typeof validationResult === "boolean"
+				? validationResult
+				: validationResult.length < 1;
+
+		if (valid) {
+			return;
+		}
+
+		/**
+		 * warn of invalidity
+		 */
+		const warningMessage =
+			typeof validationResult === "boolean"
+				? `${message} (${name})`
+				: makeMessage(`${message} (${name})`, {
+					names: validationResult.join(", ")
+				  });
+
+		/**
+		 * potentially fix
+		 */
+
+		if (configFix && fixable && fix) {
+			patchScripts(fix(scripts));
+
+			return;
+		}
+
+		/**
+		 * keep track of everything
+		 */
+
+		issues.push({
+			name,
+			affected: undefined,
+			type: "warning", // at some point we should really use this
+			message: warningMessage
+		});
+
+		if (typeof warning === "function") {
+			warning(warningMessage, validationResult);
+		}
+	};
+
+	const executeEntryRule = ({ validate, message, name, fix }: Rule) => {
+		if (typeof validate !== "function") {
+			throw new ValidationFunctionInvalidError(name);
+		}
+
+		const fixable = typeof fix === "function";
+		const pairs = Object.entries(scripts);
+
+		/**
+		 * iterate all the scripts
+		 */
+
+		pairs.forEach(([key, value]) => {
+			const valid = validate(key, value, scripts);
+
+			if (valid) {
+				return;
+			}
+
+			const warningMessage = makeMessage(`${message} (${name})`, {
+				name: key
+			});
+
+			/**
+			 * potentially fix
+			 */
 
 			if (configFix && fixable && fix) {
-				patchPackageFile(fix(scripts));
+				const [toKey, fixedValue] = fix(key, value);
+
+				const fixedScripts = patchScriptObjectEntry(
+					scripts,
+					key,
+					toKey,
+					fixedValue
+				);
+
+				patchScripts(fixedScripts);
 
 				return;
 			}
 
-			issues.push(name);
+			/**
+			 * keep track of everything
+			 */
+
+			issues.push({
+				name,
+				affected: key,
+				type: "warning", // at some point we should really use this
+				message: warningMessage
+			});
+
 			if (typeof warning === "function") {
-				warning(warningMessage, validationResult);
-			}
-		}
-	};
-
-	const executeEntryRule = ({validate, message, name, fix}: Rule) => {
-		const fixable = typeof fix === "function";
-		const pairs = Object.entries(scripts);
-
-		pairs.forEach(([key, value]) => {
-			const valid =
-				typeof validate === "function" && validate(key, value, scripts);
-
-			if (!valid) {
-				const warningMessage = makeMessage(`${message} (${name})`, {
-					name: key,
-				});
-
-				if (configFix && fixable && fix) {
-					const fixedEntry = fix(key, value);
-
-					const fixedScripts = patchScriptObjectEntry(
-						scripts,
-						key,
-						fixedEntry[0],
-						fixedEntry[1]
-					);
-
-					patchPackageFile(fixedScripts);
-
-					return;
-				}
-				issues.push(`${name} (${key})`);
-				if (typeof warning === "function") {
-					warning(warningMessage, key);
-				}
+				warning(warningMessage, key);
 			}
 		});
 	};
+
+	/**
+	 * and go!
+	 */
 
 	rules.forEach(rule => {
 		if (rule.isObjectRule) {

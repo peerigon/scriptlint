@@ -1,4 +1,4 @@
-import {NAMESPACES, DEFAULT_NPM_HOOKS} from "../constants";
+import { NAMESPACES, DEFAULT_NPM_HOOKS } from "../constants";
 
 const validate = (key: string): boolean =>
 	NAMESPACES.some(n => key === n) ||
@@ -13,5 +13,5 @@ export default {
 	message:
 		'script name "{{name}}" should start with one of the allowed namespaces',
 	validate,
-	fix: (key: string, value: string) => [`other:${key}`, value],
+	fix: (key: string, value: string) => [`other:${key}`, value]
 };

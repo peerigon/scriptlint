@@ -1,11 +1,9 @@
-export type RuntimeEnv = "cli" | "module";
-
 export type Rule = {
 	isObjectRule: boolean;
 	name: string;
 	message: string;
 	validate: unknown;
-	// eslint-disable-next-line @typescript-eslint/no-explicit-any
+
 	fix?: (
 		a: unknown,
 		b?: unknown,
@@ -20,6 +18,7 @@ export type PackageScripts = {
 export type Config = {
 	strict: boolean;
 	packageFile?: string;
+	packageScripts?: PackageScripts;
 	fix: boolean;
 	json: boolean;
 	config: boolean;
@@ -30,7 +29,7 @@ export type Config = {
 	ignoreScripts: Array<string>;
 };
 
-export type RulesConfig = {
+type RulesConfig = {
 	[key: string]: boolean;
 };
 
@@ -45,11 +44,11 @@ export type Values =
 	| Array<string>
 	| {
 			[key: string]: string;
-	};
+	  };
 
 export type MessageType = "error" | "warning" | "success";
 
-export type Message = {
+type Message = {
 	message: string;
 	type: MessageType;
 };
@@ -57,6 +56,7 @@ export type Message = {
 export type MessageBuffer = Array<Message>;
 
 export type JsonMessage = {
+	name: string;
 	type: string;
 	message: string;
 	affected: Values;

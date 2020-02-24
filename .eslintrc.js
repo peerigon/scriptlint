@@ -3,7 +3,9 @@ module.exports = {
     "peerigon",
     "peerigon/node",
     "peerigon/typescript",
-    "peerigon/styles/prefer-arrow"
+    "peerigon/styles/prefer-arrow",
+    "prettier",
+    "prettier/@typescript-eslint"
   ],
   env: {
     node: true,
@@ -13,10 +15,12 @@ module.exports = {
   rules: {
     "no-console": "warn",
     "import/no-anonymous-default-export": "off",
-    "import/prefer-default-export": "warn",
     indent: ["error", "tab"],
     "@typescript-eslint/indent": "off",
     "no-tabs": "off",
-    "@typescript-eslint/strict-boolean-expressions": "off"
+    "babel/object-curly-spacing": "off"
+  },
+  parserOptions: {
+    project: `./tsconfig.json`
   }
 };

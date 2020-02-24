@@ -1,26 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`editJson.ts creates files 1`] = `
-default_1 {
-  "fileContents": "{
-  \\"scripts\\": {
-    \\"foo\\": \\"bar\\"
-  }
-}",
-  "indent": Object {
-    "amount": 2,
-    "indent": "  ",
-    "type": "space",
-  },
-  "package": Object {
-    "scripts": Object {
-      "foo": "bar",
-    },
-  },
-  "path": "real/existing/path/package.json",
-}
-`;
-
 exports[`editJson.ts reads files 1`] = `
 default_1 {
   "fileContents": "{

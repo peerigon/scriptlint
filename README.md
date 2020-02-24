@@ -2,7 +2,7 @@
 
 Enforceable standards for your package.json scripts – like eslint for `npm run`
 
-
+![scriptlint status](https://img.shields.io/endpoint?url=https://scriptlint.now.sh/api/shield/scriptlint/1.4.0)  
 [![npm version badge](https://img.shields.io/npm/v/scriptlint)](npmjs.com/package/scriptlint)  
 [![dependency badge](https://img.shields.io/librariesio/release/npm/scriptlint)](https://libraries.io/npm/scriptlint)  
 [![CI badge](https://github.com/peerigon/scriptlint/workflows/ci/badge.svg)](https://github.com/peerigon/scriptlint/actions?query=workflow%3Aci)  
@@ -329,22 +329,48 @@ const scriptlintIssues = scriptlint({
 });
 
 ```
-The function returns found issues as an array:
+
+… **OR** you pass in a script object directly …
 
 ```js
-[
-  {
-    "message": "must contain a \"start\" script (mandatory-start)",
-    "type": "warning",
-    "affected": false // script name or false for object rules
-  },
-  {
-    "message": "Use of unix double ampersand (&&) in script 'test' is not allowed, consider using npm-run-all/run-s (no-unix-double-ampersand)",
-    "type": "warning",
-    "affected": "test"
+const scriptlint = require("scriptlint");
+
+const scriptlintIssues = scriptlint({
+	fix: true,
+	strict: true,
+	packageScripts: {
+    "foo": "bar",
+    "test": "jest"
   }
-]
+});
 ```
+
+**BUT NOT BOTH!**
+
+The function returns an object with found issues and the (potentially fixed if `fix: true`) scripts object in question:
+
+```js
+{
+  "issues": [
+    {
+      "message": "must contain a \"start\" script (mandatory-start)",
+      "type": "warning",
+      "affected": false
+    },
+    {
+      "message": "must contain a \"dev\" script (mandatory-dev)",
+      "type": "warning",
+      "affected": false
+    }
+  ],
+  "scripts": {
+    "other:foo": "bar",
+    "test": "jest"
+  }
+}
+```
+
+**Note**: local user config (in `.scriptlintrc` or similar) is ignored in the module, you have to configure the module directly!
 
 ## local dev
 

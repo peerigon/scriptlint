@@ -1,5 +1,23 @@
+import { Config } from "./types";
+
+export const PROCESS_EXIT_ERROR = 1;
+export const PROCESS_EXIT_OK = 0;
+
+export const DEFAULT_CONFIG: Config = {
+	strict: false,
+	fix: false,
+	json: false,
+	config: false,
+	packageFile: undefined,
+	rules: {},
+	customRules: [],
+	ignoreScripts: []
+};
+
 export const PROJECT_NAME = "scriptlint";
+
 export const NAME_REGEX = /^[\d:A-Za-z]+$/;
+
 export const NAMESPACES = [
 	"build",
 	"dev",
@@ -8,8 +26,9 @@ export const NAMESPACES = [
 	"report",
 	"setup",
 	"start",
-	"test",
+	"test"
 ];
+
 export const DEFAULT_NPM_HOOKS = [
 	"install",
 	"postinstall",
@@ -41,5 +60,5 @@ export const DEFAULT_NPM_HOOKS = [
 	"shrinkwrap",
 	"stop",
 	"uninstall",
-	"version",
+	"version"
 ];

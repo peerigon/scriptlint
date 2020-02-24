@@ -1,5 +1,3 @@
-#!/usr/bin/env node
-import scriptlint from "./main";
-import {Config} from "./types";
+import module from "./module";
 
-module.exports = (config: Partial<Config>) => scriptlint(config, "module");
+export = module;
