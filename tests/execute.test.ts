@@ -1,5 +1,6 @@
 import execute from "../src/execute";
 import { loadRulesFromRuleConfig } from "../src/loadRules";
+import { ValidationFunctionInvalidError } from "../src/errors";
 
 const rulesNonStrict = loadRulesFromRuleConfig(false);
 const rulesStrict = loadRulesFromRuleConfig(true);
@@ -14,6 +15,34 @@ describe("execute.ts", () => {
 			"mandatory-start",
 			"mandatory-dev"
 		]);
+	});
+
+	describe("errors for invalid validation functions", () => {
+		const rules = [
+			{
+				isObjectRule: true,
+				name: "foo",
+				message: "bar",
+				validate: "unknown"
+			}
+		];
+
+		const scripts = {
+			foo: "bar"
+		};
+
+		test("object rule", () => {
+			expect(() => {
+				execute(rules, scripts);
+			}).toThrowError(ValidationFunctionInvalidError);
+		});
+
+		test("entry rule", () => {
+			rules[0].isObjectRule = false;
+			expect(() => {
+				execute(rules, scripts);
+			}).toThrowError(ValidationFunctionInvalidError);
+		});
 	});
 
 	it("doesn't complain about correct scripts (default, fixing)", () => {

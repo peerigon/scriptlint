@@ -1,4 +1,5 @@
 import EditJson from "../src/editJson";
+import { PackageFileNotFoundError } from "../src/errors";
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const detectIndent = require("detect-indent");
 
@@ -6,7 +7,9 @@ jest.mock("fs");
 
 describe("editJson.ts", () => {
 	describe("it throws on file not found", () => {
-		expect(() => new EditJson("foo/bar/baz")).toThrow();
+		expect(() => new EditJson("foo/bar/baz")).toThrow(
+			PackageFileNotFoundError
+		);
 	});
 
 	it("has a default scripts section", () => {

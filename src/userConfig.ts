@@ -1,6 +1,7 @@
 import { cosmiconfigSync } from "cosmiconfig";
 import { Config as CosmiconfigConfig } from "cosmiconfig/dist/types";
 import { PROJECT_NAME, DEFAULT_CONFIG } from "./constants";
+import { ConfigError } from "./errors";
 // Types
 import { Config } from "./types";
 
@@ -13,7 +14,7 @@ export const sanitizeConfig = (loadedConfig: CosmiconfigConfig): Config => {
 		if (!keyExists) {
 			// eslint-disable-next-line @typescript-eslint/no-dynamic-delete
 			delete sanitized[key];
-			throw new Error(`unknown config key "${key}"`);
+			throw new ConfigError(`unknown config key "${key}"`);
 		}
 	});
 

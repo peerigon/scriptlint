@@ -5,6 +5,7 @@ import {
 	makePackageFilePath,
 	patchScriptObjectEntry
 } from "../src/utils";
+import { PackageFileNotFoundError } from "../src/errors";
 
 jest.mock("fs");
 jest.mock("path");
@@ -80,7 +81,7 @@ describe("makePackageFilePath()", () => {
 	it("throws on file not found", () => {
 		expect(() => {
 			makePackageFilePath("foo/bar/baz");
-		}).toThrowError(/such package.json found/);
+		}).toThrowError(PackageFileNotFoundError);
 	});
 
 	it("works with package.json", () => {

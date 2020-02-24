@@ -28,7 +28,7 @@ describe("cli.ts", () => {
 	it("should catch errors", () => {
 		expect(() => {
 			cli([...processArgv, "not/existing/package.json"]);
-		}).not.toThrowError(/foo/);
+		}).not.toThrow();
 	});
 
 	it("should fix 1 issue", () => {

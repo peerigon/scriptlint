@@ -1,5 +1,6 @@
 import fs from "fs";
 import path from "path";
+import { PackageFileNotFoundError } from "./errors";
 import { PackageScripts, Values } from "./types";
 
 export const makePackageFilePath = (packageFile: string): string => {
@@ -12,7 +13,7 @@ export const makePackageFilePath = (packageFile: string): string => {
 
 	// does it exist?
 	if (!fs.existsSync(packageFile)) {
-		throw new Error(`No such package.json found: ${packageFile}`);
+		throw new PackageFileNotFoundError(packageFile);
 	}
 
 	return packageFile;

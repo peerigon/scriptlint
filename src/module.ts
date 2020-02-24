@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 import userPackageScriptContext from "./userPackageScripts";
 import { loadRulesFromRuleConfig } from "./loadRules";
+import { ConfigError } from "./errors";
 import execute from "./execute";
 import { DEFAULT_CONFIG } from "./constants";
 import { Config } from "./types";
@@ -12,14 +13,14 @@ export default (moduleConfig: Partial<Config>) => {
 	 */
 
 	if (moduleConfig.packageFile && moduleConfig.packageScripts) {
-		throw new Error(
+		throw new ConfigError(
 			"Either specify a package.json location or a scripts object but not both" +
 				JSON.stringify(moduleConfig)
 		);
 	}
 
 	if (!moduleConfig.packageFile && !moduleConfig.packageScripts) {
-		throw new Error(
+		throw new ConfigError(
 			"You have to specify a package.json location or a scripts object"
 		);
 	}
