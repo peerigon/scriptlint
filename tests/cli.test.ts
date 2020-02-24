@@ -1,6 +1,6 @@
 /* eslint-disable no-console */
 import mockConsole from "jest-mock-console";
-import cli from "../src/cli";
+import cli from "../src/cliModule";
 
 jest.mock("fs");
 jest.mock("path");
