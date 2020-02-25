@@ -12,14 +12,14 @@ Enforceable standards for your package.json scripts – like eslint for `npm run
 
 ## Intro
 
-`package.json` scripts are an integral part of the JavaScript dev experience: we use them to start our projects, run our dev environments and for all kinds of formatting, linting and tooling in general. They are just as important as our code. Yet we don't treat them with the same meticulous attention to detail. **Scripts need :heart: too!**
+`package.json` scripts are an integral part of the Node dev experience: we use them to start our projects, run our dev environments and for all kinds of formatting, linting and tooling in general. They are just as important as our code. Yet we don't treat them with the same meticulous attention to detail. **Scripts need :heart: too!**
 
-One of the main goals for scriptlint, was to enable people to use memorable and consistent script names across their projects. Tools like [nps](https://github.com/sezna/nps) are great when you have to organize scripts with a certain level of complexity, but they don't help you with the structure and naming of your scripts.
+One of the main goals for scriptlint was to enable people to use memorable and consistent script names across their projects. Tools like [nps](https://github.com/sezna/nps) are great when you have to organize scripts with a certain level of complexity, but they don't help you with the structure and naming of your scripts.
 
 This is where [[the scriptlint CLI]] shines: it makes best practices outlined in this documentation enforceable throughout your project(s). Think of it as eslint for your `"scripts"` section.
 
 
-## TL;DR "standard"
+## Rules
 
 Here's the tl;dr of all the best practices we consider the "`scriptlint` standard"
 
@@ -30,8 +30,8 @@ Your `package.json`'s `"scripts"` section should…
 - _abstract script names from their implementation (`test`, not `jest`)_
 - _use namespaces to categorize scripts (`"test:unit": "jest"`)_
 - _use `:` as a namespace separator_
-- _have sthe scripts in alphabetic order_
-- _have a trigger script for all hooks (if you have `prefoobar`, there must be a `foobar` script)_
+- _have the scripts in alphabetic order_
+- _have a trigger script for all hooks (ex: if you have `prefoobar`, there must be a `foobar` script)_
 - _use `camelCase` for all script names_
 - _not alias `devDependencies` (no `"jest": "jest"`)_
 - _not use `&&` or `&` for sequential or parallel script execution_
@@ -39,7 +39,9 @@ Your `package.json`'s `"scripts"` section should…
 (_italic = strict rule_)
 
 
-## TL;DR CLI
+[Read more about the standard rules here](https://github.com/peerigon/scriptlint/wiki/The-scriptlint-%22standard%22-tl%3Bdr)
+
+## Usage
 
 Install locally: 
 
