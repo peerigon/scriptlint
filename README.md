@@ -1,10 +1,10 @@
 <img src="https://raw.githubusercontent.com/peerigon/scriptlint/master/assets/scriptlint-logo.png" width="150" height="150"><br>
 
 [![scriptlint status](https://img.shields.io/endpoint?url=https://scriptlint.now.sh/api/shield/scriptlint/1.4.0)](https://scriptlint.now.sh/issues/scriptlint/latest)  
-[![npm version badge](https://img.shields.io/npm/v/scriptlint)](https://npmjs.com/package/scriptlint)  
-[![dependency badge](https://img.shields.io/librariesio/release/npm/scriptlint)](https://libraries.io/npm/scriptlint)  
+[![npm version badge](https://img.shields.io/npm/v/scriptlint?style=flat-square)](https://npmjs.com/package/scriptlint)  
+[![dependency badge](https://img.shields.io/librariesio/release/npm/scriptlint?style=flat-square)](https://libraries.io/npm/scriptlint)  
+[![Issue badge](https://img.shields.io/github/issues/peerigon/scriptlint?style=flat-square)](https://github.com/peerigon/scriptlint/issues)  
 [![CI badge](https://github.com/peerigon/scriptlint/workflows/ci/badge.svg)](https://github.com/peerigon/scriptlint/actions?query=workflow%3Aci)  
-[![Issue badge](https://img.shields.io/github/issues/peerigon/scriptlint)](https://github.com/peerigon/scriptlint/issues)  
 
 # scriptlint
 
