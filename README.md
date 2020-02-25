@@ -1,32 +1,32 @@
 <div style="display:flex; flex-flow: row nowrap">
-<img src="./assets/scriptlint-logo.svg" width="150" height="150" style="display:block; margin-right:1rem;">
-<div style="display: flex; flex-flow: column nowrap;">
-<!--
-<a href="" target="_blank">
-<img src="" alt="" />
-</a>
--->
+	<img src="./assets/scriptlint-logo.svg" width="150" height="150" style="display:block; margin-right:1rem;">
+	<div style="display: flex; flex-flow: column nowrap;">
+		<!--
+			<a href="" target="_blank">
+			<img src="" alt="" />
+		</a>
+		-->
 	
-<a href="https://scriptlint.now.sh/issues/scriptlint/latest" target="_blank">
-<img src="https://img.shields.io/endpoint?url=https://scriptlint.now.sh/api/shield/scriptlint/1.4.0" alt="scriptlint badge">
-</a>
-	
-<a href="https://npmjs.com/package/scriptlint" target="_blank">
-<img src="https://img.shields.io/npm/v/scriptlint" alt="npm version badge" />
-</a>
-	
-<a href="https://libraries.io/npm/scriptlint" target="_blank">
-<img src="https://img.shields.io/librariesio/release/npm/scriptlint" alt="dependency badge" />
-</a>
-	
-<a href="https://github.com/peerigon/scriptlint/actions?query=workflow%3Aci" target="_blank">
-<img src="https://github.com/peerigon/scriptlint/workflows/ci/badge.svg" alt="CI badge" />
-</a>
-	
-<a href="https://github.com/peerigon/scriptlint/issues" target="_blank">
-<img src="https://img.shields.io/github/issues/peerigon/scriptlint" alt="Issue badge" />
-</a> 
-</div>
+		<a href="https://scriptlint.now.sh/issues/scriptlint/latest" target="_blank">
+			<img src="https://img.shields.io/endpoint?url=https://scriptlint.now.sh/api/shield/scriptlint/1.4.0" alt="scriptlint badge">
+		</a>
+		
+		<a href="https://npmjs.com/package/scriptlint" target="_blank">
+			<img src="https://img.shields.io/npm/v/scriptlint" alt="npm version badge" />
+		</a>
+		
+		<a href="https://libraries.io/npm/scriptlint" target="_blank">
+			<img src="https://img.shields.io/librariesio/release/npm/scriptlint" alt="dependency badge" />
+		</a>
+		
+		<a href="https://github.com/peerigon/scriptlint/actions?query=workflow%3Aci" target="_blank">
+			<img src="https://github.com/peerigon/scriptlint/workflows/ci/badge.svg" alt="CI badge" />
+		</a>
+		
+		<a href="https://github.com/peerigon/scriptlint/issues" target="_blank">
+			<img src="https://img.shields.io/github/issues/peerigon/scriptlint" alt="Issue badge" />
+		</a> 
+	</div>
 </div>
 
 # scriptlint
