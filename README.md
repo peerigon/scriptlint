@@ -12,383 +12,116 @@ Enforceable standards for your package.json scripts – like eslint for `npm run
 
 ## Intro
 
-There are quite a few pitfalls when it comes to using `package.json` scripts:
-
-- **memorable** and **consistent** script naming, also across projects
-- using **hooks** correctly (`pre*`/`post*`)
-- making your scripts **platform independent**
-- working with devDependencies
-
-`scriptlint` provides a workable standard set of rules including a toolkit to also enforce these rules. Think of a linter for your `package.json`'s `"scripts"` section.
-
-## CLI basics
-
-You can install the `scriptlint` CLI tool locally or globally
-
-### Local installation  (recommended)
-Install with `npm install scriptlint -D` / `yarn add scriptlint -D` and add a linting script to your `package.json`:
-
-
-```
-"scripts": {
-    ...
-    "test:lint:scripts": "scriptlint",
-    ...
-  },
-```
-
-You can also add this as a pre-run to husky or as a precommit-hook.
-
-### Global installation
-
-Install with `npm install scriptlint -g` / `yarn global add scriptlint` and then run with `scriptlint`.
-
-
-### Available rules
-
-```
-alphabetic-order           scripts should be in a-z order
-correct-casing             script name must be camel case
-mandatory-dev              must contain a "dev" script
-mandatory-start            must contain a "start" script
-mandatory-test             must contain a "test" script
-no-aliases                 don't alias binaries, use npx/yarn instead
-no-default-test            `test` script can't be the default script
-no-rm-rf                   forbid use of `rm -rf` in favor of rimraf
-no-double-ampersand        forbid `&&` for script sequences in favor of npm-run-all
-no-single-ampersand        forbid `&` for script parallelization in favor of npm-run-all
-prepost-trigger-defined    custom hooks must not be missing their trigger scripts
-uses-allowed-namespace     script name should start with one of the allowed namespaces
-```
-
-### CLI options
-
-```
-Usage: scriptlint [options] [packageFile]
-
-Options:
-  -V, --version  output the version number
-  -s, --strict   strict mode
-  -j, --json     JSON output
-  -c, --config   inspect the config
-  -f, --fix      autofixing
-  -h, --help     output usage information
-```
-
-#### Examples
-
-**Find problems in the current directory's `package.json`:**  
-`scriptlint`
-
-**Find problems in the current directory's `package.json` in strict mode:**  
-`scriptlint --strict` or `scriptlint -s`
-
-**Fix autofixable problems in the current directory's `package.json` in strict mode:**  
-`scriptlint --fix --strict` or `scriptlint -f -s`
-
-**Find problems in a specific `package.json`:**  
-`scriptlint ~/foo/project-dir/package.json`
-
-and so on...
-
-### Project configuration
-
-Configuration can be loaded from a `package.json` property (`scriptlint`), a `.scriptlintrc` (as JSON), or a `scriptlint.js` (CommonJS module). Check the [cosmiconfig docs](https://github.com/davidtheclark/cosmiconfig#explorersearch) for an explanation how this works.
-
-This is the default:
-
-```json
-{
-	"strict": false,
-	"fix": false,
-	"config": false,
-	"json": false,
-	"rules": {},
-	"ignoreScripts": [],
-	"customRules": []
-}
-```
-
-
-#### `strict`
-
-This defines what set of rules will be used. Non-strict means minimum rules, `"strict": true` uses all of the default rules available. See [below](#minimum-rules) for in depth explanation for each rule
-
-Turn a rule on/off like this:
-
-```json
-{
-	"strict": true,
-	"rules": {
-		"uses-allowed-namespace": false
-	}
-}
-```
-
-#### `json`
-
-Output the issues in a json format
-
-```json
-[
-  …
-  {
-    "message": "Use of unix double ampersand (&&) in script 'test' is not allowed, consider using npm-run-all/run-s (no-unix-double-ampersand)",
-    "type": "warning",
-    "affected": "test"
-  }
-  …
-]
-```
-
-#### `config`
-
-Print the config as json for debugging purposes.
-
-#### `fix`
-
-🚨 **This alters the contents of your `package.json`, only use it in a version controlled environment!**
-
-Attempt to fix all found issues. Not every rule has a autofix function ready, but some do. 
-
-#### ignore scripts
-
-```json
-{
-	"strict": true,
-	"ignoreScripts": ["my-funny-scriptname"]
-}
-```
-
-Scripts in this list will be exempt from linting.
-
-#### custom rules
-
-You can add custom rule implementations in your config. `customRules` is an array of objects like this:
-
-```js
-{
-	// your custom rule's name
-	name: string,
-	
-	// is the rule looking at an individual script or the whole scripts object
-	isObjectRule: boolean,
-	
-	// the error message if the validation fails for this rule, uses template tags {{name}} (and {{names}} for object rules)
-	message: string,
-	
-	// the validation function for the rule
-	// for object rules it returns the failing scripts on fail
-	// if isObjectRule === true: (scripts: Object) => true | Array<string>
-	// for script rules it returns true or false
-	// if isObjectRule === false: (key: string, script: string, scripts: Object) => boolean
-	validate: function
-	
-	// if the problem is autofixable, provide a fix function here
-	// for object rules it returns a fixed scripts object
-	// for script rules it returns an array with [key: string, value: string]
-	fix: function
-}
-```
-
-As a speaking example here's a custom config (`.scriptlintrc.js`) to override the `camelCase` rule and replace it with a `kebab-case` one:
-
-```js
-module.exports = {
-  rules: {
-    "correct-casing": false,
-    "correct-kebab-casing": true
-  },
-  customRules: [
-    {
-      name: "correct-kebab-casing",
-      isObjectRule: false,
-      message: "`{{name}}`: Script name must be kebab case",
-      validate: name => /^[\d:a-z\-]+$/.test(name)
-    }
-  ]
-};
-
-```
-
-## Minimum rules
-
-There are two stages of scriptlint compliance: a default, minimum one and a `strict` one. The default "rules" are very simple:
-
-### 1. mandatory scripts
-
-Every `package.json` has to have at least these 3 scripts:
-
-```json
-{
-...
-	"scripts": {
-		"start": "...",
-		"test": "...",
-		"dev": "...",
-	}
-...
-}
-```
-☑️
-
-**Note:** if you have a project, where having for example a `start` script doesn't make sense, feel free to alias it to something else like `dev` or you keep it as a stub, for example `"start": "echo \"start what?\""`. 
-
-### 2. the test script is not the default one from `npm init`
-
-```json
-{
-...
-	"scripts": {
-		...
-		"test": "echo \"Error: no test specified\" && exit 1"
-		...
-	}
-...
-}
-```
-❗️
-
-Reasoning: Every project has at least one method of quick code verification. When in doubt, try to alias it to your build script, that's better than nothing.
-
-That's it for the default rules! They should be relatively easy to follow and not require a lot of changes to get your project up to standard. When you've worked those out, it's time to switch over to strict mode:
-
-
-```json
-{
-	"scriptlint": {
-		"strict": true
-	}
-}
-```
-
-In your `package.json`, see below for other configuration options.
-
-### 3. How to name scripts
-
-#### Use categories, subcategories and `:`
-
-To better signify, what category a script belongs to, prefix it with one of these categories:
-
-- `build`
-- `dev`
-- `format`
-- `other`
-- `report`
-- `setup`
-- `start`
-- `test`
-
-So for example if you want to name a script that runs your unit tests: `test:unit`. `eslint` would be called from `format:lint`.
-
-**Of course category names themselves can (sometimes must) be script names!** For example `build` or `test`. In those cases they often serve as a sequence of subscripts, like here:
-
-
-```
-"scripts": {
-    ...
-    "test": "npm run test:unit && npm run test:lint",
-    "test:unit": "...",
-    "test:lint": "...",
-    ...
-  },
-```
-This is great practice!
-
-You can also use more then one cateogry and/or subcategory. This is rare, but sometimes something like `test:unit:watch:all` comes in handy.
-
-Anything that doesn't fit in these categories can go in `other`.
-
-#### keep 'em readable
-
-The semantic of your subcategories is totally up to you, it is still good avdice to keep things readable yet abstract: for example, try to use a dependency's category instead of its' actual name: `test:lint` ☑️ instead of `test:eslint` ❗️
-
-
-#### use camelCase
-
-Since npm does it, we should do it:
-
-- `prepublishOnly` ☑️
-- `test:unit:watchAll` ☑️
-- `test-unit` ❗️
-- `lint_fix` ❗️
-
-#### Notes
-- of course all the [default hooks and scripts](https://docs.npmjs.com/misc/scripts) are fine as they are
-- Scripts like this `"eslint": "eslint"` used to be common to make dependencies executable with `npm run`. Since [`npx`](https://www.npmjs.com/package/npx) (and with yarn of course) this is obsolete. There's a lint rule in the CLI for this.
-- scripts that start with `pre*` or `post*` should only be used as hooks for built-in commands or other scripts
-
-## scriptlint as a module dependency
-
-You can install scriptlint as a dependency and call it as a function like this:
-
-```js
-const scriptlint = require("scriptlint");
-
-const scriptlintIssues = scriptlint({
-	strict: true,
-	packageFile: "/Users/foobar/project-dir"
-});
-
-```
-
-… **OR** you pass in a script object directly …
-
-```js
-const scriptlint = require("scriptlint");
-
-const scriptlintIssues = scriptlint({
-	fix: true,
-	strict: true,
-	packageScripts: {
-    "foo": "bar",
-    "test": "jest"
-  }
-});
-```
-
-**BUT NOT BOTH!**
-
-The function returns an object with found issues and the (potentially fixed if `fix: true`) scripts object in question:
-
-```js
-{
-  "issues": [
-    {
-      "message": "must contain a \"start\" script (mandatory-start)",
-      "type": "warning",
-      "affected": false
-    },
-    {
-      "message": "must contain a \"dev\" script (mandatory-dev)",
-      "type": "warning",
-      "affected": false
-    }
-  ],
-  "scripts": {
-    "other:foo": "bar",
-    "test": "jest"
-  }
-}
-```
-
-**Note**: local user config (in `.scriptlintrc` or similar) is ignored in the module, you have to configure the module directly!
-
-## local dev
-
-- `yarn install`
-- `yarn build`
-- `yarn link`
-- `yarn dev`
-- in another project `yarn link "scriptlint"`
-- in that project's `package.json`:
-
-```
-"scripts": {
-    …
-    "test:lint:scripts": "scriptlint",
-    …
-  },
-```
-
-Then run with `yarn test:lint:scripts` to see the problems in that project's package scripts.
+`package.json` scripts are an integral part of the JavaScript dev experience: we use them to start our projects, run our dev environments and for all kinds of formatting, linting and tooling in general. They are just as important as our code. Yet we don't treat them with the same meticulous attention to detail. **Scripts need :heart: too!**
+
+One of the main goals for scriptlint, was to enable people to use memorable and consistent script names across their projects. Tools like [nps](https://github.com/sezna/nps) are great when you have to organize scripts with a certain level of complexity, but they don't help you with the structure and naming of your scripts.
+
+This is where [[the scriptlint CLI]] shines: it makes best practices outlined in this documentation enforceable throughout your project(s). Think of it as eslint for your `"scripts"` section.
+
+
+## TL;DR "standard"
+
+Here's the tl;dr of all the best practices we consider the "`scriptlint` standard"
+
+Your `package.json`'s `"scripts"` section should…
+
+- have a `test` script that is not the default script from `npm init`
+- have a `dev` script and a `start` script
+- _abstract script names from their implementation (`test`, not `jest`)_
+- _use namespaces to categorize scripts (`"test:unit": "jest"`)_
+- _use `:` as a namespace separator_
+- _be in alphabetic or natural order_
+- _have a trigger script for all hooks (if you have `preFoo`, there must be a `foo`)_
+- _use `camelCase` for all script names_
+- _not alias `devDependencies` (`"jest": "jest"`)_
+- _not use `&&` or `&` for sequential or parallel script execution (doesn't work on all operating systems)_
+
+(_italic = strict rule_)
+
+
+## TL;DR CLI
+
+Install locally: 
+
+`npm install scriptlint -D` (or `yarn add scriptlint -D`)
+
+… then run `npx scriptlint --strict` 
+
+[Read about configuration here](https://github.com/peerigon/scriptlint/wiki/Configuration)
+
+# Documentation
+<ol>
+<li><a href="https://github.com/peerigon/scriptlint/wiki/Motivation">Motivation</a></li>
+<li><a href="https://github.com/peerigon/scriptlint/wiki/The-scriptlint-%22standard%22-tl%3Bdr">The
+scriptlint "standard" tl;dr</a></li>
+<li>
+<a href="https://github.com/peerigon/scriptlint/wiki/The-scriptlint-%22standard%22">The
+scriptlint
+"standard"</a>
+<ol>
+<li>Rules enforceable via the scriptlint CLI
+<ol>
+<li>
+<a
+href="https://github.com/peerigon/scriptlint/wiki/The-scriptlint-%22standard%22#minimum-rules">Minimum
+rules</a>
+<ol>
+<li><a
+href="https://github.com/peerigon/scriptlint/wiki/The-scriptlint-%22standard%22#mandatory-start-mandatory-dev-and-mandatory-test">mandatory-start</a>
+</li>
+<li><a
+href="https://github.com/peerigon/scriptlint/wiki/The-scriptlint-%22standard%22#mandatory-start-mandatory-dev-and-mandatory-test">mandatory-dev</a>
+</li>
+<li><a
+href="https://github.com/peerigon/scriptlint/wiki/The-scriptlint-%22standard%22#mandatory-start-mandatory-dev-and-mandatory-test">mandatory-test</a>
+</li>
+<li><a
+href="https://github.com/peerigon/scriptlint/wiki/The-scriptlint-%22standard%22#mandatory-start-mandatory-dev-and-mandatory-test">no-default-test</a>
+</li>
+</ol>
+</li>
+<li>Strict rules
+<ol>
+<li><a
+href="https://github.com/peerigon/scriptlint/wiki/uses-allowed-namespace">uses-allowed-namespace</a>
+</li>
+<li><a
+href="https://github.com/peerigon/scriptlint/wiki/alphabetic-order">alphabetic-order</a>
+</li>
+<li><a href="https://github.com/peerigon/scriptlint/wiki/correct-casing">correct-casing</a>
+</li>
+<li><a href="https://github.com/peerigon/scriptlint/wiki/no-aliases">no-aliases</a>
+</li>
+<li><a
+href="https://github.com/peerigon/scriptlint/wiki/prepost-trigger-defined">prepost-trigger-defined</a>
+</li>
+<li><a
+href="https://github.com/peerigon/scriptlint/wiki/no-unix-double-ampersand">no-unix-double-ampersand</a>
+</li>
+<li><a
+href="https://github.com/peerigon/scriptlint/wiki/no-unix-single-ampersand">no-unix-single-ampersand</a>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+<li><a href="https://github.com/peerigon/scriptlint/wiki/Best-practices">Best
+practices</a></li>
+</ol>
+</li>
+<li>The scriptlint CLI
+<ol>
+<li><a href="https://github.com/peerigon/scriptlint/wiki/Installation">Installation</a></li>
+<li><a href="https://github.com/peerigon/scriptlint/wiki/Usage">Usage</a></li>
+<li><a href="https://github.com/peerigon/scriptlint/wiki/Configuration">Configuration</a></li>
+<li><a href="https://github.com/peerigon/scriptlint/wiki/Extending">Extending</a>
+</li>
+<li><a href="https://github.com/peerigon/scriptlint/wiki/Use-as-a-JavaScript-module">Use as a
+JavaScript module</a></li>
+</ol>
+</li>
+<li><a href="https://github.com/peerigon/scriptlint/wiki/Contributing-to-scriptlint">Contributing to
+scriptlint</a></li>
+</ol>
+
+From Peerigon with :heart:
