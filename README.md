@@ -1,13 +1,14 @@
-<img src="./assets/scriptlint-logo.svg" width="150" height="150">
+<img src="./assets/scriptlint-logo.svg" width="150" height="150"><br>
 
-
-Enforceable standards for your package.json scripts – like eslint for `npm run`
-
-![scriptlint status](https://img.shields.io/endpoint?url=https://scriptlint.now.sh/api/shield/scriptlint/1.4.0)  
+[![scriptlint status](https://img.shields.io/endpoint?url=https://scriptlint.now.sh/api/shield/scriptlint/1.4.0)](https://scriptlint.now.sh/issues/scriptlint/latest)  
 [![npm version badge](https://img.shields.io/npm/v/scriptlint)](https://npmjs.com/package/scriptlint)  
 [![dependency badge](https://img.shields.io/librariesio/release/npm/scriptlint)](https://libraries.io/npm/scriptlint)  
 [![CI badge](https://github.com/peerigon/scriptlint/workflows/ci/badge.svg)](https://github.com/peerigon/scriptlint/actions?query=workflow%3Aci)  
 [![Issue badge](https://img.shields.io/github/issues/peerigon/scriptlint)](https://github.com/peerigon/scriptlint/issues)  
+
+# scriptlint
+
+Enforceable standards for your package.json scripts – like eslint for `npm run`
 
 ## Intro
 
