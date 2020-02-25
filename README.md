@@ -30,11 +30,11 @@ Your `package.json`'s `"scripts"` section should…
 - _abstract script names from their implementation (`test`, not `jest`)_
 - _use namespaces to categorize scripts (`"test:unit": "jest"`)_
 - _use `:` as a namespace separator_
-- _be in alphabetic or natural order_
-- _have a trigger script for all hooks (if you have `preFoo`, there must be a `foo`)_
+- _have sthe scripts in alphabetic order_
+- _have a trigger script for all hooks (if you have `prefoobar`, there must be a `foobar` script)_
 - _use `camelCase` for all script names_
-- _not alias `devDependencies` (`"jest": "jest"`)_
-- _not use `&&` or `&` for sequential or parallel script execution (doesn't work on all operating systems)_
+- _not alias `devDependencies` (no `"jest": "jest"`)_
+- _not use `&&` or `&` for sequential or parallel script execution_
 
 (_italic = strict rule_)
 
@@ -124,4 +124,6 @@ JavaScript module</a></li>
 scriptlint</a></li>
 </ol>
 
-From Peerigon with :heart:
+***
+
+From Peerigon with ❤︎
