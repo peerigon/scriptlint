@@ -2,7 +2,7 @@ import chalk from "chalk";
 import { Values, MessageBuffer, MessageType } from "./types";
 import { makeMessage } from "./utils";
 
-const PREFIX = "𝖘";
+const PREFIX = "⧙։⧘";
 let stashed: MessageBuffer = [];
 
 const stash = (message: string, type: MessageType): void => {
