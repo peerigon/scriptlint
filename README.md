@@ -1,9 +1,10 @@
-# scriptlint
+<img src="./assets/scriptlint-logo.svg" width="150" height="150">
+
 
 Enforceable standards for your package.json scripts – like eslint for `npm run`
 
 ![scriptlint status](https://img.shields.io/endpoint?url=https://scriptlint.now.sh/api/shield/scriptlint/1.4.0)  
-[![npm version badge](https://img.shields.io/npm/v/scriptlint)](npmjs.com/package/scriptlint)  
+[![npm version badge](https://img.shields.io/npm/v/scriptlint)](https://npmjs.com/package/scriptlint)  
 [![dependency badge](https://img.shields.io/librariesio/release/npm/scriptlint)](https://libraries.io/npm/scriptlint)  
 [![CI badge](https://github.com/peerigon/scriptlint/workflows/ci/badge.svg)](https://github.com/peerigon/scriptlint/actions?query=workflow%3Aci)  
 [![Issue badge](https://img.shields.io/github/issues/peerigon/scriptlint)](https://github.com/peerigon/scriptlint/issues)  
@@ -82,7 +83,7 @@ Options:
 `scriptlint --strict` or `scriptlint -s`
 
 **Fix autofixable problems in the current directory's `package.json` in strict mode:**  
-`scriptlint --fix`
+`scriptlint --fix --strict` or `scriptlint -f -s`
 
 **Find problems in a specific `package.json`:**  
 `scriptlint ~/foo/project-dir/package.json`
@@ -195,11 +196,11 @@ As a speaking example here's a custom config (`.scriptlintrc.js`) to override th
 module.exports = {
   rules: {
     "correct-casing": false,
-    "correct-kebab-casings": true
+    "correct-kebab-casing": true
   },
   customRules: [
     {
-      name: "correct-kebab-casings",
+      name: "correct-kebab-casing",
       isObjectRule: false,
       message: "`{{name}}`: Script name must be kebab case",
       validate: name => /^[\d:a-z\-]+$/.test(name)
