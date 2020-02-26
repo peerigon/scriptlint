@@ -1,3 +1,10 @@
+## [2.0.3](https://github.com/peerigon/scriptlint/compare/v2.0.2...v2.0.3) (2020-02-26)
+
+
+### Bug Fixes
+
+* **documentation:** Fix typo in README ([bc2d943](https://github.com/peerigon/scriptlint/commit/bc2d943))
+
 ## [2.0.2](https://github.com/peerigon/scriptlint/compare/v2.0.1...v2.0.2) (2020-02-26)
 
 
