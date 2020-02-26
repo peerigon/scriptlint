@@ -1,3 +1,11 @@
+## [2.0.2](https://github.com/peerigon/scriptlint/compare/v2.0.1...v2.0.2) (2020-02-26)
+
+
+### Bug Fixes
+
+* docs and design stuff ([#26](https://github.com/peerigon/scriptlint/issues/26)) ([c0a2bf9](https://github.com/peerigon/scriptlint/commit/c0a2bf9))
+* **documentation:** overall documentation rewrite ([f586cc0](https://github.com/peerigon/scriptlint/commit/f586cc0))
+
 ## [2.0.1](https://github.com/peerigon/scriptlint/compare/v2.0.0...v2.0.1) (2020-02-24)
 
 
