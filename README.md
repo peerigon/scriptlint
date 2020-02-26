@@ -16,7 +16,7 @@ Enforceable standards for your package.json scripts – like eslint for `npm run
 
 One of the main goals for scriptlint was to enable people to use memorable and consistent script names across their projects. Tools like [nps](https://github.com/sezna/nps) are great when you have to organize scripts with a certain level of complexity, but they don't help you with the structure and naming of your scripts.
 
-This is where [[the scriptlint CLI]] shines: it makes best practices outlined in this documentation enforceable throughout your project(s). Think of it as eslint for your `"scripts"` section.
+This is where the scriptlint CLI shines: it makes best practices outlined in this documentation enforceable throughout your project(s). Think of it as eslint for your `"scripts"` section.
 
 
 ## Rules
