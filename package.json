@@ -12,7 +12,8 @@
   },
   "files": [
     "/dist",
-    "/README.md"
+    "/README.md",
+    "/LICENSE"
   ],
   "scripts": {
     "build": "run-s build:clean build:scripts build:chmod",
