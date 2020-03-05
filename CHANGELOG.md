@@ -1,3 +1,10 @@
+## [2.0.4](https://github.com/peerigon/scriptlint/compare/v2.0.3...v2.0.4) (2020-03-05)
+
+
+### Bug Fixes
+
+* **license:** Add missing license ([0dbb51b](https://github.com/peerigon/scriptlint/commit/0dbb51b))
+
 ## [2.0.3](https://github.com/peerigon/scriptlint/compare/v2.0.2...v2.0.3) (2020-02-26)
 
 
