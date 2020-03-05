@@ -6,7 +6,7 @@
   "types": "dist/index.d.ts",
   "repository": "https://github.com/peerigon/scriptlint",
   "author": "Peerigon GmbH",
-  "license": "MIT",
+  "license": "Unlicense",
   "bin": {
     "scriptlint": "./dist/cli.js"
   },
