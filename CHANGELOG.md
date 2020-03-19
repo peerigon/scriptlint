@@ -1,3 +1,11 @@
+## [2.0.5](https://github.com/peerigon/scriptlint/compare/v2.0.4...v2.0.5) (2020-03-19)
+
+
+### Bug Fixes
+
+* **dependencies:** updtr guided updates ([04af746](https://github.com/peerigon/scriptlint/commit/04af746))
+* **dependencies:** updtr guided updates ([1c92697](https://github.com/peerigon/scriptlint/commit/1c92697))
+
 ## [2.0.4](https://github.com/peerigon/scriptlint/compare/v2.0.3...v2.0.4) (2020-03-05)
 
 
