@@ -22,6 +22,7 @@ export const NAMESPACES = [
 	"build",
 	"dev",
 	"format",
+	"lint",
 	"other",
 	"report",
 	"setup",
