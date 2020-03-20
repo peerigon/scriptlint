@@ -1,6 +1,6 @@
 <img src="https://raw.githubusercontent.com/peerigon/scriptlint/master/assets/scriptlint-logo.png" width="150" height="150"><br>
 
-[![scriptlint status](https://img.shields.io/endpoint?url=https://scriptlint.now.sh/api/shield/scriptlint/1.4.0)](https://scriptlint.now.sh/issues/scriptlint/latest)  
+[![scriptlint status](https://img.shields.io/endpoint?url=https://scriptlint.peerigon.io/api/shield/scriptlint/latest)](https://scriptlint.peerigon.io/issues/scriptlint/latest)  
 [![npm version badge](https://img.shields.io/npm/v/scriptlint?style=flat-square)](https://npmjs.com/package/scriptlint)  
 [![dependency badge](https://img.shields.io/librariesio/release/npm/scriptlint?style=flat-square)](https://libraries.io/npm/scriptlint)  
 [![Issue badge](https://img.shields.io/github/issues/peerigon/scriptlint?style=flat-square)](https://github.com/peerigon/scriptlint/issues)  
@@ -125,6 +125,14 @@ JavaScript module</a></li>
 <li><a href="https://github.com/peerigon/scriptlint/wiki/Contributing-to-scriptlint">Contributing to
 scriptlint</a></li>
 </ol>
+
+## Badge
+
+Would you like a scriptlint badge for your project readme? No problem! Have a look at https://scriptlint.peerigon.io/ or adapt the snippet below:
+
+```markdown
+[![scriptlint status](https://img.shields.io/endpoint?url=https://scriptlint.peerigon.io/api/shield/scriptlint/latest)](https://scriptlint.peerigon.io/issues/scriptlint/latest)
+```
 
 ***
 
