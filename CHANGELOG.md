@@ -1,3 +1,10 @@
+## [2.1.1](https://github.com/peerigon/scriptlint/compare/v2.1.0...v2.1.1) (2020-03-25)
+
+
+### Bug Fixes
+
+* **dependencies:** move from yarn to npm over lack of `audit fix` 🤬 ([160b717](https://github.com/peerigon/scriptlint/commit/160b717))
+
 # [2.1.0](https://github.com/peerigon/scriptlint/compare/v2.0.5...v2.1.0) (2020-03-25)
 
 
