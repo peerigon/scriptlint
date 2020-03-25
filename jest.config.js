@@ -12,7 +12,7 @@ module.exports = {
 	collectCoverageFrom: [
 		"src/**/*.ts",
 		"!src/index.ts",
-		"!src/cliEntry.ts",
+		"!src/cli.ts",
 		"!src/errors.ts"
 	]
 };
