@@ -1,3 +1,16 @@
+# [2.1.0](https://github.com/peerigon/scriptlint/compare/v2.0.5...v2.1.0) (2020-03-25)
+
+
+### Bug Fixes
+
+* **tests:** jest config typo ([b378e5e](https://github.com/peerigon/scriptlint/commit/b378e5e))
+
+
+### Features
+
+* add lint namespace ([a04b1ce](https://github.com/peerigon/scriptlint/commit/a04b1ce))
+* Merge pull request [#34](https://github.com/peerigon/scriptlint/issues/34) from peerigon/lint-namespace ([4eaa726](https://github.com/peerigon/scriptlint/commit/4eaa726))
+
 ## [2.0.5](https://github.com/peerigon/scriptlint/compare/v2.0.4...v2.0.5) (2020-03-19)
 
 
