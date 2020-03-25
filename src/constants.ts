@@ -21,6 +21,7 @@ export const NAME_REGEX = /^[\d:A-Za-z]+$/;
 export const NAMESPACES = [
 	"build",
 	"dev",
+	"lint",
 	"format",
 	"other",
 	"report",

@@ -22,8 +22,8 @@
     "build:dev": "tsc -p tsconfig.build.json",
     "build:scripts": "tsc -p tsconfig.build.json",
     "dev": "run-s build other:watch",
-    "format": "run-p test:self:fix test:lint:fix format:fix",
-    "format:fix": "prettier --write tests/*.{ts,tsx} src/*.{ts,tsx}",
+    "lint": "run-p test:self:fix test:lint:fix lint:fix",
+    "lint:fix": "prettier --write tests/*.{ts,tsx} src/*.{ts,tsx}",
     "other:selfupdate": "updtr",
     "other:watch": "nodemon -e js,ts --watch src --exec 'run-p build:dev'",
     "prepublishOnly": "run-p build",
@@ -33,8 +33,8 @@
     "test:exports": "ts-unused-exports tsconfig.json --ignoreFiles src/index.ts",
     "test:lint": "eslint ./src ./tests --ext js,ts,tsx",
     "test:lint:fix": "eslint ./src ./tests --ext js,ts,tsx --fix",
-    "test:self": "scriptlint",
-    "test:self:fix": "scriptlint --fix",
+    "test:self": "./dist/cli.js",
+    "test:self:fix": "./dist/cli.js --fix",
     "test:types": "tsc -p tsconfig.json --noEmit true",
     "test:unit": "jest --coverage",
     "test:unit:ci": "jest --runInBand --coverage",
@@ -43,13 +43,13 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "run-p format test",
+      "pre-commit": "run-p lint test",
       "pre-push": "run-p test"
     }
   },
   "lint-staged": {
     "./src/**/*.{js,jsx}": [
-      "format",
+      "lint",
       "git add"
     ]
   },
@@ -70,7 +70,6 @@
     "prettier": "^1.19.1",
     "pretty-quick": "^2.0.1",
     "rimraf": "3.0.2",
-    "scriptlint": "2.0.4",
     "ts-jest": "25.2.1",
     "ts-unused-exports": "6.1.0",
     "typescript": "3.8.3",
