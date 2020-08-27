@@ -4,7 +4,7 @@
 [![npm version badge](https://img.shields.io/npm/v/scriptlint?style=flat-square)](https://npmjs.com/package/scriptlint)  
 [![dependency badge](https://img.shields.io/librariesio/release/npm/scriptlint?style=flat-square)](https://libraries.io/npm/scriptlint)  
 [![Issue badge](https://img.shields.io/github/issues/peerigon/scriptlint?style=flat-square)](https://github.com/peerigon/scriptlint/issues)  
-[![CI badge](https://github.com/peerigon/scriptlint/workflows/ci/badge.svg)](https://github.com/peerigon/scriptlint/actions?query=workflow%3Aci)  
+[![CI badge](https://github.com/peerigon/scriptlint/workflows/ci/badge.svg)](https://github.com/peerigon/scriptlint/actions?query=workflow%3Aci)
 
 # scriptlint
 
@@ -18,40 +18,39 @@ One of the main goals for scriptlint was to enable people to use memorable and c
 
 This is where the scriptlint CLI shines: it makes best practices outlined in this documentation enforceable throughout your project(s). Think of it as eslint for your `"scripts"` section.
 
-
 ## Rules
 
 Here's the tl;dr of all the best practices we consider the "`scriptlint` standard"
 
 Your `package.json`'s `"scripts"` section should…
 
-- have a `test` script that is not the default script from `npm init`
-- have a `dev` script and a `start` script
-- _abstract script names from their implementation (`test`, not `jest`)_
-- _use namespaces to categorize scripts (`"test:unit": "jest"`)_
-- _use `:` as a namespace separator_
-- _have the scripts in alphabetic order_
-- _have a trigger script for all hooks (ex: if you have `prefoobar`, there must be a `foobar` script)_
-- _use `camelCase` for all script names_
-- _not alias `devDependencies` (no `"jest": "jest"`)_
-- _not use `&&` or `&` for sequential or parallel script execution_
+-   have a `test` script that is not the default script from `npm init`
+-   have a `dev` script and a `start` script
+-   _abstract script names from their implementation (`test`, not `jest`)_
+-   _use namespaces to categorize scripts (`"test:unit": "jest"`)_
+-   _use `:` as a namespace separator_
+-   _have the scripts in alphabetic order_
+-   _have a trigger script for all hooks (ex: if you have `prefoobar`, there must be a `foobar` script)_
+-   _use `camelCase` for all script names_
+-   _not alias `devDependencies` (no `"jest": "jest"`)_
+-   _not use `&&` or `&` for sequential or parallel script execution_
 
 (_italic = strict rule_)
-
 
 [Read more about the standard rules here](https://github.com/peerigon/scriptlint/wiki/The-scriptlint-%22standard%22-tl%3Bdr)
 
 ## Usage
 
-Install locally: 
+Install locally:
 
 `npm install scriptlint -D` (or `yarn add scriptlint -D`)
 
-… then run `npx scriptlint --strict` 
+… then run `npx scriptlint --strict`
 
 [Read about configuration here](https://github.com/peerigon/scriptlint/wiki/Configuration)
 
 # Documentation
+
 <ol>
 <li><a href="https://github.com/peerigon/scriptlint/wiki/Motivation">Motivation</a></li>
 <li><a href="https://github.com/peerigon/scriptlint/wiki/The-scriptlint-%22standard%22-tl%3Bdr">The
@@ -134,6 +133,8 @@ Would you like a scriptlint badge for your project readme? No problem! Have a lo
 [![scriptlint status](https://img.shields.io/endpoint?url=https://scriptlint.peerigon.io/api/shield/scriptlint/latest)](https://scriptlint.peerigon.io/issues/scriptlint/latest)
 ```
 
-***
+---
 
-From Peerigon with ❤︎
+## Sponsors
+
+[<img src="https://assets.peerigon.com/peerigon/logo/peerigon-logo-flat-spinat.png" width="150" />](https://peerigon.com)
