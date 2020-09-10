@@ -29,10 +29,6 @@ export type Config = {
 	ignoreScripts: Array<string>;
 };
 
-type RulesConfig = {
-	[key: string]: boolean;
-};
-
 export type PackageFile = {
 	[key: string]: unknown;
 	scripts: PackageScripts;
