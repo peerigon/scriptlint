@@ -28,7 +28,7 @@ const rules: Array<Rule> = [
 		/ & /,
 		"unix single ampersand (&)",
 		"npm-run-all/run-p"
-	)
+	),
 ];
 
 export default rules;

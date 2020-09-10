@@ -10,6 +10,6 @@ export default (regex: RegExp, name: string, alternative?: string): Rule => {
 		message: `Use of ${name} in script '{{name}}' is not allowed, consider using ${alternative}`,
 		validate: (_: string, script: string): boolean | string => {
 			return !regex.test(script);
-		}
+		},
 	};
 };

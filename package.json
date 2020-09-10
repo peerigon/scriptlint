@@ -23,7 +23,7 @@
     "build:scripts": "tsc -p tsconfig.build.json",
     "dev": "run-s build other:watch",
     "lint": "run-p test:self:fix test:lint:fix lint:fix",
-    "lint:fix": "prettier --write tests/**/*.{ts,tsx} src/**/*.{ts,tsx}",
+    "lint:fix": "prettier --write \"./tests/*.ts\" \"./src/*.ts\"",
     "other:selfupdate": "updtr",
     "other:watch": "nodemon -e js,ts --watch src --exec 'run-p build:dev'",
     "prepublishOnly": "run-p build",

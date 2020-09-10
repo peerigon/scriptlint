@@ -16,5 +16,5 @@ export default {
 
 		return Object.keys(sorted).join("|") === Object.keys(scripts).join("|");
 	},
-	fix: (scripts: PackageScripts) => sortScripts(scripts)
+	fix: (scripts: PackageScripts) => sortScripts(scripts),
 };

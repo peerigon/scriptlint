@@ -29,10 +29,10 @@ export default {
 		const postHooksMissing = getMissingHooks("post", scripts);
 
 		const allMissing = [
-			...preHooksMissing.map(s => `pre${s}`),
-			...postHooksMissing.map(s => `post${s}`)
+			...preHooksMissing.map((s) => `pre${s}`),
+			...postHooksMissing.map((s) => `post${s}`),
 		];
 
 		return allMissing.length < 1 ? true : allMissing;
-	}
+	},
 };
