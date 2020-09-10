@@ -2,10 +2,6 @@ import EditJson from "./editJson";
 import { PackageScripts } from "./types";
 import { filterPackageScriptsByKeys } from "./utils";
 
-type Config = {
-	ignore: Array<string>;
-};
-
 export default (wd: string) => {
 	const file = new EditJson(wd);
 

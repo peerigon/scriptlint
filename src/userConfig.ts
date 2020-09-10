@@ -18,6 +18,7 @@ export const sanitizeConfig = (loadedConfig: CosmiconfigConfig): Config => {
 		}
 	});
 
+	// eslint-disable-next-line @typescript-eslint/no-unsafe-return
 	return sanitized;
 };
 

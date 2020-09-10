@@ -55,10 +55,10 @@
   },
   "devDependencies": {
     "@types/jest": "^26.0.13",
-    "@typescript-eslint/eslint-plugin": "^2.25.0",
-    "@typescript-eslint/parser": "^2.25.0",
+    "@typescript-eslint/eslint-plugin": "^4.1.0",
+    "@typescript-eslint/parser": "^4.1.0",
     "eslint": "^7.8.1",
-    "eslint-config-peerigon": "^27.6.0",
+    "eslint-config-peerigon": "^28.1.4",
     "eslint-import-resolver-typescript": "^2.3.0",
     "eslint-plugin-prefer-arrow": "^1.2.2",
     "husky": "^4.3.0",
@@ -72,7 +72,7 @@
     "rimraf": "3.0.2",
     "ts-jest": "^26.3.0",
     "ts-unused-exports": "^6.2.3",
-    "typescript": "^3.8.3",
+    "typescript": "^4.0.2",
     "updtr": "^3.1.0"
   },
   "dependencies": {
