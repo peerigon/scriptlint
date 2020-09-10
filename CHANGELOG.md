@@ -1,3 +1,11 @@
+## [2.1.2](https://github.com/peerigon/scriptlint/compare/v2.1.1...v2.1.2) (2020-09-10)
+
+
+### Bug Fixes
+
+* prettier && eslint --fix ([8f3aa72](https://github.com/peerigon/scriptlint/commit/8f3aa72de8bc84b287d1da4e20a1b6897a5be351))
+* run prettier and hopefully release to npm ([1820e06](https://github.com/peerigon/scriptlint/commit/1820e06b7d17c11cda1e364043669105db03a2b0))
+
 ## [2.1.1](https://github.com/peerigon/scriptlint/compare/v2.1.0...v2.1.1) (2020-03-25)
 
 
