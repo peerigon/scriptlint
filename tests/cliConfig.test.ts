@@ -9,7 +9,7 @@ describe("cliConfig.ts", () => {
 			"--json",
 			"foo/bar/baz",
 			"--strict",
-			"-c"
+			"-c",
 		]);
 
 		expect(packageFile).toBe("foo/bar/baz");
@@ -18,7 +18,7 @@ describe("cliConfig.ts", () => {
 			config: true,
 			fix: true,
 			json: true,
-			strict: true
+			strict: true,
 		});
 	});
 	it("should parse CLI params #2", () => {
@@ -31,7 +31,7 @@ describe("cliConfig.ts", () => {
 			"--json",
 			"--strict",
 			"-c",
-			pJName
+			pJName,
 		]);
 
 		expect(packageFile).toBe(pJName);
@@ -40,7 +40,7 @@ describe("cliConfig.ts", () => {
 			config: true,
 			fix: true,
 			json: true,
-			strict: true
+			strict: true,
 		});
 	});
 
@@ -48,13 +48,13 @@ describe("cliConfig.ts", () => {
 		const { packageFile, ...config } = cliConfig([
 			"foo/bin/node",
 			"/usr/local/bin/scriptlint",
-			"-f"
+			"-f",
 		]);
 
 		expect(packageFile).not.toBeDefined();
 
 		expect(config).toEqual({
-			fix: true
+			fix: true,
 		});
 	});
 

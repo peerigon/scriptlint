@@ -13,13 +13,13 @@ const validConfig = {
 			isObjectRule: false,
 			name: "foobar",
 			message: "barbaz",
-			validate: () => true
-		}
-	]
+			validate: () => true,
+		},
+	],
 };
 
 const invalidConfig = {
-	invalid: 3
+	invalid: 3,
 };
 
 describe("userConfig.ts", () => {

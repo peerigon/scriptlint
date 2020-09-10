@@ -35,7 +35,7 @@ describe("cli.ts", () => {
 		cli([
 			...processArgv,
 			"real/existing/path/fixable/package.json",
-			"--fix"
+			"--fix",
 		]);
 
 		expect((console.log as any).mock.calls[0][0]).toMatch(/Fixed 1 issue/);
@@ -45,7 +45,7 @@ describe("cli.ts", () => {
 		cli([
 			...processArgv,
 			"real/existing/path/fixable2/package.json",
-			"--fix"
+			"--fix",
 		]);
 
 		expect((console.log as any).mock.calls[0][0]).toMatch(/Fixed 2 issues/);
@@ -55,7 +55,7 @@ describe("cli.ts", () => {
 		cli([
 			...processArgv,
 			"real/existing/path/correct/package.json",
-			"--fix"
+			"--fix",
 		]);
 
 		expect((console.log as any).mock.calls[0][0]).toMatch(/All good/);

@@ -11,7 +11,7 @@ export const DEFAULT_CONFIG: Config = {
 	packageFile: undefined,
 	rules: {},
 	customRules: [],
-	ignoreScripts: []
+	ignoreScripts: [],
 };
 
 export const PROJECT_NAME = "scriptlint";
@@ -28,7 +28,7 @@ export const NAMESPACES = [
 	"report",
 	"setup",
 	"start",
-	"test"
+	"test",
 ];
 
 export const DEFAULT_NPM_HOOKS = [
@@ -62,5 +62,5 @@ export const DEFAULT_NPM_HOOKS = [
 	"shrinkwrap",
 	"stop",
 	"uninstall",
-	"version"
+	"version",
 ];

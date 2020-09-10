@@ -8,7 +8,7 @@ let stashed: MessageBuffer = [];
 const stash = (message: string, type: MessageType): void => {
 	stashed.push({
 		message,
-		type
+		type,
 	});
 };
 

@@ -13,8 +13,8 @@ describe("index.ts", () => {
 			scriptlint({
 				packageFile: "foo/bar/baz",
 				packageScripts: {
-					foo: "bar"
-				}
+					foo: "bar",
+				},
 			});
 		}).toThrowError(/not both/);
 	});
@@ -28,7 +28,7 @@ describe("index.ts", () => {
 	it("should lint files", () => {
 		expect(
 			scriptlint({
-				packageFile: "real/existing/path/package.json"
+				packageFile: "real/existing/path/package.json",
 			})
 		).toMatchSnapshot();
 	});
@@ -37,7 +37,7 @@ describe("index.ts", () => {
 		expect(
 			scriptlint({
 				strict: true,
-				packageScripts: {}
+				packageScripts: {},
 			}).issues.length
 		).toBe(3);
 	});
@@ -49,8 +49,8 @@ describe("index.ts", () => {
 				packageScripts: {
 					dev: "echo 1",
 					test: "echo 1",
-					start: "echo 1"
-				}
+					start: "echo 1",
+				},
 			}).issues.length
 		).toBe(0);
 	});
@@ -65,8 +65,8 @@ describe("index.ts", () => {
 						start: "echo 1",
 						test: "echo 1",
 						dev: "echo 1",
-						foo: "bar"
-					}
+						foo: "bar",
+					},
 				}).scripts
 			)
 		).toEqual(["dev", "other:foo", "start", "test"]);

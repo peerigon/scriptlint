@@ -55,7 +55,7 @@ const execute = (
 			typeof validationResult === "boolean"
 				? `${message} (${name})`
 				: makeMessage(`${message} (${name})`, {
-					names: validationResult.join(", ")
+					names: validationResult.join(", "),
 				  });
 
 		/**
@@ -76,7 +76,7 @@ const execute = (
 			name,
 			affected: undefined,
 			type: "warning", // at some point we should really use this
-			message: warningMessage
+			message: warningMessage,
 		});
 
 		if (typeof warning === "function") {
@@ -104,7 +104,7 @@ const execute = (
 			}
 
 			const warningMessage = makeMessage(`${message} (${name})`, {
-				name: key
+				name: key,
 			});
 
 			/**
@@ -134,7 +134,7 @@ const execute = (
 				name,
 				affected: key,
 				type: "warning", // at some point we should really use this
-				message: warningMessage
+				message: warningMessage,
 			});
 
 			if (typeof warning === "function") {
@@ -147,7 +147,7 @@ const execute = (
 	 * and go!
 	 */
 
-	rules.forEach(rule => {
+	rules.forEach((rule) => {
 		if (rule.isObjectRule) {
 			executeObjectRule(rule);
 		} else {

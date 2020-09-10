@@ -10,10 +10,10 @@ describe("execute.ts", () => {
 		const [issues, fixed] = execute(rulesNonStrict, {});
 
 		expect(fixed).toEqual({});
-		expect(issues.map(i => i.name)).toEqual([
+		expect(issues.map((i) => i.name)).toEqual([
 			"mandatory-test",
 			"mandatory-start",
-			"mandatory-dev"
+			"mandatory-dev",
 		]);
 	});
 
@@ -23,12 +23,12 @@ describe("execute.ts", () => {
 				isObjectRule: true,
 				name: "foo",
 				message: "bar",
-				validate: "unknown"
-			}
+				validate: "unknown",
+			},
 		];
 
 		const scripts = {
-			foo: "bar"
+			foo: "bar",
 		};
 
 		test("object rule", () => {
@@ -49,7 +49,7 @@ describe("execute.ts", () => {
 		const scripts = {
 			dev: "echo 1",
 			start: "echo 1",
-			test: "echo 1"
+			test: "echo 1",
 		};
 
 		const [issues, fixed] = execute(
@@ -65,14 +65,14 @@ describe("execute.ts", () => {
 
 	it("complains about rule violations (strict) #1", () => {
 		const [issues] = execute(rulesStrict, {
-			foo: "echo 1"
+			foo: "echo 1",
 		});
 
-		expect(issues.map(i => i.name)).toEqual([
+		expect(issues.map((i) => i.name)).toEqual([
 			"mandatory-test",
 			"mandatory-start",
 			"mandatory-dev",
-			"uses-allowed-namespace"
+			"uses-allowed-namespace",
 		]);
 	});
 
@@ -85,14 +85,14 @@ describe("execute.ts", () => {
 				dev: "echo 1",
 				start: "echo 1",
 				test: "echo 1",
-				"preother:foobar": "echo 1"
+				"preother:foobar": "echo 1",
 			},
 			mockWarningFn
 		);
 
-		expect(issues.map(i => i.name)).toEqual([
+		expect(issues.map((i) => i.name)).toEqual([
 			"prepost-trigger-defined",
-			"alphabetic-order"
+			"alphabetic-order",
 		]);
 		expect(mockWarningFn).toHaveBeenCalled();
 	});
@@ -102,14 +102,14 @@ describe("execute.ts", () => {
 			"wrong-place-no-category-wrong-case": "echo 1",
 			dev: "echo 1",
 			start: "echo 1",
-			test: "echo 1"
+			test: "echo 1",
 		};
 
 		const fixedShouldBe = {
 			dev: "echo 1",
 			"other:wrong-place-no-category-wrong-case": "echo 1",
 			start: "echo 1",
-			test: "echo 1"
+			test: "echo 1",
 		};
 
 		const mockWarningFn = jest.fn();
@@ -121,7 +121,7 @@ describe("execute.ts", () => {
 		);
 
 		expect(mockWarningFn).toHaveBeenCalled();
-		expect(issues.map(i => i.name)).toEqual(["correct-casing"]);
+		expect(issues.map((i) => i.name)).toEqual(["correct-casing"]);
 
 		expect(fixed).toEqual(fixedShouldBe);
 
@@ -135,7 +135,7 @@ describe("execute.ts", () => {
 			dev: "echo 1",
 			prepublishOnly: "echo 1",
 			start: "echo 1",
-			test: "echo 1"
+			test: "echo 1",
 		});
 
 		expect(issues).toEqual([]);

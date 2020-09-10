@@ -10,21 +10,21 @@ describe("loadRules.ts", () => {
 			name: "test-custom-rule-foobar",
 			isObjectRule: false,
 			message: "foobar",
-			validate: () => true
+			validate: () => true,
 		};
 
 		const rulesWithCustomRule = loadRulesFromRuleConfig(
 			false,
 			{
-				[customRule.name]: true
+				[customRule.name]: true,
 			},
 			[customRule]
 		);
 
 		expect(
 			rulesWithCustomRule
-				.map(r => r.name)
-				.filter(r => r === customRule.name)[0]
+				.map((r) => r.name)
+				.filter((r) => r === customRule.name)[0]
 		).toBe(customRule.name);
 	});
 
@@ -43,7 +43,7 @@ describe("loadRules.ts", () => {
 		const rules = loadRulesFromRuleConfig(true, {
 			"mandatory-dev": false,
 			"mandatory-start": false,
-			"mandatory-test": false
+			"mandatory-test": false,
 		});
 
 		expect(rules[0].name).toEqual("no-default-test");
@@ -53,15 +53,15 @@ describe("loadRules.ts", () => {
 		const rules = loadRulesFromRuleConfig(
 			true,
 			{
-				foobarbaz: true
+				foobarbaz: true,
 			},
 			[
 				{
 					name: "foobarbaz",
 					isObjectRule: true,
 					message: "barbazfoo",
-					validate: () => true
-				}
+					validate: () => true,
+				},
 			]
 		);
 
@@ -74,10 +74,10 @@ describe("loadRules.ts", () => {
 				name: "foobarbaz",
 				isObjectRule: true,
 				message: "barbazfoo",
-				validate: () => true
-			}
+				validate: () => true,
+			},
 		]);
 
-		expect(rules.map(r => r.name).includes("foobarbaz")).toBe(false);
+		expect(rules.map((r) => r.name).includes("foobarbaz")).toBe(false);
 	});
 });

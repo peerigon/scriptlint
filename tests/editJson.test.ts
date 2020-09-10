@@ -31,7 +31,7 @@ describe("editJson.ts", () => {
 
 	test("set()", () => {
 		expect(file.set("scripts", { foo: "bar" }).get()).toEqual({
-			scripts: { foo: "bar" }
+			scripts: { foo: "bar" },
 		});
 	});
 

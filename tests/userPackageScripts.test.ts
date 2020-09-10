@@ -10,12 +10,12 @@ const saveMock = jest.fn();
 jest.mock("../src/editJson", () => () => ({
 	get: () => ({
 		scripts: {
-			foo: "bar"
-		}
+			foo: "bar",
+		},
 	}),
 	set: (path: string, content: Record<string, unknown>) =>
 		setMock(path, content),
-	save: () => saveMock()
+	save: () => saveMock(),
 }));
 
 describe("userPackageScripts.ts", () => {
@@ -47,10 +47,10 @@ describe("userPackageScripts.ts", () => {
 
 	it("writes back to the file", () => {
 		writePackageScripts({
-			foo: "bar"
+			foo: "bar",
 		});
 		expect(setMock).toHaveBeenCalledWith("scripts", {
-			foo: "bar"
+			foo: "bar",
 		});
 		expect(saveMock).toHaveBeenCalled();
 	});

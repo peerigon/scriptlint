@@ -3,7 +3,7 @@ import {
 	filterPackageScriptsByKeys,
 	makeMessage,
 	makePackageFilePath,
-	patchScriptObjectEntry
+	patchScriptObjectEntry,
 } from "../src/utils";
 import { PackageFileNotFoundError } from "../src/errors";
 
@@ -15,7 +15,7 @@ describe("patchScriptObjectEntry()", () => {
 		patchScriptObjectEntry(
 			{
 				bar: "1",
-				foo: "2"
+				foo: "2",
 			},
 			"bar",
 			"xxx",
@@ -23,7 +23,7 @@ describe("patchScriptObjectEntry()", () => {
 		)
 	).toEqual({
 		xxx: "5",
-		foo: "2"
+		foo: "2",
 	});
 });
 
@@ -68,10 +68,10 @@ describe("filterPackageScriptsByKeys()", () => {
 			)
 		).toEqual({
 			baz: "echo 3",
-			foo: "echo 1"
+			foo: "echo 1",
 		});
 		expect(filterPackageScriptsByKeys({ foo: "echo 1" }, [])).toEqual({
-			foo: "echo 1"
+			foo: "echo 1",
 		});
 		expect(filterPackageScriptsByKeys({}, [])).toEqual({});
 	});

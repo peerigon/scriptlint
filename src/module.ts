@@ -58,6 +58,6 @@ export default (moduleConfig: Partial<Config>) => {
 
 	return {
 		issues,
-		scripts: config.fix ? fixedScripts : scripts
+		scripts: config.fix ? fixedScripts : scripts,
 	};
 };

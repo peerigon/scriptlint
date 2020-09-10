@@ -16,6 +16,6 @@ export default (wd: string) => {
 			file.set("scripts", scripts);
 
 			return file.save();
-		}
+		},
 	};
 };

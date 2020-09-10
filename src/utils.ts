@@ -33,7 +33,7 @@ export const filterPackageScriptsByKeys = (
 	removes: Array<string>
 ): PackageScripts => {
 	return Object.keys(raw)
-		.filter(k => !removes.includes(k))
+		.filter((k) => !removes.includes(k))
 		.reduce((obj: PackageScripts, key: string) => {
 			obj[key] = raw[key];
 
@@ -55,9 +55,7 @@ export const makeMessage = (template: string, values: Values): string => {
 	return message;
 };
 
-const fromEntries = (
-	iterable: Array<[string, string]>
-): PackageScripts => {
+const fromEntries = (iterable: Array<[string, string]>): PackageScripts => {
 	return [...iterable].reduce((obj: PackageScripts, [key, val]) => {
 		obj[key] = val;
 

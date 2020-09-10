@@ -8,7 +8,7 @@ import { success, warning, dump, error } from "./consoleReporter";
 import {
 	DEFAULT_CONFIG,
 	PROCESS_EXIT_ERROR,
-	PROCESS_EXIT_OK
+	PROCESS_EXIT_OK,
 } from "./constants";
 
 /* istanbul ignore next */
@@ -31,7 +31,7 @@ export default (argv: Array<string>) => {
 			...DEFAULT_CONFIG,
 			...{ json: false },
 			...userConfig,
-			...cliConfig
+			...cliConfig,
 		};
 
 		// output the config (--config) but only if we don't want JSON output on the CLI
@@ -48,7 +48,7 @@ export default (argv: Array<string>) => {
 
 		const {
 			writePackageScripts,
-			readPackageScripts
+			readPackageScripts,
 		} = userPackageScriptContext(
 			makePackageFilePath(config.packageFile ?? process.cwd())
 		);
