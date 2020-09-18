@@ -8,7 +8,7 @@ export const DEFAULT_CONFIG: Config = {
 	fix: false,
 	json: false,
 	config: false,
-	packageFile: undefined,
+	packageFile: process.cwd(),
 	rules: {},
 	customRules: [],
 	ignoreScripts: [],
