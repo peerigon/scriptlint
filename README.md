@@ -22,7 +22,7 @@ This is where the scriptlint CLI shines: it makes best practices outlined in thi
 
 Here's the tl;dr of all the best practices we consider the "`scriptlint` standard"
 
-Your `package.json`'s `"scripts"` section should…
+Your `package.json`'s `"scripts"` section should… 
 
 -   have a `test` script that is not the default script from `npm init`
 -   have a `dev` script and a `start` script
