@@ -2,7 +2,7 @@ name: release
 on:
   push:
     branches:
-      - master
+      - test-release-again
 jobs:
   prepare:
     runs-on: ubuntu-latest
@@ -13,17 +13,20 @@ jobs:
     needs: prepare
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v1
-      - name: Use Node.js ${{ matrix.node-version }}
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - name: Setup Node.js
         uses: actions/setup-node@v1
         with:
-          node-version: ${{ matrix.node-version }}
-      - name: npm install, build, and test
-        run: |
+          node-version: 12
+      - name: Install dependencies
+        run:  |
           npm install
           npm run build
-      - run: npm install @semantic-release/changelog@3 @semantic-release/git@7 --ignore-scripts --no-save
-      - uses: codfish/semantic-release-action@v1
+      - name: Release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: npx semantic-release
