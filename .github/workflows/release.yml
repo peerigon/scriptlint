@@ -2,7 +2,7 @@ name: release
 on:
   push:
     branches:
-      - test-release-again
+      - master
 jobs:
   prepare:
     runs-on: ubuntu-latest
