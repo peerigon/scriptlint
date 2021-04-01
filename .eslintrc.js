@@ -1,18 +1,9 @@
-"use strict";
-
 module.exports = {
-	extends: [
-		"peerigon",
-		"peerigon/node",
-		"peerigon/typescript",
-		"peerigon/styles/prefer-arrow",
-		"prettier",
-		"prettier/@typescript-eslint"
-	],
-	env: {
-		node: true,
-		jest: true
-	},
+	extends: ["peerigon/presets/prettier-typescript-node.js"],
+	// env: {
+	// 	node: true,
+	// 	jest: true,
+	// },
 	root: true,
 	rules: {
 		"no-console": "warn",
@@ -21,9 +12,12 @@ module.exports = {
 		"@typescript-eslint/indent": "off",
 		"no-tabs": "off",
 		"babel/object-curly-spacing": "off",
-		"prefer-arrow/prefer-arrow-functions": "off"
+		"prefer-arrow/prefer-arrow-functions": "off",
+		"node/no-unsupported-features/es-syntax": "off",
+		"node/no-missing-import": "off",
 	},
 	parserOptions: {
-		project: "./tsconfig.json"
-	}
+		project: "./tsconfig.json",
+		sourceType: "module",
+	},
 };

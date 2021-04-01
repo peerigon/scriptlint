@@ -1,3 +1,4 @@
+/* eslint-disable no-process-exit */
 import loadUserConfig from "./userConfig";
 import loadCliConfig from "./cliConfig";
 import { makePackageFilePath } from "./utils";
@@ -14,7 +15,7 @@ import {
 /* istanbul ignore next */
 const processExit = (code: number) => {
 	if (typeof process.env.JEST_WORKER_ID === "undefined") {
-		// eslint-disable-next-line no-process-exit
+		// eslint-disable-next-line node/no-process-exit
 		process.exit(code);
 	}
 };

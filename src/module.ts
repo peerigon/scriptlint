@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+// eslint-disable-next-line node/shebang
 import userPackageScriptContext from "./userPackageScripts";
 import { loadRulesFromRuleConfig } from "./loadRules";
 import { ConfigError } from "./errors";
