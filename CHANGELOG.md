@@ -1,3 +1,12 @@
+## [2.1.3](https://github.com/peerigon/scriptlint/compare/v2.1.2...v2.1.3) (2021-04-01)
+
+
+### Bug Fixes
+
+* README ([#43](https://github.com/peerigon/scriptlint/issues/43)) ([33a8119](https://github.com/peerigon/scriptlint/commit/33a8119cd5f007c0e9b7c2f88bafd92ff750b90b))
+* update dependencies ([#44](https://github.com/peerigon/scriptlint/issues/44)) ([b76b2db](https://github.com/peerigon/scriptlint/commit/b76b2dbd60028df2a7eb4e31dfe59fe64d3157ff))
+* **trigger:** manually trigger release after dependency patch ([0092dce](https://github.com/peerigon/scriptlint/commit/0092dce377d55cd0d65880e2be6057a240621929))
+
 ## [2.1.2](https://github.com/peerigon/scriptlint/compare/v2.1.1...v2.1.2) (2020-09-10)
 
 
