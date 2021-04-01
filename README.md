@@ -127,7 +127,7 @@ scriptlint</a></li>
 
 ## Badge
 
-Would you like a scriptlint badge for your project readme? No problem! Have a look at https://scriptlint.peerigon.io/ or adapt the snippet below:
+Would you like a scriptlint badge for your project readme? No problem: have a look at https://scriptlint.peerigon.io/ or adapt the snippet below:
 
 ```markdown
 [![scriptlint status](https://img.shields.io/endpoint?url=https://scriptlint.peerigon.io/api/shield/scriptlint/latest)](https://scriptlint.peerigon.io/issues/scriptlint/latest)
