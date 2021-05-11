@@ -1,3 +1,10 @@
+## [2.1.4](https://github.com/peerigon/scriptlint/compare/v2.1.3...v2.1.4) (2021-05-11)
+
+
+### Bug Fixes
+
+* **deps:** bump hosted-git-info from 2.8.8 to 2.8.9 ([#46](https://github.com/peerigon/scriptlint/issues/46)) ([f14d229](https://github.com/peerigon/scriptlint/commit/f14d2296b92294e177cd020c3af1fcc0cb444777))
+
 ## [2.1.3](https://github.com/peerigon/scriptlint/compare/v2.1.2...v2.1.3) (2021-04-01)
 
 
