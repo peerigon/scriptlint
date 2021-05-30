@@ -1,3 +1,10 @@
+## [2.1.5](https://github.com/peerigon/scriptlint/compare/v2.1.4...v2.1.5) (2021-05-30)
+
+
+### Bug Fixes
+
+* **deps:** bump ws from 7.4.4 to 7.4.6 ([#48](https://github.com/peerigon/scriptlint/issues/48)) ([6b9f675](https://github.com/peerigon/scriptlint/commit/6b9f67564f6b9343a7f67a4f87d915f90ea65156))
+
 ## [2.1.4](https://github.com/peerigon/scriptlint/compare/v2.1.3...v2.1.4) (2021-05-11)
 
 
