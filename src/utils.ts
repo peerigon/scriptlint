@@ -74,3 +74,10 @@ export const patchScriptObjectEntry = (
 			return k === fromKey ? [toKey, value] : [k, v];
 		})
 	);
+
+type ObjectFromEntries = {[key: string]: any};
+export const objectFromEntries = <T>(iterable: Array<[string, T]>): ObjectFromEntries => iterable.reduce((obj, [key, value]) => {
+	obj[key] = value;
+
+	return obj
+}, {} as ObjectFromEntries)

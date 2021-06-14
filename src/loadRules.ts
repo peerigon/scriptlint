@@ -1,4 +1,4 @@
-import defaultRuleSets from "./defaultRuleSets";
+import defaultRuleSets, {optionalRules} from "./defaultRuleSets";
 import defaultRules from "./rules";
 // Types
 import { Rule } from "./types";
@@ -32,31 +32,36 @@ const loadDefaultRulesFromSet = (strict: boolean): Array<Rule> => {
 		.filter((r): r is Rule => r !== null);
 };
 
+const loadOptionalRules = (): Array<Rule> => {
+	return optionalRules
+		.map((name: string) => getRuleByName(defaultRules, name))
+		.filter((r): r is Rule => r !== null);
+};
+
 export const loadRulesFromRuleConfig = (
 	strict: boolean,
 	rulesConfig?: RulesConfig,
 	customRules?: Array<Rule>
 ): Array<Rule> => {
+	const optionalRules = loadOptionalRules();
 	const rules = loadDefaultRulesFromSet(strict);
 
-	const loadedCustomRules =
-		rulesConfig && customRules
-			? customRules.filter((cr: Rule) => rulesConfig[cr.name])
-			: [];
-
-	const loadedRules = [...loadedCustomRules, ...rules];
-
+	// standard rulesets apply
 	if (!rulesConfig) {
-		return loadedRules;
+		return rules;
 	}
 
-	return loadedRules
-		.map((rule: Rule) => {
-			if (rule.name in rulesConfig && rulesConfig[rule.name] === false) {
-				return null;
-			}
+	// there's custom rules loaded
+	const loadedCustomRules = customRules
+		? customRules.filter((cr: Rule) => rulesConfig[cr.name])
+		: [];
 
-			return rule;
-		})
-		.filter((r): r is Rule => r !== null);
+	// there's enabled optional rules
+	const enabledOptionalRules = optionalRules.filter(
+		({ name }) => name in rulesConfig && Boolean(rulesConfig[name])
+	);
+
+	return [...loadedCustomRules, ...enabledOptionalRules, ...rules].filter(
+		({ name }) => !(name in rulesConfig) || rulesConfig[name] !== false
+	);
 };

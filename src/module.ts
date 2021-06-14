@@ -35,7 +35,7 @@ export default (moduleConfig: Partial<Config>) => {
 
 	if (!moduleConfig.packageScripts && moduleConfig.packageFile) {
 		const { readPackageScripts } = userPackageScriptContext(
-			makePackageFilePath(config.packageFile ?? "")
+			makePackageFilePath(config.packageFile)
 		);
 
 		scripts = readPackageScripts(config.ignoreScripts);

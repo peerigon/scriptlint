@@ -6,6 +6,7 @@ import noAliases from "./no-aliases";
 import prePostTriggerDefined from "./prepost-trigger-defined";
 import usesAllowedNamespace from "./uses-allowed-namespace";
 import alphabeticOrder from "./alphabetic-order";
+import naturalOrder from "./natural-order";
 import { Rule } from "../types";
 
 const rules: Array<Rule> = [
@@ -18,6 +19,7 @@ const rules: Array<Rule> = [
 	usesAllowedNamespace,
 	prePostTriggerDefined,
 	alphabeticOrder,
+	naturalOrder,
 	makeForbidUnixOperators(/rm /, "rm -rf", "rimraf"),
 	makeForbidUnixOperators(
 		/ && /,

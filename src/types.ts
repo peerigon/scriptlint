@@ -17,7 +17,7 @@ export type PackageScripts = {
 
 export type Config = {
 	strict: boolean;
-	packageFile?: string;
+	packageFile: string;
 	packageScripts?: PackageScripts;
 	fix: boolean;
 	json: boolean;

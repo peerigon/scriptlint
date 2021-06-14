@@ -1,5 +1,6 @@
 import { loadRulesFromRuleConfig, getRuleByName } from "../src/loadRules";
 import defaultRules from "../src/rules";
+import {optionalRules} from "../src/defaultRuleSets";
 
 describe("loadRules.ts", () => {
 	const defaultRulesLoaded = loadRulesFromRuleConfig(false);
@@ -28,8 +29,19 @@ describe("loadRules.ts", () => {
 		).toBe(customRule.name);
 	});
 
+	it("loads optional rules", () => {
+		const rulesWithCustomRule = loadRulesFromRuleConfig(
+			false,
+			{
+				"natural-order": true,
+			}
+		);
+
+		expect(rulesWithCustomRule.map(r => r.name)[0]).toBe("natural-order");
+	});
+
 	it("loads correct amount of rules", () => {
-		expect(strictRulesLoaded.length).toBe(defaultRules.length);
+		expect(strictRulesLoaded.length).toBe(defaultRules.length - optionalRules.length);
 	});
 
 	test("getRuleByName() nulls on unknown name", () => {
