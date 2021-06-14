@@ -1,3 +1,10 @@
+## [2.1.6](https://github.com/peerigon/scriptlint/compare/v2.1.5...v2.1.6) (2021-06-14)
+
+
+### Bug Fixes
+
+* **deps:** bump normalize-url from 4.5.0 to 4.5.1 ([#49](https://github.com/peerigon/scriptlint/issues/49)) ([ab0ada5](https://github.com/peerigon/scriptlint/commit/ab0ada53b0f01e82b500bbdfb3aa6bbe0b33a9f0))
+
 ## [2.1.5](https://github.com/peerigon/scriptlint/compare/v2.1.4...v2.1.5) (2021-05-30)
 
 
