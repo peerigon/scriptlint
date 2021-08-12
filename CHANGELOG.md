@@ -1,3 +1,10 @@
+## [2.1.7](https://github.com/peerigon/scriptlint/compare/v2.1.6...v2.1.7) (2021-08-12)
+
+
+### Bug Fixes
+
+* **deps:** bump path-parse from 1.0.6 to 1.0.7 ([#50](https://github.com/peerigon/scriptlint/issues/50)) ([dff7d22](https://github.com/peerigon/scriptlint/commit/dff7d2208d3aa96fca578e884f7e1f491872d5b2))
+
 ## [2.1.6](https://github.com/peerigon/scriptlint/compare/v2.1.5...v2.1.6) (2021-06-14)
 
 
