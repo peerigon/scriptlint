@@ -5,6 +5,7 @@ const validConfig = {
 	strict: true,
 	fix: false,
 	json: false,
+	packageFile: "/foo/bar/baz",
 	config: false,
 	rules: { foo: "bar" },
 	ignoreScripts: ["foo"],
@@ -41,7 +42,7 @@ describe("userConfig.ts", () => {
 	test("loadConfig()", () => {
 		const loaded = loadConfig();
 
-		expect(loaded).toMatchSnapshot();
+		expect({...loaded, packageFile: undefined}).toMatchSnapshot();
 	});
 
 	test("loadConfig() with config missing", () => {

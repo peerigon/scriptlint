@@ -1,3 +1,7 @@
 {
-	"strict": true
+	"strict": true,
+	"rules": {
+		"alphabetic-order": false,
+		"natural-order": true
+	}
 }

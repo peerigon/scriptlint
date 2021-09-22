@@ -29,7 +29,7 @@ Your `package.json`'s `"scripts"` section should…
 -   _abstract script names from their implementation (`test`, not `jest`)_
 -   _use namespaces to categorize scripts (`"test:unit": "jest"`)_
 -   _use `:` as a namespace separator_
--   _have the scripts in alphabetic order_
+-   _have the scripts in alphabetic or ["natural order"](https://github.com/peerigon/scriptlint/wiki/natural-order)
 -   _have a trigger script for all hooks (ex: if you have `prefoobar`, there must be a `foobar` script)_
 -   _use `camelCase` for all script names_
 -   _not alias `devDependencies` (no `"jest": "jest"`)_
@@ -88,6 +88,9 @@ href="https://github.com/peerigon/scriptlint/wiki/uses-allowed-namespace">uses-a
 </li>
 <li><a
 href="https://github.com/peerigon/scriptlint/wiki/alphabetic-order">alphabetic-order</a>
+</li>
+<li><a
+href="https://github.com/peerigon/scriptlint/wiki/natural-order">natural-order</a>
 </li>
 <li><a href="https://github.com/peerigon/scriptlint/wiki/correct-casing">correct-casing</a>
 </li>

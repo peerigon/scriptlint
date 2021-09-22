@@ -27,7 +27,8 @@ export default (argv: Array<string>): CliConfig => {
 
 	program.parse(argv);
 
-	const cliConfig: CliConfig = { packageFile };
+	// eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
+	const cliConfig: CliConfig = { packageFile: packageFile ?? process.cwd() };
 
 	if (program.fix !== undefined) {
 		cliConfig.fix = program.fix;
