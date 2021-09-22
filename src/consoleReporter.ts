@@ -47,24 +47,24 @@ export const error = (message: string): void => {
 
 const print = (type: MessageType, message: string) => {
 	switch (type) {
-	case "error": {
-		// eslint-disable-next-line no-console
-		console.log(chalk.bold.red(`${PREFIX} [error] ${message}`));
-		break;
-	}
+		case "error": {
+			// eslint-disable-next-line no-console
+			console.log(chalk.bold.red(`${PREFIX} [error] ${message}`));
+			break;
+		}
 
-	case "warning": {
-		const notUnderlined = chalk.yellow.bold(`${PREFIX} [${type}]`);
-		const underlined = chalk.yellow.underline(message);
+		case "warning": {
+			const notUnderlined = chalk.yellow.bold(`${PREFIX} [${type}]`);
+			const underlined = chalk.yellow.underline(message);
 
-		// eslint-disable-next-line no-console
-		console.log(`${notUnderlined} ${underlined}`);
-		break;
-	}
-	case "success": {
-		// eslint-disable-next-line no-console
-		console.log(chalk.bold.gray(`${PREFIX} [✔️] ${message}`));
-		break;
-	}
+			// eslint-disable-next-line no-console
+			console.log(`${notUnderlined} ${underlined}`);
+			break;
+		}
+		case "success": {
+			// eslint-disable-next-line no-console
+			console.log(chalk.bold.gray(`${PREFIX} [✔️] ${message}`));
+			break;
+		}
 	}
 };

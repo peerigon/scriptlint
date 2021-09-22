@@ -1,9 +1,7 @@
 import fs from "fs";
-import { Indent } from "detect-indent";
+import detectIndent, { Indent } from "detect-indent";
 import { PackageFile } from "./types";
 import { PackageFileNotFoundError } from "./errors";
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-const detectIndent = require("detect-indent");
 
 export default class {
 	path: string;

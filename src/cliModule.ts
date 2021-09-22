@@ -47,12 +47,10 @@ export default (argv: Array<string>) => {
 		 * package.json
 		 */
 
-		const {
-			writePackageScripts,
-			readPackageScripts,
-		} = userPackageScriptContext(
-			makePackageFilePath(config.packageFile ?? process.cwd())
-		);
+		const { writePackageScripts, readPackageScripts } =
+			userPackageScriptContext(
+				makePackageFilePath(config.packageFile ?? process.cwd())
+			);
 
 		const scripts = readPackageScripts(config.ignoreScripts);
 
@@ -92,6 +90,6 @@ export default (argv: Array<string>) => {
 		dump(config.json);
 		processExit(PROCESS_EXIT_ERROR);
 	} catch (err) {
-		error(err);
+		error((err as Error).message);
 	}
 };
