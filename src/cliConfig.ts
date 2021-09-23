@@ -27,22 +27,24 @@ export default (argv: Array<string>): CliConfig => {
 
 	program.parse(argv);
 
+	const options = program.opts();
+
 	const cliConfig: CliConfig = { packageFile };
 
-	if (program.fix !== undefined) {
-		cliConfig.fix = program.fix;
+	if (options.fix !== undefined) {
+		cliConfig.fix = options.fix;
 	}
 
-	if (program.strict !== undefined) {
-		cliConfig.strict = program.strict;
+	if (options.strict !== undefined) {
+		cliConfig.strict = options.strict;
 	}
 
-	if (program.json !== undefined) {
-		cliConfig.json = program.json;
+	if (options.json !== undefined) {
+		cliConfig.json = options.json;
 	}
 
-	if (program.config !== undefined) {
-		cliConfig.config = program.config;
+	if (options.config !== undefined) {
+		cliConfig.config = options.config;
 	}
 
 	return cliConfig;

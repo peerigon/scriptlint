@@ -55,13 +55,14 @@ const execute = (
 			typeof validationResult === "boolean"
 				? `${message} (${name})`
 				: makeMessage(`${message} (${name})`, {
-					names: validationResult.join(", "),
+						names: validationResult.join(", "),
 				  });
 
 		/**
 		 * potentially fix
 		 */
 
+		// eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
 		if (configFix && fixable && fix) {
 			patchScripts(fix(scripts));
 
@@ -111,6 +112,7 @@ const execute = (
 			 * potentially fix
 			 */
 
+			// eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
 			if (configFix && fixable && fix) {
 				const [toKey, fixedValue] = fix(key, value);
 

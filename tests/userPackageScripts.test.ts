@@ -31,7 +31,7 @@ describe("userPackageScripts.ts", () => {
 
 			expect(true).toBe(false);
 		} catch (e) {
-			expect(e.message).toBeDefined();
+			expect((e as Error).message).toBeDefined();
 		}
 	});
 
@@ -41,7 +41,7 @@ describe("userPackageScripts.ts", () => {
 
 			expect(true).toBe(false);
 		} catch (e) {
-			expect(e.message).toBeDefined();
+			expect((e as Error).message).toBeDefined();
 		}
 	});
 

@@ -1,7 +1,6 @@
+import detectIndent from "detect-indent";
 import EditJson from "../src/editJson";
 import { PackageFileNotFoundError } from "../src/errors";
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-const detectIndent = require("detect-indent");
 
 jest.mock("fs");
 
