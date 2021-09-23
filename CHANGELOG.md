@@ -1,3 +1,10 @@
+## [2.1.8](https://github.com/peerigon/scriptlint/compare/v2.1.7...v2.1.8) (2021-09-23)
+
+
+### Bug Fixes
+
+* dependencies and dev improvements ([a79a095](https://github.com/peerigon/scriptlint/commit/a79a095908658b3a8a4b230c5623ff65a8a1be67))
+
 ## [2.1.7](https://github.com/peerigon/scriptlint/compare/v2.1.6...v2.1.7) (2021-08-12)
 
 
