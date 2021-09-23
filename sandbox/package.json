@@ -1,0 +1,15 @@
+{
+	"name": "scriptlint-sandbox",
+	"version": "1.0.0",
+	"description": "Test your changes here",
+	"main": "index.js",
+	"scripts": {
+		"test-lint-parallel": "scriptlint & jest",
+		"test": "echo \"Error: no test specified\" && exit 1",
+		"scriptlint": "scriptlint",
+		"clean": "rm -rf ./cache",
+		"test-lint": "scriptlint && echo 'ok!'"
+	},
+	"author": "",
+	"license": "ISC"
+}
