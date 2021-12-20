@@ -8,6 +8,7 @@ import { Config } from "./types";
 export const sanitizeConfig = (loadedConfig: CosmiconfigConfig): Config => {
 	const sanitized = { ...DEFAULT_CONFIG, ...loadedConfig };
 
+	// eslint-disable-next-line @typescript-eslint/no-unsafe-argument
 	Object.keys(sanitized).forEach((key: string) => {
 		const keyExists = Object.keys(DEFAULT_CONFIG).includes(key);
 
