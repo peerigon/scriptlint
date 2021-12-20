@@ -1,3 +1,10 @@
+## [2.1.9](https://github.com/peerigon/scriptlint/compare/v2.1.8...v2.1.9) (2021-12-20)
+
+
+### Bug Fixes
+
+* update and pin action dependencies ([#54](https://github.com/peerigon/scriptlint/issues/54)) ([4a85555](https://github.com/peerigon/scriptlint/commit/4a8555537d802c9f9ecfbe0d1416d2226dbba52f))
+
 ## [2.1.8](https://github.com/peerigon/scriptlint/compare/v2.1.7...v2.1.8) (2021-09-23)
 
 
