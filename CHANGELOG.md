@@ -1,3 +1,10 @@
+## [2.1.10](https://github.com/peerigon/scriptlint/compare/v2.1.9...v2.1.10) (2022-03-28)
+
+
+### Bug Fixes
+
+* bump minimist from 1.2.5 to 1.2.6 ([#55](https://github.com/peerigon/scriptlint/issues/55)) ([783d374](https://github.com/peerigon/scriptlint/commit/783d37437eaf6fea349fc1c71da2c4898b0b7f30))
+
 ## [2.1.9](https://github.com/peerigon/scriptlint/compare/v2.1.8...v2.1.9) (2021-12-20)
 
 
