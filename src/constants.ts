@@ -26,6 +26,7 @@ export const NAMESPACES = [
 	"lint",
 	"other",
 	"report",
+	"script",
 	"setup",
 	"start",
 	"test",
