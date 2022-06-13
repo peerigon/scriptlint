@@ -1,3 +1,10 @@
+# [2.2.0](https://github.com/peerigon/scriptlint/compare/v2.1.10...v2.2.0) (2022-06-13)
+
+
+### Features
+
+* **namespaces:** additional "script" namespace ([#59](https://github.com/peerigon/scriptlint/issues/59)) ([d9380c7](https://github.com/peerigon/scriptlint/commit/d9380c789556b07513505cdefba3f745426ef3eb))
+
 ## [2.1.10](https://github.com/peerigon/scriptlint/compare/v2.1.9...v2.1.10) (2022-03-28)
 
 
