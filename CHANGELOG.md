@@ -1,3 +1,20 @@
+# [3.0.0](https://github.com/peerigon/scriptlint/compare/v2.2.0...v3.0.0) (2023-04-25)
+
+
+### Bug Fixes
+
+* semantic-release needs node 18 ([#66](https://github.com/peerigon/scriptlint/issues/66)) ([2e2cd80](https://github.com/peerigon/scriptlint/commit/2e2cd804dbbe4f97bdb872ab6ce8bb4aba35f232))
+
+
+### Features
+
+* dependencies ([#65](https://github.com/peerigon/scriptlint/issues/65)) ([bbf4764](https://github.com/peerigon/scriptlint/commit/bbf4764ed301d6cd96243c5af4ce81e59c561583))
+
+
+### BREAKING CHANGES
+
+* node version bump
+
 # [2.2.0](https://github.com/peerigon/scriptlint/compare/v2.1.10...v2.2.0) (2022-06-13)
 
 
