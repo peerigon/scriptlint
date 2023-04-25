@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unsafe-argument */
 /* eslint-disable no-console */
 import mockConsole from "jest-mock-console";
 import cli from "../src/cliModule";

@@ -81,7 +81,6 @@ const execute = (
 		});
 
 		if (typeof warning === "function") {
-			// eslint-disable-next-line @typescript-eslint/no-unsafe-argument
 			warning(warningMessage, validationResult);
 		}
 	};
