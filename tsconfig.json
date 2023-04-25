@@ -12,7 +12,7 @@
 		"strict": true,
 		"strictFunctionTypes": true,
 		"strictNullChecks": true,
-		"target": "es5"
+		"target": "ES2015",
 	},
 	"include": ["./src", "./tests", "./jest.config.ts"]
 }

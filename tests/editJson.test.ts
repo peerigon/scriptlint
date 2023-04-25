@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unsafe-argument */
 import detectIndent from "detect-indent";
 import EditJson from "../src/editJson";
 import { PackageFileNotFoundError } from "../src/errors";

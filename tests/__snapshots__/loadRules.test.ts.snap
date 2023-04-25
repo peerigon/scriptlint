@@ -1,9 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`loadRules.ts getRuleByName() nulls on unknown name 1`] = `
-Object {
+{
   "isObjectRule": true,
-  "message": "must contain a \\"dev\\" script",
+  "message": "must contain a "dev" script",
   "name": "mandatory-dev",
   "validate": [Function],
 }

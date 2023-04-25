@@ -1,20 +1,20 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`userConfig.ts loadConfig() 1`] = `
-Object {
+{
   "config": false,
-  "customRules": Array [],
+  "customRules": [],
   "fix": false,
-  "ignoreScripts": Array [
+  "ignoreScripts": [
     "foobar",
   ],
   "json": false,
   "packageFile": undefined,
-  "rules": Object {
+  "rules": {
     "mandatory-dev": false,
   },
   "strict": true,
 }
 `;
 
-exports[`userConfig.ts should sanitize configs: invalid keys 1`] = `"unknown config key \\"invalid\\""`;
+exports[`userConfig.ts should sanitize configs: invalid keys 1`] = `"unknown config key "invalid""`;
