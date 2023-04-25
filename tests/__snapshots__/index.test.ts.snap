@@ -1,28 +1,28 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`index.ts should lint files 1`] = `
-Object {
-  "issues": Array [
-    Object {
+{
+  "issues": [
+    {
       "affected": undefined,
-      "message": "must contain a \\"test\\" script (mandatory-test)",
+      "message": "must contain a "test" script (mandatory-test)",
       "name": "mandatory-test",
       "type": "warning",
     },
-    Object {
+    {
       "affected": undefined,
-      "message": "must contain a \\"start\\" script (mandatory-start)",
+      "message": "must contain a "start" script (mandatory-start)",
       "name": "mandatory-start",
       "type": "warning",
     },
-    Object {
+    {
       "affected": undefined,
-      "message": "must contain a \\"dev\\" script (mandatory-dev)",
+      "message": "must contain a "dev" script (mandatory-dev)",
       "name": "mandatory-dev",
       "type": "warning",
     },
   ],
-  "scripts": Object {
+  "scripts": {
     "foo": "bar",
   },
 }

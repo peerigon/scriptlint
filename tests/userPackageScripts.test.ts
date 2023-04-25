@@ -7,16 +7,18 @@ const { readPackageScripts, writePackageScripts } = context(
 const setMock = jest.fn();
 const saveMock = jest.fn();
 
-jest.mock("../src/editJson", () => () => ({
-	get: () => ({
-		scripts: {
-			foo: "bar",
-		},
-	}),
-	set: (path: string, content: Record<string, unknown>) =>
-		setMock(path, content),
-	save: () => saveMock(),
-}));
+jest.mock("../src/editJson", () =>
+	jest.fn(() => ({
+		get: () => ({
+			scripts: {
+				foo: "bar",
+			},
+		}),
+		set: (path: string, content: Record<string, unknown>) =>
+			setMock(path, content),
+		save: () => saveMock(),
+	}))
+);
 
 describe("userPackageScripts.ts", () => {
 	it("reads package.json files", () => {

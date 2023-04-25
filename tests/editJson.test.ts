@@ -1,4 +1,4 @@
-import detectIndent from "detect-indent";
+import { detectIndent } from "../src/detectIndent";
 import EditJson from "../src/editJson";
 import { PackageFileNotFoundError } from "../src/errors";
 
