@@ -10,6 +10,8 @@
 
 Enforceable standards for your package.json scripts – like eslint for `npm run`
 
+⚠️ Requires nodejs >= 14.x.x
+
 ## Intro
 
 `package.json` scripts are an integral part of the Node dev experience: we use them to start our projects, run our dev environments and for all kinds of formatting, linting and tooling in general. They are just as important as our code. Yet we don't treat them with the same meticulous attention to detail. **Scripts need :heart: too!**
@@ -22,7 +24,7 @@ This is where the scriptlint CLI shines: it makes best practices outlined in thi
 
 Here's the tl;dr of all the best practices we consider the "`scriptlint` standard"
 
-Your `package.json`'s `"scripts"` section should… 
+Your `package.json`'s `"scripts"` section should…
 
 -   have a `test` script that is not the default script from `npm init`
 -   have a `dev` script and a `start` script
