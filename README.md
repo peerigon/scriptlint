@@ -1,4 +1,4 @@
-<img src="https://raw.githubusercontent.com/peerigon/scriptlint/master/assets/scriptlint-logo.png" width="150" height="150"><br>
+<img src="https://raw.githubusercontent.com/peerigon/scriptlint/main/assets/scriptlint-logo.png" width="150" height="150"><br>
 
 [![scriptlint status](https://img.shields.io/endpoint?url=https://scriptlint.peerigon.io/api/shield/scriptlint/latest)](https://scriptlint.peerigon.io/issues/scriptlint/latest)  
 [![npm version badge](https://img.shields.io/npm/v/scriptlint?style=flat-square)](https://npmjs.com/package/scriptlint)  
