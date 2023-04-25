@@ -1,10 +1,11 @@
-import type { Config } from "@jest/types";
+import type { Config } from "jest";
 
-const config: Config.InitialOptions = {
+const config: Config = {
 	preset: "ts-jest",
 	testEnvironment: "node",
 	modulePathIgnorePatterns: ["out-ts", "dist"],
 	setupFilesAfterEnv: ["<rootDir>/jest-setup.js"],
+	transformIgnorePatterns: [],
 	collectCoverageFrom: [
 		"src/**/*.ts",
 		"!src/index.ts",
