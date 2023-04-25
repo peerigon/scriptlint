@@ -1,5 +1,5 @@
 import fs from "fs";
-import { detectIndent, Indent } from "./detectIndent";
+import detectIndent, { Indent } from "detect-indent";
 import { PackageFile } from "./types";
 import { PackageFileNotFoundError } from "./errors";
 
